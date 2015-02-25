@@ -1,0 +1,142 @@
+* {
+  font-smooth: always;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+input[type=text],
+input[type=email],
+input[type=password] {
+  height: 25px;
+  color: ghostwhite;
+}
+.help-block {
+  color: #f79771 !important;
+  margin: 0;
+}
+.server-errors {
+  height: 20px;
+}
+label {
+  color: ghostwhite;
+}
+label h6 {
+  margin-bottom: 0;
+}
+label .error_msg,
+label h6 {
+  display: inline-block;
+}
+label .error_msg {
+  margin-left: 15px;
+}
+.landing-container {
+  color: white;
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  background: url(../img/mac_hands.jpg) center center no-repeat fixed;
+  background-size: cover;
+}
+.landing-container a {
+  color: lightgray;
+}
+.landing-container a:hover {
+  color: white;
+}
+.btn-back {
+  background-color: #f25011;
+}
+.btn-back:hover {
+  background-color: #f46933;
+}
+.login-reg {
+  margin-right: auto;
+  margin-left: auto;
+  border-radius: 10px;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  width: 300px;
+  background: rgba(55, 55, 55, 0.5);
+}
+.login-reg .btn-log {
+  width: 100%;
+  margin-top: 10px;
+  background-color: #22ae4b;
+  color: white;
+}
+.login-reg .btn-log:hover {
+  background-color: rgba(34, 174, 75, 0.8);
+}
+.login-reg .btn-reg {
+  width: 100%;
+  background-color: #1dacd6;
+  color: white;
+}
+.login-reg .btn-reg:hover {
+  background-color: rgba(29, 172, 214, 0.8);
+}
+.login-reg .container img {
+  margin-left: -10%;
+  height: 90px;
+  width: 150px;
+}
+.reg-container {
+  background: rgba(55, 55, 55, 0.5);
+  border-radius: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  height: vmax;
+  width: 40vw;
+}
+.reg-container h3,
+.reg-container h5 {
+  text-align: center;
+}
+.reg-container h4 {
+  color: white;
+}
+.reg-container .btn-file {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  color: white;
+  background-color: rgba(43, 187, 173, 0.6);
+}
+.reg-container .btn-file input[type=file] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 100px;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  outline: none;
+  background: white;
+  cursor: inherit;
+  display: block;
+}
+.reg-container ::-webkit-input-placeholder {
+  color: white;
+}
+.reg-container :-moz-placeholder {
+  /* Firefox 18- */
+  color: white;
+}
+.reg-container ::-moz-placeholder {
+  /* Firefox 19+ */
+  color: white;
+}
+.reg-container :-ms-input-placeholder {
+  color: white;
+}
+.reg-container input[placeholder] {
+  color: white !important;
+}
+.reg-container select {
+  font-family: FontAwesome;
+  background-color: rgba(43, 187, 173, 0.6) !important;
+  border: none !important;
+  margin-bottom: 5px;
+}

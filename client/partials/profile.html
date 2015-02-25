@@ -1,0 +1,117 @@
+<!-- navbar beginning -->
+  <nav>
+    <div class="nav-wrapper">
+            <img src="./../img/coding_dojo.png"><!-- Coding Dojo log -->
+      <ul id="nav-mobile" class="right valign-wrapper">
+        <li><a class='mdi-action-account-circle' ng-href="/#user/{{app.settings.user_id}}">Profile</a></li>
+        <li><a class='mdi-action-dashboard' href="/#/dashboard">Dashboard</a></li>
+        <li><a class='mdi-action-settings-applications' ng-href="/#/settings">Settings</a></li>
+        <li><a class='mdi-navigation-arrow-back' ng-click="app.functions.log_out()">Log off</a></li>
+      </ul>
+    </div>
+  </nav>
+<!-- navbar end -->
+
+<!-- main container -->
+<div class='container' id="topics_container">
+
+  <!-- server error message -->
+  <p ng-if="app.settings.message !== null" ng-bind="app.settings.message"></p>
+
+    <h3 class='center teal-text'>My topics</h3>
+
+  <!-- add topic button -->
+  <div>
+    <div class="row">
+      <div class='col m6'>
+          <a ng-href="/#/topic/add" class='btn btn-floating red left'><i class='mdi-content-add'></i></a>
+      </div>
+      <div class='col m6'>
+         <input type="text" ng-model="app.forms.search" placeholder="&#xF002;" class='right'/>
+      </div>
+    </div>
+  </div>
+  <!-- ng-repeat for topics -->
+	<div class='btn btn-cool row'ng-repeat="t in app.topics | filter:app.forms.search">
+          <a href="/#/topic/{{t.topic_id}}">
+      <!-- icon depending on topic type -->
+      <div class='col m3 icon-grp'>
+          <span ng-if="t.type=='resume'" class='fa fa-file-text-o fa-5x'></span><!-- <i class='fa fa-file-text-o fa-5x'></i> -->
+          <span ng-if="t.type=='image'" class='fa fa-camera fa-5x'></span><!-- <i class='fa fa-camera fa-5x'></i> -->
+      </div>
+
+      <!-- title & description -->
+      <div class='col m6'>
+        <h4 ng-bind="t.title"></h4>
+        <p ng-bind="t.description"></p>
+      </div>
+
+      <!-- topic stats -->
+      <div class='col m3'>
+        <div class='row'>
+          <div class="col m6">
+            <ul style='text-align:right;'>
+              <li>Public:</li>
+              <li>Versions:</li>
+              <li>Views:</li>
+              <li>Videos:</li>
+              <li>Comments:</li>
+              <li>Status:</li>
+            </ul>
+          </div>
+          <div class="col m6">
+            <ul style='text-align:left;'>
+              <li>{{t.is_public}}</li>
+              <li>{{t.latest_version}}</li>
+              <li>{{t.views}}</li>
+              <li>{{t.videos}}</li>
+              <li>{{t.posts}}</li>
+              <li>{{t.status}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </a>
+	</div>
+
+<!--           <ul>
+          <li>Public: {{t.is_public}}</li>
+          <li>Versions: {{t.latest_version}} </li>
+          <li>Views: {{t.views}}</li>
+          <li>Videos: {{t.videos}}</li>
+          <li>Comments: {{t.posts}}</li>
+        </ul> -->
+
+<!-- *******************************************************-->
+<!-- ****** timeline  to be implemented later **************-->
+<!-- *******************************************************-->
+
+  <!-- topic timeline -->
+  <!-- <div class="bar"></div> -->
+  <!-- revision history -->
+  <!-- <div class="timeline">
+    <div class="entry">
+      <h1>v1.0</h1>
+      <h2>Resume 1st submission</h2>
+      Here's the info about this date
+    </div>
+    <div class="entry">
+      <h1>v2.0</h1>
+      Here's the info about this date
+    </div>
+    <div class="entry">
+      <h1>v3.0</h1>
+      Here's the info about this date
+    </div>
+    <div class="entry">
+      <h1>v4.0</h1>
+      Here's the info about this date
+    </div>
+    <div class="entry">
+      <h1>v5.0</h1>
+      Here's the info about this date
+    </div>
+  </div>
+</div>
+-->
+</div>
