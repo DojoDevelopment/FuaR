@@ -17,18 +17,10 @@ module.exports = (function(obj, db, callback){
   };
 
   query = [];
-  query[0] = 'SELECT latest_version'
-           + ' FROM topics'
-           + ' WHERE topic_id = $1';
-
-  query[1] = 'INSERT INTO files (topic_id, version, key)'
-           + ' VALUES ($1, $2, $3)';
-
-  query[2] = 'UPDATE topics'
-           + ' set latest_version = $1,'
-           + " status = 'enqueue'"
-           + ' WHERE topic_id = $2';
-
+  query.push('BEGIN');
+  query.push('SELECT latest_version FROM topics WHERE topic_id = $1');
+  query.push('INSERT INTO files (topic_id, version, key) VALUES ($1, $2, $3)');
+  query.push("UPDATE topics SET latest_version = $1, status = 'enqueue' WHERE topic_id = $2");
   values = {
     get : [obj.id]
   }
@@ -44,13 +36,13 @@ module.exports = (function(obj, db, callback){
       values.post = [obj.id, version, obj.key]
 
       //insert file info into database
-      db.client.query(query[1], values.post, function(err, res){
-        if (err) return rollback(db.client, 3, query[1], err);
+      db.client.query(query[2], values.post, function(err, res){
+        if (err) return rollback(db.client, 3, query[2], err);
         values.update = [version, obj.id];
 
         //update topics latest version
-        db.client.query(query[2], values.update, function(err, res){
-          if (err) return rollback(db.client, 4, query[2], err);
+        db.client.query(query[3], values.update, function(err, res){
+          if (err) return rollback(db.client, 4, query[3], err);
 
           //commit and send message to client
           db.client.query('COMMIT');

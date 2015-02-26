@@ -1,4 +1,5 @@
 <!-- navbar beginning -->
+
 <nav>
   <div class="nav-wrapper">
     <img src="./../img/coding_dojo.png"><!-- Coding Dojo log -->
@@ -59,7 +60,9 @@
 
 <!-- main content section -->
 <section class='dash-posts container'>
+
   <!-- Switch -->
+
   <!-- server error message -->
   <p ng-if="app.settings.message !== null" ng-bind="app.settings.message"></p>
 
@@ -71,6 +74,7 @@
       <a ng-href="/#/topic/{{topic.topic_id}}">
 
         <!-- ng-class sets container background color -->
+
         <div  id='top-cont' ng-class="{reviewed : topic.status == 'reviewed', enqueue : topic.status == 'enqueue', completed : topic.status == 'completed' }">
 
           <!-- icon for topic type  & topic status messages for the user-->
@@ -102,3 +106,4 @@
 
     </div><!-- end row -->
   </section><!-- end main content section -->
+

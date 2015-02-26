@@ -91,8 +91,8 @@ app.controller('TopicController', [ '$scope', '$location', '$rootScope', 'PageFa
               //upload video response
               TopicFactory.add_video(topic_id, $scope.app.forms.video, function(has_err, data){
                 //display message
-                console.log(data)
                 $scope.app.topic.videos.push({key: data.key})
+                $scope.app.topic.show_video = $scope.app.topic.videos.length - 1;
                 $scope.app.settings.message = data.msg;
               });
             } else if (form === 'file' && $scope.app.forms.file.size !== undefined ){

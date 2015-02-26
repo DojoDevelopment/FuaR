@@ -29,7 +29,9 @@
         </div><!-- end privacy admin switch -->
 
         <!-- user switch -->
+
         <div ng-if="app.settings.user_level <=5 && app.settings.user_id === app.topic.stats.user_id ">
+
           <input type="radio" ng-click='app.functions.update_privacy(false) ; app.topic.stats.is_checked = false' name="public" id="private" ng-checked="app.topic.stats.is_public == false" ng-if='app.topic.stats.is_public == false'>
           <label for="private" class="white-text" ng-if='app.topic.stats.is_public == false'>Private</label>
           <input type="radio" ng-click='app.topic.stats.is_checked = true' name="public" id="public" ng-checked="app.topic.stats.is_public == true" ng-if='app.topic.stats.is_public == false'>
@@ -43,7 +45,9 @@
             <hr/>
           </div>
 
+
           <div ng-if='app.settings.user_id === app.topic.stats.user_id && app.settings.user_level < 5'>
+
             <form name="app.forms.fileForm" ng-submit="app.functions.submitForm(app.forms.fileForm.$valid, 'file')" novalidate>
               <span id='file' class='btn btn-file'>
                 <span id='file' ng-bind='app.forms.file.name'></span>
@@ -58,12 +62,15 @@
         <p ng-if="app.settings.message !== null" ng-bind="app.settings.message"></p>
       </div>
     </div><!-- end search button -->
+
     <ul id="nav-mobile" class="right right hide-on-med-and-down">
       <li ng-if='app.settings.user_level <= 5'><a class='mdi-action-account-circle' ng-href="/#user/{{app.settings.user_id}}">Profile</a></li>
+
       <li><a class='mdi-action-dashboard' href="/#/dashboard">Dashboard</a></li>
       <li><a class='mdi-action-settings-applications' ng-href="/#/settings">Settings</a></li>
       <li><a class='mdi-navigation-arrow-back' ng-click="app.functions.log_out()">Log off</a></li>
     </ul>
+
     <div class='nav-drop'>
   <i class='mdi-navigation-more-vert right '>
     <ul class='nav-drop-group right'>
@@ -84,6 +91,7 @@
   <div class='row'>
 
     <!-- left page -->
+
     <div class='col s12 m12 l6'>
 
       <!-- switch toggle for pdf/video view -->
@@ -93,8 +101,8 @@
         <input ng-click='app.functions.showVideo("video")' type="radio" name="view" value="video" id="video">
         <label for="video">VIDEO</label>
       </div>
-      <!-- end switch toggle-->
 
+      <!-- end switch toggle-->
       <div ng-if="app.settings.isVideo">
         <div class="btn-group" role="group" aria-label="...">
           <button ng-repeat="v in app.topic.videos" type="button" class="waves-effect btn btn-version" ng-click="app.functions.switch_video($index)">{{$index + 1}}</button>
@@ -104,11 +112,13 @@
           <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that supports HTML5<a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
         </video>
       </div>
+
 <!-- PDF -->
       <div ng-if="!app.settings.isVideo">
         <div class="btn-group" role="group" aria-label="...">
           <button ng-repeat="f in app.topic.files" type="button" class="btn btn-version" ng-click="app.functions.switch_file($index)">{{$index + 1}}</button>
         </div>
+
         <div>
                   <object data="http://v88_fuar.s3.amazonaws.com/1/file/1424319012921.pdf" alt="pdf" ></object>
 <!--                   <iframe src=""></iframe> -->
@@ -141,6 +151,7 @@
                 <img ng-if="app.topic.posts[$index].file_name === 'anon.png'" ng-src="../assets/users/anon.png" class="circle">
                 <img ng-if="app.topic.posts[$index].file_name !== 'anon.png'" ng-src="../assets/users/{{p.user_id}}/{{p.file_name}}" class="circle">
               </div>
+
 
 
                 <!-- poster's name date and comment or post -->

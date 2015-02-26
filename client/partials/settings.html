@@ -45,11 +45,13 @@
   <form name="app.forms.passwordForm" ng-submit="app.functions.submitForm(app.forms.passwordForm.$valid, 'password')" novalidate>
     <div class='row'>
       <div class="col s12 m6">
+
         <h4>Update Password</h4>
         <label for='password'>
           <h6>Password:</h6>
           <!-- password input error messages -->
           <div class='error_msg right' ng-messages="app.forms.passwordForm.password.$error" ng-if="app.forms.passwordForm.$submitted || !app.forms.passwordForm.password.$pristine">
+
             <h6 ng-message="required" class="help-block">Password is required</h6>
             <h6 ng-message="minlength" class="help-block">Password is too short</h6>
             <h6 ng-message="maxlength" class="help-block">Password is too long</h6>
@@ -64,6 +66,7 @@
         <label for='confirm'>
           <h6>Confirm:</h6>
           <div class='error_msg right' ng-messages="app.forms.passwordForm.confirm.$error" ng-if="app.forms.passwordForm.password.$valid && !app.forms.passwordForm.confirm.$pristine">
+
             <h6 ng-message="required" class="help-block">Confirmation is required.</h6>
             <h6 ng-message="match"    class="help-block">Password doesn't match</h6>
           </div>
@@ -85,6 +88,7 @@
 
 
             <button type="submit" class="btn mdi-image-portrait orange darken-2">Update</button>
+
   </form>
 <!-- end update profile-pic form -->
 
@@ -113,6 +117,7 @@
           <button class='btn blue darken-2'ng-click="app.functions.update_privacy($index)">Make public</button>
         </td>
         <td><button class="btn red darken-2" ng-click="app.functions.delete_topic($index)">Delete</button></td>
+
       </tr>
     </tbody>
   </table>
@@ -130,6 +135,7 @@
       <div class="error-container center">
         <h4  ng-if="app.settings.message !== null" ng-bind="app.settings.message"></h4>
       </div>
+
       <!-- ng-repeat for table body defines user's name, email and admin setting -->
       <tr ng-repeat="row in app.table">
         <td ng-bind="row.name"></td>
@@ -147,6 +153,7 @@
             <label for="yes[{{$index}}]" class="switch-label switch-label-on">Yes</label>
 
             <!-- <span class="switch-selection"></span> -->
+
           </div><!-- End admin switch -->
 
         </td>

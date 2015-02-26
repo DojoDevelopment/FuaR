@@ -19,7 +19,7 @@ app.directive('myTag', ['$http', function($http) {
     restrict: 'E',
     transclude: true,
     replace: true,
-    template: '<iframe></iframe>',
+    template: '<iframe height="100%" width="100%" frameborder="0"></iframe>',
     scope:{
         src:"="
     },
@@ -29,7 +29,7 @@ app.directive('myTag', ['$http', function($http) {
         .get($scope.src, {
            'x-amz-acl': 'public-read'
           ,'Content-Type': 'application/pdf'
-          ,'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS'
+          ,'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
         }).success(function(result){
          console.log(result);
         })

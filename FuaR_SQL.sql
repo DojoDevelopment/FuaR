@@ -32,7 +32,7 @@ CREATE TABLE topics (
 CREATE TABLE files (
 	file_id SERIAL PRIMARY KEY,
 	topic_id INT NOT NULL,
-	version INT NOT NULL,
+	version INT DEFAULT 1 NOT NULL,
 	key VARCHAR(255) NOT NULL,
 	created_at TIMESTAMP DEFAULT NOW() NOT NULL,
 	updated_at TIMESTAMP DEFAULT NOW() NOT NULL
@@ -95,11 +95,11 @@ BEFORE INSERT ON posts
 FOR EACH ROW
 EXECUTE PROCEDURE my_trigger_function();
 
-INSERT INTO users(name, email, password, user_level, file_name, graduation, location) VALUES ('Michael Choi',    'mike@gmail.com',   'password', 10, 'user_id.jpg', '2010-01-01 00:00:00', 'Seattle' );
-INSERT INTO users(name, email, password, user_level, file_name, graduation, location) VALUES ('Anthony Fenech',  'tony@gmail.com',   'password', 1,  'user_id.jpg', '2014-09-01 00:00:00', 'San Jose');
-INSERT INTO users(name, email, password, user_level, file_name, graduation, location) VALUES ('Alvaro Canencia', 'alvaro@gmail.com', 'password', 1,  'user_id.jpg', '2014-11-01 00:00:00', 'Burbank' );
-INSERT INTO users(name, email, password, user_level, file_name, graduation, location) VALUES ('Julian Nguyen',   'julian@gmail.com', 'password', 1,  'user_id.jpg', '2014-09-01 00:00:00', 'San Jose');
-INSERT INTO users(name, email, password, user_level, file_name, graduation, location) VALUES ('Jay Patel',       'jay@gmail.com',    'password', 5,  'user_id.jpg', '2010-01-01 00:00:00', 'Seattle' );
+INSERT INTO users(name, email, password, user_level, file_name, graduation, location) VALUES ('Michael Choi',    'mike@gmail.com',   '$2a$10$EiFH511e9MLWiT2fvueuVu9x7USM3vsuDixSy/ByMgTBqsuPxH/La', 10, 'user_id.jpg', '2010-01-01 00:00:00', 'Seattle' );
+INSERT INTO users(name, email, password, user_level, file_name, graduation, location) VALUES ('Anthony Fenech',  'tony@gmail.com',   '$2a$10$EiFH511e9MLWiT2fvueuVu9x7USM3vsuDixSy/ByMgTBqsuPxH/La', 1,  'user_id.jpg', '2014-09-01 00:00:00', 'San Jose');
+INSERT INTO users(name, email, password, user_level, file_name, graduation, location) VALUES ('Alvaro Canencia', 'alvaro@gmail.com', '$2a$10$EiFH511e9MLWiT2fvueuVu9x7USM3vsuDixSy/ByMgTBqsuPxH/La', 1,  'user_id.jpg', '2014-11-01 00:00:00', 'Burbank' );
+INSERT INTO users(name, email, password, user_level, file_name, graduation, location) VALUES ('Julian Nguyen',   'julian@gmail.com', '$2a$10$EiFH511e9MLWiT2fvueuVu9x7USM3vsuDixSy/ByMgTBqsuPxH/La', 1,  'user_id.jpg', '2014-09-01 00:00:00', 'San Jose');
+INSERT INTO users(name, email, password, user_level, file_name, graduation, location) VALUES ('Jay Patel',       'jay@gmail.com',    '$2a$10$EiFH511e9MLWiT2fvueuVu9x7USM3vsuDixSy/ByMgTBqsuPxH/La', 5,  'user_id.jpg', '2010-01-01 00:00:00', 'Seattle' );
 
 INSERT INTO topics(user_id, type, title, status, description, views, latest_version, is_public) VALUES (2, 'resume', 'Anthonys resumee',  'enqueue',   'desc',  3, 1, TRUE);
 INSERT INTO topics(user_id, type, title, status, description, views, latest_version, is_public) VALUES (3, 'resume', 'Alvaros resumee',   'enqueue',   'desc', 25, 4, FALSE);

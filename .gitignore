@@ -1,3 +1,7 @@
 /node_uploads
 /config
+<<<<<<< HEAD
 *.DS_Store
+=======
+*.DS_Store
+>>>>>>> 1d75b7548a870968e25060f74b1ef4f132fbcce4

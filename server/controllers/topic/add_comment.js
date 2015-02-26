@@ -9,8 +9,8 @@ module.exports = (function(req, res, db){
 
   //check if user is logged in
   if ( auth.check_login(req.session.user, 1) ){
+    //check if params are numbers
     if ( auth.check_params(req.params.id) ) {
-
       //check for a comment parent_id is not undefined and topic id is there
       if( req.body.text && req.body.parent_id !== undefined && req.params.id ) {
 
@@ -29,9 +29,8 @@ module.exports = (function(req, res, db){
 
           //run comment query return response
           comment(topic, db, function(has_err, data){
-            !has_err
-              ? response.success(res, data)
-              : response.error_data(res, data, page_code + '0103');
+            !has_err ? response.success(res, data)
+                     : response.error_data(res, data, page_code + '0103');
           });
 
         } else {

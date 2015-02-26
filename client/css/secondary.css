@@ -403,8 +403,6 @@ object {
   width: 90%;
 }
 .posts img {
-  display: block;
-  margin-left: auto;
   margin-right: auto;
   height: 80px;
   width: 80px;
