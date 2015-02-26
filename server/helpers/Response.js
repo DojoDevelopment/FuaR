@@ -41,7 +41,7 @@ module.exports = {
     res.status(status).json(client_msg).end();
 
   }, error_data : function(res, data, code, server_msg, client_msg){
-    server_msg = server_msg || message[db];
+    server_msg = server_msg || message.db;
     client_msg = client_msg || message.client;
     console.log('ERROR ' + code + ': ' + server_msg);
     res.status(400).json(data).end();
