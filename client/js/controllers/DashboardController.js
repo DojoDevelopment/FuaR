@@ -7,10 +7,10 @@ app.controller('DashboardController', ['$scope', '$rootScope', 'PageFactory', 'U
     $scope.app = {
       //set default settings object
       settings : {
-        user_level :  $rootScope.user.user_level
-        , message : null
-        , name : $rootScope.user.name
-        , user_id : $rootScope.user.id
+        user_level : $rootScope.user.user_level
+        ,  message : null
+        ,     name : $rootScope.user.name
+        ,  user_id : $rootScope.user.id
       }, functions : {
 
         setSortVariable: function(sortVariable) {

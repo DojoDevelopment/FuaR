@@ -9,8 +9,8 @@ module.exports = (function(req, res, db){
 
   //check if user is logged in
   if ( auth.check_login(req.session.user, 1) ){
+    //check if params are numbers
     if ( auth.check_params(req.params.id) ) {
-
       //check for a comment parent_id is not undefined and topic id is there
       if( req.body.text && req.body.parent_id !== undefined && req.params.id ) {
 
@@ -29,25 +29,28 @@ module.exports = (function(req, res, db){
 
           //run comment query return response
           comment(topic, db, function(has_err, data){
-            !has_err
-              ? response.success(res, data)
-              : response.error_data(res, data, page_code + '0103');
+            !has_err ? response.success(res, data)
+                     : response.error_data(res, data, page_code + '0103');
           });
 
         } else {
           //info is not in the correct format
           response.error_generic(res, page_code + '0104', 'invalid');
+
         }
       } else {
         //missing required info
         response.error_generic(res, page_code + '0103', 'missing');
+
       }
     } else {
       //params are not numbers
       response.error_generic(res, page_code + '0102', 'params');
+
     }
   } else {
     //user is not logged in
     response.error_generic(res, page_code + '0101', 'login', 401);
+
   }
 });

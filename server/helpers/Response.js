@@ -7,6 +7,7 @@ var message = {
   missing : 'Missing Information',
   page    : 'Successful DB call sent to client',
   params  : 'Params are not numbers.',
+  post    : 'Must be a post.',
   s3      : 'Failed to send to s3.',
   password: 'Password is incorrect.'
 }
