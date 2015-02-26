@@ -1,0 +1,174 @@
+<nav><!-- navbar beginning -->
+  <div class="nav-wrapper">
+    <img src="./../img/coding_dojo.png"/><!-- Coding Dojo logo -->
+    <div id="slideout" ng-if='app.settings.user_id === app.topic.stats.user_id || app.settings.user_level>=5'>
+      <i class='mdi-action-list medium'></i><!-- user search icon -->
+      <div id="slideout_inner">
+        <h3 class='white-text'>Settings</h3>
+        <hr class='teal'/>
+
+        <!-- admin privacy switch -->
+        <div ng-if="app.settings.user_level >=5">
+          <div style='margin-bottom:15px;'>
+            <input type="radio" ng-click='app.functions.update_privacy(false)' name="public" id="private" ng-checked="app.topic.stats.is_public == false">
+            <label for="private" class="white-text">Private</label>
+            <input type="radio" ng-click='app.functions.update_privacy(true)' name="public" id="public" ng-checked="app.topic.stats.is_public == true">
+            <label for="public" class="white-text">Public</label>
+          </div>
+
+          <form name="app.forms.videoForm" ng-submit="app.functions.submitForm(app.forms.videoForm.$valid, 'video')" novalidate>
+            <span id='file' class='btn btn-file '>
+              <span id='file' ng-bind='app.forms.video.name'></span>
+              <input type='file' file-model="app.forms.video" ng-model="app.forms.video" name="video_path" id="inputFile" class='btn green'/>
+            </span>
+            <button class='btn blue'>Upload Video</button>
+          </form>
+
+          <button style='display:block;'class='btn green' ng-if="app.topic.stats.status !== 'completed'" ng-click="app.functions.mark_complete()">Mark as Complete</button>
+          <a style='cursor:pointer; display:block !important;' class='mdi-action-delete red-text' ng-click="app.functions.delete_topic(app.topic.topic_id)">Delete this topic</a>
+        </div><!-- end privacy admin switch -->
+
+        <!-- user switch -->
+
+        <div ng-if="app.settings.user_level <=5 && app.settings.user_id === app.topic.stats.user_id ">
+
+          <input type="radio" ng-click='app.functions.update_privacy(false) ; app.topic.stats.is_checked = false' name="public" id="private" ng-checked="app.topic.stats.is_public == false" ng-if='app.topic.stats.is_public == false'>
+          <label for="private" class="white-text" ng-if='app.topic.stats.is_public == false'>Private</label>
+          <input type="radio" ng-click='app.topic.stats.is_checked = true' name="public" id="public" ng-checked="app.topic.stats.is_public == true" ng-if='app.topic.stats.is_public == false'>
+          <label for="public" class="white-text" ng-if='app.topic.stats.is_public == false'>Public</label>
+
+          <!-- user privacy confirmation -->
+          <div class='pub_priv' ng-if='app.topic.stats.is_checked == true && app.topic.stats.is_public == false'>
+            <hr/>
+            <p>Are you sure you want to make this post PUBLIC? This can not be undone.</p>
+            <button class='btn red' ng-click='app.functions.update_privacy(true)'>Yes I'm Sure</button>
+            <hr/>
+          </div>
+
+
+          <div ng-if='app.settings.user_id === app.topic.stats.user_id && app.settings.user_level < 5'>
+
+            <form name="app.forms.fileForm" ng-submit="app.functions.submitForm(app.forms.fileForm.$valid, 'file')" novalidate>
+              <span id='file' class='btn btn-file'>
+                <span id='file' ng-bind='app.forms.file.name'></span>
+                <input type="file" file-model="app.forms.file" ng-model="app.forms.file" name="revision" id="inputFile"/>
+              </span>
+              <button class='btn blue'>Upload File</button>
+            </form>
+          </div>
+        </div><!-- end user privacy switch -->
+
+        <!-- server error message -->
+        <p ng-if="app.settings.message !== null" ng-bind="app.settings.message"></p>
+      </div>
+    </div><!-- end search button -->
+
+    <ul id="nav-mobile" class="right right hide-on-med-and-down">
+      <li ng-if='app.settings.user_level <= 5'><a class='mdi-action-account-circle' ng-href="/#user/{{app.settings.user_id}}">Profile</a></li>
+
+      <li><a class='mdi-action-dashboard' href="/#/dashboard">Dashboard</a></li>
+      <li><a class='mdi-action-settings-applications' ng-href="/#/settings">Settings</a></li>
+      <li><a class='mdi-navigation-arrow-back' ng-click="app.functions.log_out()">Log off</a></li>
+    </ul>
+
+    <div class='nav-drop'>
+  <i class='mdi-navigation-more-vert right '>
+    <ul class='nav-drop-group right'>
+      <li ng-if='app.settings.user_level <= 5'><a class='mdi-action-account-circle' ng-href="/#user/{{app.settings.user_id}}">Profile</a></li>
+      <li><a class='mdi-action-dashboard' href="/#/dashboard">Dashboard</a></li>
+      <li><a class='mdi-action-settings-applications' ng-href="/#/settings">Settings</a></li>
+      <li><a class='mdi-navigation-arrow-back' ng-click="app.functions.log_out()">Log off</a></li>
+    </ul>
+  </i>
+</div>
+  </div>
+</nav><!-- navbar end -->
+
+<!-- main container -->
+<section>
+
+  <!-- main container -->
+  <div class='row'>
+
+    <!-- left page -->
+
+    <div class='col s12 m12 l6'>
+
+      <!-- switch toggle for pdf/video view -->
+      <div ng-if="app.topic.videos.length > 0">
+        <input ng-click='app.functions.showVideo("pdf")' type="radio" name="view" value="pdf" id="pdf" checked>
+        <label for="pdf">PDF</label>
+        <input ng-click='app.functions.showVideo("video")' type="radio" name="view" value="video" id="video">
+        <label for="video">VIDEO</label>
+      </div>
+
+      <!-- end switch toggle-->
+      <div ng-if="app.settings.isVideo">
+        <div class="btn-group" role="group" aria-label="...">
+          <button ng-repeat="v in app.topic.videos" type="button" class="waves-effect btn btn-version" ng-click="app.functions.switch_video($index)">{{$index + 1}}</button>
+        </div>
+        <video ng-repeat="v in app.topic.videos" ng-show="app.topic.show_video === $index" class="video-js vjs-default-skin" controls preload="auto">
+          <source ng-src="{{v.key}}" type='video/mp4'/>
+          <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that supports HTML5<a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
+        </video>
+      </div>
+
+<!-- PDF -->
+      <div ng-if="!app.settings.isVideo">
+        <div class="btn-group" role="group" aria-label="...">
+          <button ng-repeat="f in app.topic.files" type="button" class="btn btn-version" ng-click="app.functions.switch_file($index)">{{$index + 1}}</button>
+        </div>
+
+        <div>
+                  <object data="http://v88_fuar.s3.amazonaws.com/1/file/1424319012921.pdf" alt="pdf" ></object>
+<!--                   <iframe src=""></iframe> -->
+          
+        </div>
+      </div>
+    </div><!-- end left page -->
+
+      <!-- right page -->
+      <div class='col s12 m12 l6'>
+
+        <!--  users start a new post on the topic  -->
+        <div class='form-group new_post'>
+          <button class="btn btn-floating red" ng-click="app.functions.add_post(null, 0, app.forms.post)"><i class='fa fa-pencil fa-2x'></i></button>
+          <input ng-model="app.forms.post" type="text" class='form-control' placeholder='start a new post!' value="">
+        </div>
+        <!--  end of user new post input  -->
+
+        <div class='posts'>
+
+          <!-- display user posts-->
+          <div ng-repeat="p in app.topic.posts" class='row'>
+            <div class='col m12'>
+
+              <!-- post & comments -->
+              <div class='row post' ng-class="{post: p.parent_id == p.post_id, comment: p.parent_id != p.post_id}">
+
+              <!-- profile image -->
+              <div class='col s12 m4 l4'>
+                <img ng-if="app.topic.posts[$index].file_name === 'anon.png'" ng-src="../assets/users/anon.png" class="circle">
+                <img ng-if="app.topic.posts[$index].file_name !== 'anon.png'" ng-src="../assets/users/{{p.user_id}}/{{p.file_name}}" class="circle">
+              </div>
+
+
+
+                <!-- poster's name date and comment or post -->
+                <div class='col s12 m8 l8'>
+                  <p><span ng-bind="p.name"></span> <small ng-bind="p.created_at | date:'mediumDate'"></small></p>
+                  <p ng-bind="p.post"></p>
+                </div>
+              </div>
+
+              <!-- user input for commenting on a post -->
+              <div class='input-fields new_post' ng-class="{pst: p.parent_id == p.post_id, cmt: p.parent_id != p.post_id}" ng-if="app.topic.posts[$index+1].parent_id != p.parent_id">
+                <button class="btn btn-floating blue" ng-click="app.functions.add_post($index, p.parent_id, app.forms.comment[$index])"><i class='fa fa-comments fa-2x'></i></button>
+                <input type="text" ng-model="app.forms.comment[$index]" placeholder='comment on this post'>
+              </div><!-- end post input-->
+            </div><!-- end block element -->
+          </div><!-- end comments & posts -->
+        </div><!-- end posts -->
+      </div><!-- end right page -->
+    </div><!-- end row -->
+</section><!-- Main area-->

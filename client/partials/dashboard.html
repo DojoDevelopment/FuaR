@@ -1,0 +1,109 @@
+<!-- navbar beginning -->
+
+<nav>
+  <div class="nav-wrapper">
+    <img src="./../img/coding_dojo.png"><!-- Coding Dojo log -->
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li ng-if='app.settings.user_level <= 5'><a class='mdi-action-account-circle' ng-href="/#user/{{app.settings.user_id}}">Profile</a></li>
+      <li><a class='mdi-action-dashboard' href="/#/dashboard">Dashboard</a></li>
+      <li><a class='mdi-action-settings-applications' ng-href="/#/settings">Settings</a></li>
+      <li><a class='mdi-navigation-arrow-back' ng-click="app.functions.log_out()">Log off</a></li>
+    </ul>
+<div class='nav-drop'>
+  <i class='mdi-navigation-more-vert right'>
+    <ul class='nav-drop-group right'>
+      <li ng-if='app.settings.user_level <= 5'><a class='mdi-action-account-circle' ng-href="/#user/{{app.settings.user_id}}">Profile</a></li>
+      <li><a class='mdi-action-dashboard' href="/#/dashboard">Dashboard</a></li>
+      <li><a class='mdi-action-settings-applications' ng-href="/#/settings">Settings</a></li>
+      <li><a class='mdi-navigation-arrow-back' ng-click="app.functions.log_out()">Log off</a></li>
+    </ul>
+  </i>
+</div>
+    <!-- search button -->
+    <div id="slideout">
+      <i class='mdi-action-search'></i><!-- search icon -->
+      <div id="slideout_inner">
+        <!--  search form -->
+        <form class='col s12'>
+
+          <!-- input for search filter function -->
+          <h4>Search By:</h4>
+          <input class='input-field col s12' placeholder='file type, author, title' type="text" ng-model="app.forms.search" autofocus/>
+
+          <!-- select for search by type -->
+          <h4>Select type:</h4>
+          <div style='display:inline;'>
+            <input ng-click='' type="radio" name="view" value="resume" id="resume" checked>
+            <label for="resume" class='white-text'>Resume</label>
+            <input ng-click='' type="radio" name="view" value="image" id="image">
+            <label for="image" class="white-text">Image</label>
+            <input ng-click='' type="radio" name="view" value="all" id="all">
+            <label for="all" class="white-text">All</label>
+          </div>
+          <!-- Switch -->
+          <!-- button group for filter function -->
+          <h4>Order by:</h4>
+          <div class="btn-group" role='group'>
+            <ul>
+              <li id='grp-1'><button type="button" class="btn btn-filter" ng-click='app.functions.setSortVariable("title")'>Title</button></li>
+              <li id='grp-2'><button type="button" class="btn btn-filter" ng-click='app.functions.setSortVariable("updated_at")'>Date</button></li>
+              <li id='grp-3'><button type="button" class="btn btn-filter" ng-click='app.functions.setSortVariable("views")'>Popularity</button></li>
+              <li id='grp-4'><button type="button" class="btn btn-filter" ng-click='app.functions.setSortVariable("latest_version")'>Versions</button></li>
+            </ul>
+          </div><!-- end button group -->
+        </form><!-- end search form -->
+      </div>
+    </div><!-- end search button -->
+  </div>
+</nav>
+<!-- navbar end -->
+
+<!-- main content section -->
+<section class='dash-posts container'>
+
+  <!-- Switch -->
+
+  <!-- server error message -->
+  <p ng-if="app.settings.message !== null" ng-bind="app.settings.message"></p>
+
+  <!-- block element container -->
+  <div class='row'>
+
+    <!-- ng-repeat for topic container -->
+    <div class='col l3 md3 s12 topic' ng-repeat="topic in app.topics | filter:app.forms.search | orderBy:app.topics.sortVariable : reverse=app.topics.isReverse">
+      <a ng-href="/#/topic/{{topic.topic_id}}">
+
+        <!-- ng-class sets container background color -->
+
+        <div  id='top-cont' ng-class="{reviewed : topic.status == 'reviewed', enqueue : topic.status == 'enqueue', completed : topic.status == 'completed' }">
+
+          <!-- icon for topic type  & topic status messages for the user-->
+          <p><i class='medium' ng-class="{'mdi-action-description' : topic.type == 'resume', 'mdi-image-photo' : topic.type == 'image'}"></i></p>
+
+            <p ng-if="topic.status == 'enqueue' ">Awaiting review</p>
+            <p ng-if="topic.status == 'reviewed' ">Reviewed</p>
+            <p ng-if="topic.status == 'completed' ">Completed</p>
+
+            <!-- hr line -->
+            <hr  ng-class="{reviewed : topic.status == 'reviewed', enqueue : topic.status == 'enqueue', completed : topic.status == 'completed' }"/>
+
+            <!-- topic title -->
+            <h4>{{topic.title | limitTo: 20 }}{{topic.title.length > 10 ? '...' : ''}}</h4>
+
+            <!-- topic description -->
+            <p>{{topic.description | limitTo: 20 }}{{t.description.length > 20 ? '...' : ''}}</p>
+
+            <!-- topic creator -->
+            <p>By <a class='topic_owner_link' ng-href="/#/user/{{topic.user_id}}" ng-bind='topic.user'></a></p>
+
+            <!-- last updated date -->
+            <p>Updated: <span ng-bind='topic.updated_at | date:"mediumDate"'></span></p>
+
+          </div><!-- end background color -->
+
+        </a><!-- end link -->
+      </div><!-- end ng-repeat for topic container -->
+
+    </div><!-- end row -->
+  </section><!-- end main content section -->
+
