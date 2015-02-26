@@ -1,0 +1,169 @@
+//out:splash.css
+
+@import "colors";
+
+*{
+    //smoothes out the font -- keeping it from being blurred
+  font-smooth:always;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+input[type=text], input[type=email], input[type=password] {
+  height:25px;
+  color:@res-ghost;
+}
+
+.help-block{
+        color:lighten(@res-ints-orange, 15%) !important;
+        margin:0;
+}
+
+.server-errors{
+  height:20px;
+}
+
+label{
+  width:100%;
+  color:@res-ghost;
+  h6{
+    margin-bottom: 0;
+  }
+  .error_msg, h6{
+    display:inline-block;
+  }
+  .error_msg{
+    margin: 7px 0px 0px 15px;
+    float:right;
+  }   
+}
+
+//container for the landing page
+.landing-container{
+  color:white;
+  height:100vh; //100% view height
+   width:100vw;  //100% view width
+   position:absolute;
+    background:url(../img/mac_hands.jpg) center center  no-repeat fixed;
+    background-size: cover;
+      a{
+        color:lightgray;
+        &:hover{
+            color:white;
+          }
+      }
+}
+
+//back button for registration page
+.btn-back{
+  background-color: darken(@res-ints-orange, 5%);
+    &:hover{
+      background-color: lighten(@res-ints-orange, 2%);
+    }
+}
+
+//box containing login & registration form
+.btn-log{ 
+  width:100% !important;
+  margin-top: 10px;
+  color:white;
+}
+.login-reg{
+  margin-right: auto;
+  margin-left: auto;
+  border-radius:10px;
+  padding-top:2%;
+  padding-bottom:2%;
+  width:300px;
+  background: rgba(55,55,55,.5);
+//registration button css
+.btn-reg{
+  width:100%;
+  background-color:@res-blue;
+  color:white;
+  &:hover{
+    background-color:@res-blu-op;
+  }
+}
+    .container{
+      img{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        height:90px;
+        width:150px;
+      }
+    }
+}
+
+//container for registration page form fields
+.reg-container{
+  background: rgba(55,55,55,.5);
+  border-radius:10px;
+  margin-left: auto;
+ margin-right: auto;
+ height:vmax;
+  width:40vw;
+  h3, h5{
+    text-align: center;
+  }
+  h4{
+    color:white;
+  }
+
+  .btn-file {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    color:white;
+    background-color: rgba(43, 187, 173, .6);
+  }
+  .btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+  }
+
+  //makes palceholder text and input white
+::-webkit-input-placeholder {
+   color: white;
+}
+:-moz-placeholder { /* Firefox 18- */
+   color: white;  
+}
+::-moz-placeholder {  /* Firefox 19+ */
+   color: white;  
+}
+:-ms-input-placeholder {  
+   color: white;  
+}
+  input[placeholder]{
+    color:white !important;
+  }
+
+  //end placeholder styling
+
+  //materialize select styling -- material default select is controlled by jQuery
+    select{
+      font-family: FontAwesome;
+       background-color: rgba(43, 187, 173, .6) !important;
+       border: none !important; 
+       margin-bottom: 5px;
+    }
+}
+
+@media screen and (min-width: 300px) and (max-width: 800px){
+    .reg-container{
+      width: 85vw;
+    }
+}

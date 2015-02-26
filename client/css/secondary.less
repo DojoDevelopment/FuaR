@@ -1,0 +1,810 @@
+//out: secondary.css
+@import 'colors';
+
+//all elements
+*{
+    //smoothes out the font -- keeping it from being blurred
+  font-smooth:always;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  h4{
+    font-size:20px;
+  }
+  h5{
+    font-size: 15px;
+  }
+}
+
+// error messages
+.help-block{
+        color:lighten(@res-ints-orange, 15%) !important;
+        margin:0;
+}
+
+label{ 
+  color:black;
+  padding:2%;
+  .error_msg, h6{
+    display:inline-block;
+  }
+  .error_msg{
+    margin-left: 15px;
+  }   
+}
+.error-container{
+  color:@res-blue;
+  margin: -25px 0px 25px 0px;
+  padding:0;
+  height:15px;
+  h4{
+    margin:0;
+    padding: 0;
+  }
+}
+// end error messages
+
+//########## button styling #############//
+
+//file upload button
+  .btn-file {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    color:white;
+        input[type=file] {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width:100%;
+        min-height: 100%;
+        font-size: 100px;
+        text-align: right;
+        filter: alpha(opacity=0);
+        opacity: 0;
+        outline: none;
+        background: white;
+        cursor: inherit;
+        display: block;
+      }
+}
+
+//button group for slide-down menu
+.btn-group{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  #grp-1{
+    .btn-filter{
+      border-top-right-radius: 0px;
+      border-bottom-right-radius: 0px;
+    }
+  }
+  #grp-2{
+    .btn-filter{
+    border-radius:0px;
+    }
+}
+#grp-3{
+    .btn-filter{
+
+    border-radius:0px;
+  }
+}
+#grp-4{
+    .btn-filter{
+
+      border-top-left-radius: 0px;
+      border-bottom-left-radius: 0px;
+    }
+}
+
+  p{
+    margin-bottom:0;
+    &:hover{
+      cursor:pointer;
+    }
+  }
+}
+
+//########## end button styling #############//
+
+
+//########## profile view container styling #############//
+#topics_container{
+  input[type="text"] {
+    position: relative;
+    margin-right: 13px;
+    width:65%;
+     font-family: 'FontAwesome';
+  }
+  .btn-cool{
+    height:100%;
+    width:100%;
+    white-space:normal;
+    background:@res-blue;
+    border:1px solid darken(@res-blue, 10%);
+    line-height: normal;
+      &:active{
+      background:darken(@res-blue, 6%);
+    }
+    &:hover{
+      background:darken(@res-blue, 2%);
+      border:1px solid darken(@res-awesome-blue, 2%);
+    }
+      .icon{
+        margin-top:.5%;
+      }
+  }
+  a{
+    text-decoration:none;
+    color:white;
+    label{
+      cursor:pointer;
+      color:@res-blue;
+    }
+
+    .title-desc{
+      h4{
+        margin-top: 2.14rem;
+        text-align: left;
+      }
+      i{
+        font-size: 35px;
+      }
+      line-height: 12px;
+    }
+
+    .icon-grp{
+
+            margin-left: auto;
+            margin-right: auto;
+            display: flex;
+            flex-direction: row;
+            margin-top: 24px;
+
+        i{
+             font-size: 3.3rem;
+             span{
+                position: absolute;
+                  width: 2rem;
+                  border-radius: 10px;
+                  background-color: @res-ints-red;
+                  display: block;
+                  margin-left: -9px;
+                  font-size: 17px;
+                  margin-top: -53px;
+             }
+        }
+        div{
+              position: absolute;
+              display: block;
+              margin-top: 51px;
+              margin-left: -206px;
+        }
+    }
+  }
+}
+    .desc{
+      p{
+        text-align: left;
+      }
+    }
+#topic-stats{
+  margin-left: auto;
+  margin-right: auto;
+  display:flex;
+  flex-direction:row;
+    i{
+      margin-top:24px;
+      margin-left: auto;
+      margin-right: auto;
+      font-size: 3.3rem;
+      span{
+          position: absolute;
+          width: 2rem;
+          border-radius: 10px;
+          background-color: @res-ints-red;
+          display: block;
+          margin-left: -11px;
+          font-size: 17px;
+          margin-top: -53px;
+      }
+    }
+}
+
+//########## end profile view container styling #############//
+
+.wrapper{
+  margin-top:5%;
+  margin-left:auto;
+  margin-right:auto;
+  width:60%;
+}
+
+
+//########## ng-class border & logo styling  #############//
+
+.enqueue{
+  box-shadow:1.25px 1.25px 1.25px 1.25px @res-ints-red;
+    i{
+      color:@res-ints-red;
+    }
+  border:1px solid @res-ints-red;
+}
+
+.reviewed{
+  box-shadow:1.5px 1.5px 1.5px 1.5px @res-ints-orange;
+  i{
+    color:@res-ints-orange;
+  }
+  border:1px solid @res-ints-orange;
+
+}
+.started{
+  box-shadow:1.5px 1.5px 1.5px 1.5px @res-ints-yellow;
+  i{
+    color:@res-ints-yellow;
+  }
+  border:1px solid @res-ints-yellow;
+
+}
+.completed{
+  box-shadow:1.5px 1.5px 1.5px 1.5px @res-green;
+  i{
+    color:@res-green;
+  }
+  border:1px solid @res-green;
+
+}
+
+  hr{
+    content:'';
+    height:0px;
+    width:100%;
+    box-shadow: none !important;
+  }
+//##########  end ng-class border & logo styling  #############//
+
+
+
+.dash-posts{
+  padding:1%;
+  margin-top: 25px;
+  width:95vw;
+  height:100%;
+  background:rgb(43,43,43);
+}
+
+.topic{
+  color:white;
+  margin:2% 0;
+  margin-bottom:1.5%;
+  height:10%;
+  display:inline-block;
+  h4{
+    text-align: center;
+    font-size: 20px;
+  }
+p{
+  text-align: center;
+  font-size: 15px;
+}
+  #top-cont{
+    padding: 2%;
+    height:380px;
+    background:@res-black;
+    &:hover{
+      cursor: pointer;
+      background: lighten(@res-black, 8%);
+    }
+  }
+
+  a{
+    color:white !important;
+    &:hover{
+      text-decoration:none;
+    }
+  }
+
+  .topic_owner_link{
+    color:@res-primary !important;
+    &:hover{
+      color:white !important;
+    }
+  }
+}
+
+.topic-wrap{
+  border:2px dotted @res-blue;
+  margin-left:15%;
+  margin-top:5%;
+  padding:2%;
+  height:25em;
+  width:85%;
+  overflow-y:scroll;
+  position:absolute;
+  display: inline-flex;
+}
+
+ul{
+  li{
+    display:block;
+  }
+}
+
+// ###### begin nav styling ########## //
+
+nav{
+  background: darken(@res-obsidian, 1%);
+  position:relative;
+  padding:.3%;
+  border-radius:0px !important;
+  height:70px;
+  img{
+    position:absolute;
+    height:65px;
+    width:100px;
+  }
+
+  ul {
+    margin-top:15px;
+    margin-left: 16px;
+    list-style:none;
+    padding-left:0;
+    li{
+      a{
+        &:hover{
+          color:@res-blue;
+        }
+      }
+    }
+      img{
+        display:inline-flex;
+        height:65px;
+        width:100px;
+      }
+    }​
+
+  a {
+    color:@res-blue;
+    &:hover{
+      text-decoration:none;
+      color:white;
+    }
+  }
+  .empty {
+    width:95%;
+  }
+.nav-links {
+  height: 21px;
+}
+.right {
+    line-height: 28px;
+}
+  input{
+    vertical-align: bottom !important;
+    display:inline-block;
+  }
+  .empty input[type="text"] {
+    font-family: 'FontAwesome';
+    font-style: normal;
+  }
+//aligns the user's link and logout button vertically
+    a, button{
+      display:inline !important;
+    }
+
+   [type="radio"]:not(:checked)+label:before {
+      border: 2px solid @res-ghost;
+    }
+
+}
+
+//collapsed links in nav bar, hidden on large screens
+.nav-drop{
+  i{
+    font-size: 30px;
+  }
+  display: none;
+}
+
+// ###### end nav styling ########## //
+
+
+
+//######### topic-view page css ########//
+video{
+  width:100%;
+  height:75vh;
+}
+object{
+  width:100%;
+  height:75vh;
+}
+
+.pst{
+    margin-left: 10%;
+  margin-top: 15px;
+  width:92%;
+}
+ .cmt {
+    margin-left: 11%;
+    margin-top: 15px;
+    width:92%;
+ }
+.new_post{
+  margin-top: 30px;
+  input{
+    margin-left:auto;
+    margin-right:auto;
+    width:89%;
+    display:inline-block !important;
+    color:@res-blue;
+  }
+  .btn-p{
+    display:inline-block;
+    position:relative;
+    background-color: @res-ints-red !important;
+  }
+    .btn-c{
+    display:inline-block;
+    background: @res-primary !important;
+  }
+}
+.posts{
+clear:both;
+color:ghostwhite;
+padding-top:0px !important;
+width:100%;
+height:60vh;
+overflow-y:scroll;
+overflow-x:hidden;
+  .post{
+      background:darken(@res-blue, 10%);
+      margin-left:auto;
+      margin-right:3%;
+      margin-top:3%;
+      line-height:15px;
+      border-radius:30px 30px 30px 0px;
+      box-shadow:2px 2px 4px #888;
+      padding:2%;
+      height:auto;
+      width:auto;
+  }
+  .comment{
+    background:@res-green;
+    margin-top:3%;
+    float:right;
+    line-height:15px;
+    border-radius:30px 30px 0px 30px;
+    box-shadow:2px 2px 4px #888;
+    padding:2%;
+    height:auto;
+    width:90%;
+  }
+  img{
+    display: block;
+    margin-left: auto;
+    margin-right:auto;
+    height:80px;
+    width:80px;
+  }
+}
+
+//font-awesome size css -- this makes 5x class HUGE
+
+.fa-5x{
+  font-size:80px !important;
+}
+
+//############ slide-down css ########//
+
+#slideout {
+  i {
+    font-size: 60px;
+    position:absolute;
+   left:50%;
+   margin-left: -40px;
+    color:white;
+  }
+  display:inline;
+  top: 40px;
+  left: 0;
+  -webkit-transition-duration: 0.3s;
+  -moz-transition-duration: 0.3s;
+  -o-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+}
+
+#slideout_inner {
+  padding:1%;
+  text-align: center;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  width:300px;
+  min-width:250px;
+  background: fade(@res-obsidian, 95%);
+  display:inline;
+  position: absolute;
+  z-index:1000;
+  top: -600px;
+  left: 50%;
+margin-left: -150px;
+  -webkit-transition-duration: 0.3s;
+  -moz-transition-duration: 0.3s;
+  -o-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+
+        div{
+          line-height: 24px !important;
+        }
+
+        form{
+          margin-top:5%;
+          h4{
+            color:white;
+          }
+      } 
+      hr{
+        border:1px solid white;
+        outline:none;
+      }
+      .btn{
+        width:100%;
+      }
+}
+
+#slideout:hover #slideout_inner {
+  top: -10px;
+}
+
+
+//################## timeline horizontal css ##################//
+
+
+.timeline {
+  white-space:nowrap;
+  overflow-x: scroll;
+  padding:30px 0 10px 0;
+  position:relative;
+}
+
+.entry {
+  display:inline-block;
+  vertical-align:top;
+  background:#13519C;
+  color:#fff;
+  padding:10px;
+  font-size:12px;
+  text-align:center;
+  position:relative;
+  border-top:4px solid #06182E;
+  border-radius:3px;
+  min-width:200px;
+  max-width:500px;
+}
+
+.entry img {
+  display:block;
+  max-width:100%;
+  height:auto;
+  margin-bottom:10px;
+}
+
+.entry:after {
+  content:'';
+  display:block;
+  background:#eee;
+  width:7px;
+  height:7px;
+  border-radius:6px;
+  border:3px solid #06182E;
+  position:absolute;
+  left:51%;
+  top:-30px;
+  margin-left:-6px;
+}
+
+.entry:before {
+  content:'';
+  display:block;
+  background:#06182E;
+  width:5px;
+  height:20px;
+  position:absolute;
+  left:50%;
+  top:-20px;
+  margin-left:-2px;
+}
+
+.entry h1 {
+  color:#fff;
+  font-size:18px;
+  font-weight:bold;
+  margin-bottom:10px;
+}
+
+.entry h2 {
+  letter-spacing:.2em;
+  margin-bottom:10px;
+  font-size:14px;
+}
+
+.bar {
+  margin-top:2%;
+  height:4px;
+  background:#eee;
+  width:100%;
+  position:relative;
+  top:13px;
+  left:0;
+}
+
+//################## end timeline css ##################//
+
+
+//################## media queries ##################//
+@media screen and (min-width: 601px) and (max-width: 992px){
+  .btn-cool{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width:55%;
+  }
+}
+
+
+@media screen and (min-width: 460px) and (max-width: 1124px){
+  .nav-wrapper{
+    i{
+         line-height: initial !important;      
+    }
+  }
+    .cmt, .pst {
+        margin-left: 9%;
+        width:93%;
+        i{
+          font-size: 20px;
+        }
+    }
+  }
+  @media screen and (min-width: 300px) and (max-width: 459px){
+    .nav-drop{
+     display:block;
+    -webkit-transition-duration: 0.3s;
+    -moz-transition-duration: 0.3s;
+    -o-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+      .nav-drop-group{
+        position:fixed;
+        background:@res-obsidian;
+        right:-120px;
+        top:-12px;
+        -webkit-transition-duration: 0.3s;
+        -moz-transition-duration: 0.3s;
+        -o-transition-duration: 0.3s;
+        transition-duration: 0.3s;
+          li{
+            float:none;
+          }
+      }
+    }
+    .nav-drop:hover{
+      .nav-drop-group{
+      right:0px;
+      } 
+    }
+
+    .dash-posts{
+      padding:10%;
+    }
+      #slideout{
+        i{
+          font-size: 70px;
+          margin-left: -33px;
+        }
+      }
+
+  .cmt, .pst {
+    margin-left: 5%;
+    width:93%;
+    i{
+      font-size: 10px;
+    }
+  }
+
+    .title-desc{
+      h4{
+        margin-top: 2.14rem;
+        font-size: x-large !important;
+        text-align: center !important;
+      }
+      i{
+        font-size: 35px;
+      }
+      line-height: 12px;
+  }
+  #topics_container a .icon-grp i {
+  font-size: 4.3rem;
+  margin: auto;
+}
+
+  }
+  @media screen and (min-width: 450px) and (max-width: 990px){
+    .nav-drop{
+     display:block;
+    -webkit-transition-duration: 0.3s;
+    -moz-transition-duration: 0.3s;
+    -o-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+      .nav-drop-group{
+        position:fixed;
+        background:@res-obsidian;
+        right:-120px;
+        top:-11px;
+        -webkit-transition-duration: 0.3s;
+        -moz-transition-duration: 0.3s;
+        -o-transition-duration: 0.3s;
+        transition-duration: 0.3s;
+          li{
+            float:none;
+          }
+      }
+    }
+    .nav-drop:hover{
+      .nav-drop-group{
+      right:0px;
+      } 
+    }
+
+    .dash-posts{
+      padding:3%;
+    }
+          #slideout{
+        i{
+          font-size: 70px;
+          margin-left: -33px;
+        }
+      }
+    .posts{
+      height:300px;
+    }
+
+  .title-desc{
+      h4{
+        margin-top: 2.14rem;
+        font-size: x-large !important;
+        text-align: center !important;
+      }
+      i{
+        font-size: 35px;
+      }
+      line-height: 12px;
+  }
+
+  #topics_container a .icon-grp i {
+  font-size: 4.3rem;
+  margin: auto;
+}
+
+  }
+  @media screen and (min-height: 850px) and (max-height: 1000px){
+    .posts{
+      height:700px;
+    }
+  }
+
+.btn-version{
+  margin-bottom:0px;
+}
+.btn-filter{
+  width: 100%;
+  height: 100%;
+  font-size: 13px;
+  padding: 5px;
+  letter-spacing: 0;
+  -webkit-box-shadow: 0 1px 6px 0 rgba(0,0,0,0.16),0 0 0 0 rgba(0,0,0,0.12);
+  -moz-box-shadow: 0 1px 6px 0 rgba(0,0,0,0.16),0 0 0 0 rgba(0,0,0,0.12);
+  box-shadow: 0 1px 6px 0 rgba(0,0,0,0.16),0 0 0 0 rgba(0,0,0,0.12);
+}
+

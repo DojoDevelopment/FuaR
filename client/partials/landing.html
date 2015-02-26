@@ -1,0 +1,45 @@
+<div class='valign-wrapper landing-container'>
+  <div  class='valign login-reg'>
+    <div class='container'>
+
+      <!-- dojo logo -->
+      <img src="../img/coding_dojo.png" alt="dojo-review" />
+
+      <!-- login form -->
+      <form name="app.forms.loginForm" ng-submit="app.functions.submitForm(app.forms.loginForm.$valid)" validate>
+
+        <!-- email input -->
+        <div class=' col s6'>
+          <label class='left' for='email'>
+            <h6>Email</h6>
+            <!-- email input error messages -->
+            <div class='error_msg' ng-messages="app.forms.loginForm.email.$error" ng-if="app.forms.loginForm.$submitted || !app.forms.loginForm.email.$pristine">
+              <h6 ng-message="required" class="help-block">Required</h6>
+              <h6 ng-message="pattern"  class="help-block">Invalid</h6>
+            </div>
+          </label>
+          <input type="email" ng-model="app.forms.login.email" ng-pattern="app.patterns.email" ng-trim="true" name="email" id="email" class='form-control' required autofocus/>
+        </div>
+        <!-- password input -->
+        <div class=' col s6'>
+          <label class='left' for='password'>
+            <h6>Password</h6>
+            <!-- password input error messages -->
+            <div class='error_msg' ng-messages="app.forms.loginForm.password.$error" ng-if="app.forms.loginForm.$submitted || !app.forms.loginForm.password.$pristine">
+              <h6 ng-message="required"  class="help-block">Required<h6>
+            </div>
+          </label>
+          <input type="password" ng-model="app.forms.login.password" ng-pattern="app.patterns.password" ng-minlength="6" ng-maxlength="72" for="password" name="password" required/>
+        </div>
+        <div class='server-errors'>
+          <!-- server error message -->
+          <p ng-if="app.messages.login !== null" ng-bind="app.messages.login" class='help-block center'></p>
+        </div>
+        <!-- submit button for login -->
+        <button type="submit" class='waves-effect btn btn-log'>Login</button>
+        <!-- link to registration page -->
+        <a href="/#/register" class="waves-effect btn btn-reg">Register</a>
+      </form><!-- end login form -->
+    </div>
+  </div>
+</div><!-- end containers -->
