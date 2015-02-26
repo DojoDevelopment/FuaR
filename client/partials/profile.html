@@ -24,7 +24,13 @@
 
 <!-- main container -->
 
-<div ng-if='app.topics.length <= 0' class='container'><h1>You don't yet have any topics.</h1></div>
+<div ng-if='app.topics.length <= 0' class='container'>
+  <div class="center">
+  <h1 class='orange'>You don't yet have any topics.</h1>
+      <p class='teal'>Add a new topic to start yourself off!</p>
+        <a ng-href="/#/topic/add" class='btn btn-floating blue' id='add-topic'><i class='mdi-content-add'></i></a>
+  </div>
+</div>
 <div ng-if='app.topics.length > 0' class='container' id="topics_container">
 
   <!-- server error message -->
@@ -57,7 +63,6 @@
 
       <!-- title & description -->
       <div class='col s12 m12 l6 title-desc'>
-        <!-- <h4>GGGGGGGGGGGGGGGGGGG</h4> -->
         <h4>{{t.title | limitTo: 20 }}{{t.title.length > 20 ? '...' : ''}}</h4>
       </div>
 

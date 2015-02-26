@@ -8,7 +8,7 @@
 var query;
 module.exports = (function(id, db, callback){
 
-  query = 'SELECT user_id, is_public, views, status'
+  query = 'SELECT user_id, is_public, views, status, description'
         + ' FROM topics'
         + ' WHERE topic_id = $1';
 

@@ -89,49 +89,48 @@
 
   <!-- main container -->
   <div class='row'>
-
     <!-- left page -->
 
     <div class='col s12 m12 l6'>
-
       <!-- switch toggle for pdf/video view -->
-      <div ng-if="app.topic.videos.length > 0">
-        <input ng-click='app.functions.showVideo("pdf")' type="radio" name="view" value="pdf" id="pdf" checked>
-        <label for="pdf">PDF</label>
-        <input ng-click='app.functions.showVideo("video")' type="radio" name="view" value="video" id="video">
-        <label for="video">VIDEO</label>
-      </div>
+      <div id='left-page'>
+          <div ng-if="app.topic.videos.length > 0">
+            <input ng-click='app.functions.showVideo("pdf")' type="radio" name="view" value="pdf" id="pdf" checked>
+            <label for="pdf">PDF</label>
+            <input ng-click='app.functions.showVideo("video")' type="radio" name="view" value="video" id="video">
+            <label for="video">VIDEO</label>
+          </div>
+          <!-- end switch toggle-->
+          <div ng-if="app.settings.isVideo">
+            <div class="btn-group" role="group" aria-label="...">
+              <button ng-repeat="v in app.topic.videos" type="button" class="waves-effect btn btn-version" ng-click="app.functions.switch_video($index)">{{$index + 1}}</button>
+            </div>
+            <video ng-repeat="v in app.topic.videos" ng-show="app.topic.show_video === $index" class="video-js vjs-default-skin" controls preload="auto">
+              <source ng-src="{{v.key}}" type='video/mp4'/>
+              <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that supports HTML5<a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
+            </video>
+          </div>
 
-      <!-- end switch toggle-->
-      <div ng-if="app.settings.isVideo">
-        <div class="btn-group" role="group" aria-label="...">
-          <button ng-repeat="v in app.topic.videos" type="button" class="waves-effect btn btn-version" ng-click="app.functions.switch_video($index)">{{$index + 1}}</button>
-        </div>
-        <video ng-repeat="v in app.topic.videos" ng-show="app.topic.show_video === $index" class="video-js vjs-default-skin" controls preload="auto">
-          <source ng-src="{{v.key}}" type='video/mp4'/>
-          <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that supports HTML5<a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
-        </video>
-      </div>
+    <!-- PDF -->
+          <div ng-if="!app.settings.isVideo">
+            <div class="btn-group" role="group" aria-label="...">
+              <button ng-repeat="f in app.topic.files" type="button" class="btn btn-version" ng-click="app.functions.switch_file($index)">{{$index + 1}}</button>
+            </div>
 
-<!-- PDF -->
-      <div ng-if="!app.settings.isVideo">
-        <div class="btn-group" role="group" aria-label="...">
-          <button ng-repeat="f in app.topic.files" type="button" class="btn btn-version" ng-click="app.functions.switch_file($index)">{{$index + 1}}</button>
+            <div>
+                      <object data="http://v88_fuar.s3.amazonaws.com/1/file/1424319012921.pdf" alt="pdf" ></object>
+    <!--                   <iframe src=""></iframe> -->
+              
+            </div>
+          </div>
         </div>
-
-        <div>
-                  <object data="http://v88_fuar.s3.amazonaws.com/1/file/1424319012921.pdf" alt="pdf" ></object>
-<!--                   <iframe src=""></iframe> -->
-          
-        </div>
-      </div>
-    </div><!-- end left page -->
+      </div><!-- end left page -->
 
       <!-- right page -->
       <div class='col s12 m12 l6'>
-
         <!--  users start a new post on the topic  -->
         <div class='form-group new_post'>
+        <h6 class='teal-text'>A bit about this topic: <span class='grey-text'>{{app.topic.stats.description}}</span></h6>
           <button class="btn btn-floating red" ng-click="app.functions.add_post(null, 0, app.forms.post)"><i class='fa fa-pencil fa-2x'></i></button>
           <input ng-model="app.forms.post" type="text" class='form-control' placeholder='start a new post!' value="">
         </div>
