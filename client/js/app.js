@@ -12,65 +12,65 @@ app.config(function($routeProvider, $sceDelegateProvider){
     ]);
 
     $routeProvider
-    //index page for non logged in users
-    .when('/', {
-        templateUrl: '/partials/landing.html',
-        controller:  'LandingController',
-        css: 'css/splash.css',
-        data: { login : false }
+      //index page for non logged in users
+      .when('/', {
+          templateUrl: '/partials/landing.html',
+          controller:  'LandingController',
+          css: 'css/splash.css',
+          data: { login : false }
 
-    //going to try to combine this page with landing.html
-    }).when('/register', {
+      //going to try to combine this page with landing.html
+      }).when('/register', {
 
-        templateUrl: '/partials/register.html',
-        controller: 'LandingController',
-        css: 'css/splash.css',
-        data: { login : false }
+          templateUrl: '/partials/register.html',
+          controller: 'LandingController',
+          css: 'css/splash.css',
+          data: { login : false }
 
-    //topic page
-    }).when('/dashboard', {
+      //topic page
+      }).when('/dashboard', {
 
-        templateUrl: '/partials/dashboard.html',
-        controller: 'DashboardController',
-        css: 'css/secondary.css',
-        data: { login : true }
+          templateUrl: '/partials/dashboard.html',
+          controller: 'DashboardController',
+          css: 'css/secondary.css',
+          data: { login : true }
 
-    //add topic
-    }).when('/topic/add', {
+      //add topic
+      }).when('/topic/add', {
 
-        templateUrl: '/partials/topic_add.html',
-        controller: 'AlterTopicController',
-        css: 'css/secondary.css',
-        data: { login : true }
+          templateUrl: '/partials/topic_add.html',
+          controller: 'AlterTopicController',
+          css: 'css/secondary.css',
+          data: { login : true }
 
-    //view topic
-    }).when('/topic/:id', {
+      //view topic
+      }).when('/topic/:id', {
 
-        templateUrl: '/partials/topic_view.html',
-        controller: 'TopicController',
-        css: 'css/secondary.css',
-        data: { login : true }
+          templateUrl: '/partials/topic_view.html',
+          controller: 'TopicController',
+          css: 'css/secondary.css',
+          data: { login : true }
 
-    //user profile
-    }).when('/user/:id', {
+      //user profile
+      }).when('/user/:id', {
 
-        templateUrl: '/partials/profile.html',
-        controller: 'UserController',
-        css: 'css/secondary.css',
-        data: { login : true }
+          templateUrl: '/partials/profile.html',
+          controller: 'UserController',
+          css: 'css/secondary.css',
+          data: { login : true }
 
-    //admin settings
-    }).when('/settings', {
+      //admin settings
+      }).when('/settings', {
 
-        templateUrl: '/partials/settings.html',
-        controller: 'SettingsController',
-        css: 'css/secondary.css',
-        data: { login : true }
+          templateUrl: '/partials/settings.html',
+          controller: 'SettingsController',
+          css: 'css/secondary.css',
+          data: { login : true }
 
-    //route to root index
-    }).otherwise({
-        redirectTo: '/',
-    });
+      //route to root index
+      }).otherwise({
+          redirectTo: '/',
+      });
 
 }).run(function ($rootScope, $location, $http, UserFactory) {
 
@@ -81,24 +81,25 @@ app.config(function($routeProvider, $sceDelegateProvider){
 
       //verify if login is true or user_level is greater than 0
       verification = next.$$route.data.login;
-
-      if ($rootScope.user !== undefined){
-
-        //if verification is true and user isn't set send them to login
-        if ( verification && $rootScope.user === undefined ) {
-          console.log('Error A0103: Access Denied');
-          $location.path('/');
-        }
-
-      } else {
-        UserFactory.check_session(function(){
+      if (verification){
+        if ($rootScope.user !== undefined){
 
           //if verification is true and user isn't set send them to login
           if ( verification && $rootScope.user === undefined ) {
-            console.log('Error A0102: Access Denied');
+            console.log('Error A0103: Access Denied');
             $location.path('/');
           }
-        });
+
+        } else {
+          UserFactory.check_session(function(){
+
+            //if verification is true and user isn't set send them to login
+            if ( verification && $rootScope.user === undefined ) {
+              console.log('Error A0102: Access Denied');
+              $location.path('/');
+            }
+          });
+        }
       }
     } else {
       console.log('Error A0101: Access Denied');
