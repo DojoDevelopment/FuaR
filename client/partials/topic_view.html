@@ -116,7 +116,7 @@
           </div>
 
           <div>
-            <object ng-repeat='file in app.topic.files'  ng-show="app.topic.show_video === $index" alt="file" ></object>
+            <object ng-show="app.topic.show_video === $index" alt="user_file" >If you're using Chrome please download the PdfJS Chrome extension and restart your browser to view this file.</object>
           </div>
         </div>
       </div>
@@ -127,7 +127,7 @@
       <!--  users start a new post on the topic  -->
       <div class='form-group new_post'>
         <h6 class='teal-text'>A bit about this topic: <span class='grey-text'>{{app.topic.stats.description}}</span></h6>
-        <button class="btn btn-floating red" ng-click="app.functions.add_post(null, 0, app.forms.post)"><i class='fa fa-pencil fa-2x'></i></button>
+        <button class="btn btn-floating red" ng-click="app.functions.add_post(null, 0, app.forms.post)"><i class='mdi-image-edit'></i></button>
         <input ng-model="app.forms.post" type="text" class='form-control' placeholder='start a new post!' value="">
       </div>
 
@@ -142,7 +142,7 @@
             <div class='row post' ng-class="{post: p.parent_id == p.post_id, comment: p.parent_id != p.post_id}">
 
               <!-- profile image -->
-              <div class='col s12 m4 l4'>
+              <div class='col s12 m4 l3'>
                 <a ng-href="/#/user/{{p.user_id}}">
                   <img ng-if="app.topic.posts[$index].file_name === 'anon.png'" ng-src="../assets/users/anon.png" class="circle">
                   <img ng-if="app.topic.posts[$index].file_name !== 'anon.png'" ng-src="../assets/users/{{p.user_id}}/{{p.file_name}}" class="circle">
@@ -150,8 +150,8 @@
               </div>
 
               <!-- poster's name date and comment or post -->
-              <div class='col s12 m8 l8'>
-                <p><a ng-href="/#/user/{{p.user_id}}" class="blue-text lighten-3"><span ng-bind="p.name"></span></a> <small ng-bind="p.created_at | date:'mediumDate'"></small></p>
+              <div class='col s12 m8 l9'>
+                <p><a ng-href="/#/user/{{p.user_id}}" class="deep-orange-text darken-3"><span ng-bind="p.name"></span></a> <small ng-bind="p.created_at | date:'mediumDate'"></small></p>
                 <p ng-bind="p.post"></p>
               </div>
 
@@ -159,7 +159,7 @@
 
             <!-- user input for commenting on a post -->
             <div class='input-fields new_post' ng-class="{pst: p.parent_id == p.post_id, cmt: p.parent_id != p.post_id}" ng-if="app.topic.posts[$index+1].parent_id != p.parent_id">
-              <button class="btn btn-floating blue" ng-click="app.functions.add_post($index, p.parent_id, app.forms.comment[$index])"><i class='fa fa-comments fa-2x'></i></button>
+              <button class="btn btn-floating blue" ng-click="app.functions.add_post($index, p.parent_id, app.forms.comment[$index])"><i class='mdi-action-question-answer'></i></button>
               <input type="text" ng-model="app.forms.comment[$index]" placeholder='comment on this post'>
             </div><!-- end post input-->
           </div><!-- end block element -->

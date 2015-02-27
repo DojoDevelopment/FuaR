@@ -51,7 +51,6 @@ app.controller('SettingsController', [ '$scope', '$rootScope', '$location', 'Pag
             $scope.app.forms.pass.confirm.$setValidity('match', ($scope.app.forms.pass.isMatch == false ? false : true ));
 
           }, submitForm : function(valid, form){
-
             if (valid){
               switch(form){
                 case 'email' :
