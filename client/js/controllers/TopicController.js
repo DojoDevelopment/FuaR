@@ -101,7 +101,8 @@ app.controller('TopicController', [ '$scope', '$location', '$rootScope', 'PageFa
                 $scope.app.settings.message = data.msg;
               });
             } else {
-              console.log('no file');
+              $scope.app.forms.file.name = 'no file chosen';
+              alert('Please choose a file to upload!');
             }
           }
         }, delete_topic: function(topic_id){

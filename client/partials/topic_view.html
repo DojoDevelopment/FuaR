@@ -51,7 +51,7 @@
           <div ng-if='app.settings.user_id === app.topic.stats.user_id && app.settings.user_level < 5'>
 
             <form name="app.forms.fileForm" ng-submit="app.functions.submitForm(app.forms.fileForm.$valid, 'file')" novalidate>
-              <span id='file' class='btn btn-file'>
+              <span id='file' class='btn btn-file' ng-class="{'red' : app.forms.file.name == 'no file chosen'}">
                 <span id='file' ng-bind='app.forms.file.name'></span>
                 <input type="file" file-model="app.forms.file" ng-model="app.forms.file" name="revision" id="inputFile"/>
               </span>
