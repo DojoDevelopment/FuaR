@@ -15,7 +15,7 @@ module.exports = {
       if (err) {throw err;}
       callback(err === null);
     });
-  }, delete_topic : function(topic_id, callback){
+  }, delete_topic : function(topic_id){
 
     params = {
       Bucket: 'v88_fuar',
@@ -23,7 +23,7 @@ module.exports = {
     }
 
     s3.listObjects(params, function(err, data) {
-      if (err) return console.log(err);
+      if (err) return console.log('No objects in bucket in s3' + err);
       params = {Bucket: 'v88_fuar'};
       params.Delete = {};
       params.Delete.Objects = [];
@@ -33,8 +33,7 @@ module.exports = {
       });
 
       s3.deleteObjects(params, function(err, data) {
-        if (err) return console.log(err);
-        callback(data.Deleted.length > 0)
+        if (err) return console.log('no objects in that location' + err);
       });
     });
   }

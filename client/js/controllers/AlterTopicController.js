@@ -24,7 +24,7 @@ app.controller('AlterTopicController', ['$scope', '$rootScope', '$location', 'Us
         }, functions : {
           submitForm : function(valid){
             //add topic display or error messages
-            if (valid) {
+            if (valid && $scope.app.forms.doc.size !== undefined) {
               TopicFactory.add_topic($scope.app.forms.topic, function(has_err, data){
                 if (has_err){
                   $scope.app.settings.message = data; //error message

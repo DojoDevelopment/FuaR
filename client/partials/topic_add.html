@@ -46,7 +46,7 @@
             <!-- type input -->
             <select  class='browser-default teal lighten-2 white-text' ng-model="app.forms.topic.type" name="type" required>
               <!-- type error message -->
-              <option ng-messages="app.forms.topicForm.type.$error" ng-if="app.forms.topicForm.$submitted && !app.forms.topicForm.type.$pristine" selected disabled="">
+              <option ng-messages="app.forms.topicForm.type.$error" ng-if="app.forms.topicForm.$submitted" disabled selected >
                 <p ng-message="required" class="help-block">&#xf00d; This field is required</p>
               </option>
               <option value="" disabled selected>Topic Type</option>
