@@ -12,34 +12,33 @@ app.controller('AlterTopicController', ['$scope', '$rootScope', '$location', 'Us
               name : 'Choose File'
             }
           }
-        },
-        settings : {
-          user_level : $rootScope.user.user_level
-          , name     : $rootScope.user.name
-          , user_id  : $rootScope.user.id
-          , message  : null
-        }, patterns : {
-          //regular expression patterns
-          loose : /^[a-zA-Z\s\[\]()\/`~\-_:.,'"!@#$%^&*]*$/
-        }, functions : {
-          submitForm : function(valid){
-            //add topic display or error messages
-            if (valid && $scope.app.forms.doc.size !== undefined) {
+        }
+      },
+      settings : {
+        user_level : $rootScope.user.user_level
+        , name     : $rootScope.user.name
+        , user_id  : $rootScope.user.id
+        , message  : null
+      }, patterns : {
+        //regular expression patterns
+        loose : /^[a-zA-Z\s\[\]()\/`~\-_:.,'"!@#$%^&*]*$/
+      }, functions : {
+        submitForm : function(valid){
+          //add topic display or error messages
+          if (valid && $scope.app.forms.topic.doc.size !== undefined){
               TopicFactory.add_topic($scope.app.forms.topic, function(has_err, data){
                 if (has_err){
-                  $scope.app.settings.message = data; //error message
-                } else {
-                  $location.url('/user/' + $scope.app.settings.user_id)
-                }
-              });
+                $scope.app.settings.message = data; //error message
+              } else {
+                $location.url('/user/' + $scope.app.settings.user_id)
+              }
+            });
+            } else if ($scope.app.forms.topic.doc.size === undefined){
+              $scope.app.forms.topic.doc.name = 'No File Chosen';
             }
-          }, check_file : function(){
-            $scope.app.forms.topic.file = ($scope.app.forms.topic.doc.name !== 'Choose File');
-            $scope.app.forms.topicForm.$setValidity('file', ($scope.app.forms.topic.file === true ? true : false ));
-          }, log_out : function(){
-            //logout function
-            UserFactory.log_out();
-          }
+        }, log_out : function(){
+          //logout function
+          UserFactory.log_out();
         }
       };
     }
