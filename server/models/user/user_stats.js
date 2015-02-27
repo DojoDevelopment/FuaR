@@ -9,7 +9,7 @@ var query;
 module.exports = (function(values, db, callback){
 
   query = 'SELECT name, file_name, graduation, location'
-        + ' FROM udsers'
+        + ' FROM users'
         + ' WHERE user_id = $1';
 
   //send error or user_id
