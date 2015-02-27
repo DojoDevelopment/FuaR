@@ -116,6 +116,17 @@ app.factory('UserFactory', ['$http', '$location', '$rootScope', function($http, 
         $location.path('/');
       }
       return $rootScope.user === undefined ? false : true;
+    }, check_session : function(){
+      $http.get('/api/users/session')
+        .success(function(data){
+          console.log(data);
+          $rootScope.user = {
+            user_level   : data.user_level
+            , file_name  : data.file_name
+            , name       : data.name
+            , id         : data.id
+          }
+        })
     }
   }
 }]);

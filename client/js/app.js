@@ -72,7 +72,7 @@ app.config(function($routeProvider, $sceDelegateProvider){
         redirectTo: '/',
     });
 
-}).run(function ($rootScope, $location, $http, ServerFactory) {
+}).run(function ($rootScope, $location, $http, UserFactory) {
 
   // //on load
   $rootScope.$on('$routeChangeStart', function (event, next, current) {
@@ -83,12 +83,6 @@ app.config(function($routeProvider, $sceDelegateProvider){
       verification = next.$$route.data.login;
 
       if ($rootScope.user !== undefined){
-        user = {
-            user_level : $rootScope.user.user_level
-          , file_name  : $rootScope.user.file_name
-          , name       : $rootScope.user.name
-          , user_id    : $rootScope.user.id
-        }
 
         //if verification is true and user isn't set send them to login
         if ( verification && $rootScope.user === undefined ) {
@@ -97,7 +91,7 @@ app.config(function($routeProvider, $sceDelegateProvider){
         }
 
       } else {
-        ServerFactory.check_session(function(){
+        UserFactory.check_session(function(){
 
           //if verification is true and user isn't set send them to login
           if ( verification && $rootScope.user === undefined ) {
