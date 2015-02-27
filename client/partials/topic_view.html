@@ -91,7 +91,6 @@
 
     <!-- left page -->
     <div class='col s12 m12 l6'>
-
       <!-- switch toggle for pdf/video view -->
       <div id='left-page'>
         <div ng-if="app.topic.videos.length > 0">
@@ -118,7 +117,7 @@
           </div>
 
           <div>
-            <object data="http://v88_fuar.s3.amazonaws.com/1/file/1424319012921.pdf" alt="pdf" ></object>
+            <object ng-repeat='file in app.topic.files'  ng-show="app.topic.show_video === $index" alt="file" ></object>
           </div>
         </div>
       </div>

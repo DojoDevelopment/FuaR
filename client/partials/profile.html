@@ -2,7 +2,7 @@
 <nav>
   <div class="nav-wrapper">
     <img src="./../img/coding_dojo.png"><!-- Coding Dojo log -->
-    <ul id="nav-mobile" class="right right hide-on-med-and-down">
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
       <li ng-if='app.settings.user_level <= 5'><a class='mdi-action-account-circle' ng-href="/#user/{{app.settings.user_id}}">Profile</a></li>
       <li><a class='mdi-action-dashboard' href="/#/dashboard">Dashboard</a></li>
       <li><a class='mdi-action-settings-applications' ng-href="/#/settings">Settings</a></li>
@@ -67,13 +67,13 @@
 
     <!-- title & description -->
     <div class='col s12 m12 l6 title-desc'>
-      <h4>{{t.title | limitTo: 20 }}{{t.title.length > 20 ? '...' : ''}}</h4>
+      <h4>{{t.title | limitTo: 20 }}{{t.title.length > 20 ? '...' : ''}}:<span ng-class="{'orange-text bold': t.status == 'reviewed', 'red-text bold': t.status == 'enqueue', 'teal-text bold': t.status == 'completed' }">{{t.status}}</span></h4>
     </div>
 
     <!-- topic stats -->
     <div id='topic-stats' class='col s12 m12 l5'>
-      <i ng-if='t.is_public === false' class='mdi-action-lock-outline'></i>
-      <i ng-if='t.is_public === true' class='mdi-action-lock-open'></i>
+          <i ng-if='t.is_public === false' class='mdi-action-lock-outline'></i>
+          <i ng-if='t.is_public === true' class='mdi-action-lock-open'></i>
       <i class='mdi-action-visibility'>
         <span>{{t.views}}</span>
       </i>
@@ -86,7 +86,7 @@
     </div>
   </a>
   <div class='row'>
-    <div class="col l12 desc">
+    <div class="col s12 desc">
       <p>{{t.description | limitTo: 150 }}{{t.description.length > 150 ? '...' : ''}}</p>
       </div>
     </div>
