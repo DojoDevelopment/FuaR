@@ -7,7 +7,7 @@
  */
 var query;
 module.exports = (function(values, db, callback){
-
+console.log(values);
   query = 'SELECT user_id, name, email, user_level, graduation'
         + ' FROM users'
         + ' WHERE user_id <> $1'

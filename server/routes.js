@@ -22,7 +22,7 @@ module.exports = function Routes(app, db) {
   app.get( '/api/page/profile/:id', function(req, res){ require('./controllers/page/profile.js')(req, res, db);           });
   app.get( '/api/page/dashboard',   function(req, res){ require('./controllers/page/dashboard.js')(req, res, db);         });
   app.get( '/api/page/topic/:id',   function(req, res){ require('./controllers/page/view_topic.js')(req, res, db);        });
-
+  app.get( '/api/users/session',    function(req, res){ require('./controllers/user/get_session.js')(req, res);           });
   //delete routes
   app.delete('/api/topics/:id',     function(req, res){ require('./controllers/topic/delete_topic')(req, res, db);        });
 }
