@@ -1,43 +1,41 @@
 <!-- navbar beginning -->
-  <nav>
-    <div class="nav-wrapper">
-            <img src="./../img/coding_dojo.png"><!-- Coding Dojo log -->
-          <ul id="nav-mobile" class="right right hide-on-med-and-down">
+<nav>
+  <div class="nav-wrapper">
+    <img src="./../img/coding_dojo.png"><!-- Coding Dojo log -->
+    <ul id="nav-mobile" class="right right hide-on-med-and-down">
       <li ng-if='app.settings.user_level <= 5'><a class='mdi-action-account-circle' ng-href="/#user/{{app.settings.user_id}}">Profile</a></li>
       <li><a class='mdi-action-dashboard' href="/#/dashboard">Dashboard</a></li>
       <li><a class='mdi-action-settings-applications' ng-href="/#/settings">Settings</a></li>
       <li><a class='mdi-navigation-arrow-back' ng-click="app.functions.log_out()">Log off</a></li>
     </ul>
     <div class='nav-drop'>
-  <i class='mdi-navigation-more-vert right '>
-    <ul class='nav-drop-group right'>
-      <li ng-if='app.settings.user_level <= 5'><a class='mdi-action-account-circle' ng-href="/#user/{{app.settings.user_id}}">Profile</a></li>
-      <li><a class='mdi-action-dashboard' href="/#/dashboard">Dashboard</a></li>
-      <li><a class='mdi-action-settings-applications' ng-href="/#/settings">Settings</a></li>
-      <li><a class='mdi-navigation-arrow-back' ng-click="app.functions.log_out()">Log off</a></li>
-    </ul>
-  </i>
-</div>
+      <i class='mdi-navigation-more-vert right '>
+        <ul class='nav-drop-group right'>
+          <li ng-if='app.settings.user_level <= 5'><a class='mdi-action-account-circle' ng-href="/#user/{{app.settings.user_id}}">Profile</a></li>
+          <li><a class='mdi-action-dashboard' href="/#/dashboard">Dashboard</a></li>
+          <li><a class='mdi-action-settings-applications' ng-href="/#/settings">Settings</a></li>
+          <li><a class='mdi-navigation-arrow-back' ng-click="app.functions.log_out()">Log off</a></li>
+        </ul>
+      </i>
     </div>
-  </nav>
-<!-- navbar end -->
+  </div>
+</nav><!-- navbar end -->
 
 <!-- main container -->
-
 <div ng-if='app.topics.length <= 0' class='container'>
   <div class="center">
   <h1 class='orange'>You don't yet have any topics.</h1>
-      <p class='teal'>Add a new topic to start yourself off!</p>
-        <a ng-href="/#/topic/add" class='btn btn-floating blue' id='add-topic'><i class='mdi-content-add'></i></a>
+    <p class='teal'>Add a new topic to start yourself off!</p>
+    <a ng-href="/#/topic/add" class='btn btn-floating blue' id='add-topic'><i class='mdi-content-add'></i></a>
   </div>
 </div>
 <div ng-if='app.topics.length > 0' class='container' id="topics_container">
 
   <!-- server error message -->
   <p ng-if="app.settings.message !== null" ng-bind="app.settings.message"></p>
-    <h3 class='center teal-text' ng-if='app.settings.user_id != app.settings.page_id'>{{}} PlaceHolder's topics</h3>
+    <h3 class='center teal-text' ng-if='app.settings.user_id != app.settings.page_id'>{{app.user.name}}'s topics</h3>
     <h3 class='center teal-text' ng-if='app.settings.user_id == app.settings.page_id'>My topics</h3>
-    <img class='circle' src="../assets/users/anon.png" />
+    <img class='circle' ng-src="../assets/users/{{app.settings.page_id}}/{{app.user.file_name}}" />
   <!-- add topic button -->
   <div>
     <div class="row">
@@ -50,7 +48,7 @@
           <a ng-href="/#/topic/add" class='btn btn-floating red left' id='add-topic'><i class='mdi-content-add'></i></a>
       </div>
       <div class='col s4 m4'>
-           <p class='center'>Gradtuation Date: 9/2014 <br/> Silicon Valley Cohort</p>
+           <p class='center'>Gradtuation Date: {{app.user.graduation | date:"MMM, yyyy "}} <br/> {{app.user.location}} Cohort</p>
       </div>
       <div class='col s4 m4'>
          <input type="text" ng-model="app.forms.search" placeholder="&#xF002;" class='right'/>
@@ -65,69 +63,33 @@
       <div class='col s12 m12 l1 icon-grp'>
           <i class='mdi-action-description' ng-if="t.type=='resume'"><span>V{{t.latest_version}}</span></i>
           <i class='mdi-image-photo' ng-if="t.type=='image'"><span>V{{t.latest_version}}</span></i>
-          <!-- <div>{{t.status}}</div> -->
       </div>
 
-      <!-- title & description -->
-      <div class='col s12 m12 l6 title-desc'>
-        <h4>{{t.title | limitTo: 20 }}{{t.title.length > 20 ? '...' : ''}}</h4>
-      </div>
+    <!-- title & description -->
+    <div class='col s12 m12 l6 title-desc'>
+      <h4>{{t.title | limitTo: 20 }}{{t.title.length > 20 ? '...' : ''}}</h4>
+    </div>
 
-      <!-- topic stats -->
-      <div id='topic-stats' class='col s12 m12 l5'>
-              <i ng-if='t.is_public === false' class='mdi-action-lock-outline'></i>
-              <i ng-if='t.is_public === true' class='mdi-action-lock-open'></i>
-              <i class='mdi-action-visibility'>
-                    <span>{{t.views}}</span>
-              </i>
-              <i class='mdi-image-slideshow'>
-                    <span>{{t.videos}}</span>
-              </i>
-              <i class='mdi-communication-comment'>
-                    <span>{{t.posts}}</span>
-              </i>
+    <!-- topic stats -->
+    <div id='topic-stats' class='col s12 m12 l5'>
+      <i ng-if='t.is_public === false' class='mdi-action-lock-outline'></i>
+      <i ng-if='t.is_public === true' class='mdi-action-lock-open'></i>
+      <i class='mdi-action-visibility'>
+        <span>{{t.views}}</span>
+      </i>
+      <i class='mdi-image-slideshow'>
+        <span>{{t.videos}}</span>
+      </i>
+      <i class='mdi-communication-comment'>
+        <span>{{t.posts}}</span>
+      </i>
+    </div>
+  </a>
+  <div class='row'>
+    <div class="col l12 desc">
+      <p>{{t.description | limitTo: 150 }}{{t.description.length > 150 ? '...' : ''}}</p>
       </div>
-    </a>
-    <div class='row'>
-      <div class="col l12 desc">
-          <!-- <p>{{t.description | limitTo: 150 }}{{t.description.length > 150 ? '...' : ''}}</p> -->
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
-      </div>
-    </div>
-</div>
-
-<!-- *******************************************************-->
-<!-- ****** timeline  to be implemented later **************-->
-<!-- *******************************************************-->
-
-  <!-- topic timeline -->
-  <!-- <div class="bar"></div> -->
-  <!-- revision history -->
-  <!-- <div class="timeline">
-    <div class="entry">
-      <h1>v1.0</h1>
-      <h2>Resume 1st submission</h2>
-      Here's the info about this date
-    </div>
-    <div class="entry">
-      <h1>v2.0</h1>
-      Here's the info about this date
-    </div>
-    <div class="entry">
-      <h1>v3.0</h1>
-      Here's the info about this date
-    </div>
-    <div class="entry">
-      <h1>v4.0</h1>
-      Here's the info about this date
-    </div>
-    <div class="entry">
-      <h1>v5.0</h1>
-      Here's the info about this date
     </div>
   </div>
-</div>
--->
+
 </div>

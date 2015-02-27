@@ -8,7 +8,6 @@ app.controller('UserController', ['$scope', '$rootScope', '$location', 'PageFact
     $scope.app = {
       settings : {
         user_level : $rootScope.user.user_level
-        , topic_id : _.last($location.path().split('/'))  //pages user id
         , message : null
         , name : $rootScope.user.name
         , user_id : $rootScope.user.id
@@ -19,8 +18,13 @@ app.controller('UserController', ['$scope', '$rootScope', '$location', 'PageFact
     };
 
     //get approiate topics for the user id of topic_id
-    PageFactory.profile($scope.app.settings.topic_id, function(has_err, data){
-      has_err === true ? $scope.app.settings.message = data : $scope.app.topics = data;
+    PageFactory.profile($scope.app.settings.page_id, function(has_err, data){
+      if (!has_err) {
+        $scope.app.topics = data.topics;
+        $scope.app.user = data.user;
+      } else {
+        $scope.app.settings.message = data;
+      }
     })
   }
 }]);

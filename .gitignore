@@ -1,4 +1,4 @@
 /node_modules
-/node_uploads
+/temp_uploads
 /config
 *.DS_Store

@@ -18,7 +18,6 @@ app.factory('PageFactory', ['$http', '$location', '$rootScope', function($http, 
       //get topic by user id for users page
       //on success return array of user topics
       //on error send message or send to login
-
       $http
         .get('/api/page/profile/' + id)
         .success(function(data){
