@@ -109,9 +109,9 @@ INSERT INTO topics(user_id, type, title, status, description, views, latest_vers
 INSERT INTO topics(user_id, type, title, status, description, views, latest_version, is_public) VALUES (4, 'image',  'Awesome Image',     'reviewed',  'desc', 25, 8, FALSE);
 
 INSERT INTO videos(topic_id, user_id, key) VALUES (1, 1, 'http://v88_fuar.s3.amazonaws.com/1/vid/1425027689928.mp4');
-INSERT INTO videos(topic_id, user_id, key) VALUES (2, 1, 'http://v88_fuar.s3.amazonaws.com/1/vid/1425028118211.mp4');
+INSERT INTO videos(topic_id, user_id, key) VALUES (2, 1, 'http://v88_fuar.s3.amazonaws.com/1/vid/1425027689928.mp4');
 INSERT INTO videos(topic_id, user_id, key) VALUES (3, 1, 'http://v88_fuar.s3.amazonaws.com/1/vid/1425027689928.mp4');
-INSERT INTO videos(topic_id, user_id, key) VALUES (1, 1, 'http://v88_fuar.s3.amazonaws.com/1/vid/1425027689928.mp4');
+INSERT INTO videos(topic_id, user_id, key) VALUES (1, 1, 'http://v88_fuar.s3.amazonaws.com/1/vid/1425028118211.mp4');
 
 INSERT INTO files (topic_id, version, key) VALUES (1, 1, '1/file/1425027140441.pdf');
 INSERT INTO files (topic_id, version, key) VALUES (1, 2, '1/file/1425027483611.pdf');

@@ -115,9 +115,7 @@
             <button ng-repeat="f in app.topic.files" type="button" class="btn btn-version" ng-click="app.functions.switch_file($index)">{{$index + 1}}</button>
           </div>
 
-          <div>
-            <object ng-repeat='file in app.topic.files'  ng-show="app.topic.show_video === $index" alt="file" ></object>
-          </div>
+          <object data="http://v88_fuar.s3.amazonaws.com/1/file/1425027140441.pdf" alt="file" ></object>
         </div>
       </div>
     </div><!-- end left page -->
