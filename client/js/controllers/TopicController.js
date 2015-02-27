@@ -39,8 +39,7 @@ app.controller('TopicController', [ '$scope', '$location', '$rootScope', 'PageFa
               if (!has_err){
                 //set post object
                 var post = {
-                     graduation : $scope.app.settings.graduation
-                    , file_name : $scope.app.settings.file_name
+                    file_name : $scope.app.settings.file_name
                     , name : $rootScope.user.name
                     , parent_id : (index === null ? data.post_id : parent_id)
                     , post : text
@@ -48,7 +47,6 @@ app.controller('TopicController', [ '$scope', '$location', '$rootScope', 'PageFa
                     , created_at : new Date().toISOString()
                     , updated_at : new Date().toISOString()
                     , user_id : $scope.app.settings.user_id
-                    , user_level : $scope.app.settings.user_level
                   };
                 //if index is null creat new post else add comment to correct post/comment
                 if ( index === null ){
