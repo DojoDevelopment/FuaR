@@ -19,7 +19,7 @@ module.exports = (function(obj, db, callback){
   query = [];
   query.push('SELECT latest_version FROM topics WHERE topic_id = $1');
   query.push('INSERT INTO files (topic_id, version, key) VALUES ($1, $2, $3)');
-  query.push("UPDATE topics SET latest_version = $1, status = 'enqueue' WHERE topic_id = $2");
+  query.push("UPDATE topics SET latest_version = $1, status='enqueue', updated_at=NOW() WHERE topic_id = $2");
   values = { get : [obj.id] };
 
   //preforms all db queries as a transaction roll back if any fail

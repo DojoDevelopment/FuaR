@@ -18,7 +18,7 @@ module.exports = (function(obj, db, callback){
 
   query = []
   query.push('INSERT INTO videos (topic_id, user_id, key) VALUES ($1, $2, $3)');
-  query.push("UPDATE topics SET status = 'reviewed' WHERE topic_id = $1")
+  query.push("UPDATE topics SET status='reviewed', updated_at=NOW() WHERE topic_id = $1")
 
   values  = {
     videos : [obj.topic_id, obj.user_id, obj.key],

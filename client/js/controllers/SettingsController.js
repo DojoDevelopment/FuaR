@@ -8,7 +8,8 @@ app.controller('SettingsController', [ '$scope', '$rootScope', '$location', 'Pag
           user_level : $rootScope.user.user_level
           , name     : $rootScope.user.name
           , user_id  : $rootScope.user.id
-          , message  : null
+          , top_message  : null
+          , bottom_message : null
         }, forms : {
           profile : {
             pic : {
@@ -32,7 +33,7 @@ app.controller('SettingsController', [ '$scope', '$rootScope', '$location', 'Pag
                   if(!has_err) {
                     $scope.app.table[index].user_level = level;
                   }
-                  $scope.app.settings.message = msg;
+                  $scope.app.settings.bottom_message = msg;
                 })
               }
             }
@@ -42,39 +43,39 @@ app.controller('SettingsController', [ '$scope', '$rootScope', '$location', 'Pag
               if (!has_err){
                 $scope.app.topics.splice(index, 1);
               }
-              $scope.app.settings.message = data;
+              $scope.app.settings.bottom_message = data;
             });
 
           }, isMatch : function(){
 
             $scope.app.forms.pass.isMatch = ($scope.app.forms.pass.password === $scope.app.forms.pass.confirm);
-            $scope.app.forms.pass.confirm.$setValidity('match', ($scope.app.forms.pass.isMatch == false ? false : true ));
+            $scope.app.forms.passwordForm.confirm.$setValidity('match', ($scope.app.forms.pass.isMatch == false ? false : true ));
 
           }, submitForm : function(valid, form){
             if (valid){
               switch(form){
                 case 'email' :
-
-                  UserFactory.update_email($scope.app.forms.email, function(data){
-                      $scope.app.settings.message = data;
+                  UserFactory.update_email({email: $scope.app.forms.email}, function(data){
+                    $scope.app.settings.top_message = data;
                   });
 
                 break;
                 case 'pic' :
-                //check if file is there or send error message
-                UserFactory.update_pic($scope.app.forms.profile, function(data){
-                    // $scope.app.settings.message = data;
-                    $scope.app.forms.profile.pic.name = 'no file chosen';
-                });
+                  //check if file is there or send error message
+                  UserFactory.update_pic($scope.app.forms.profile, function(data){
+                    $scope.app.settings.top_message = data;
+                  });
                 break;
                 case 'password' :
 
                   UserFactory.update_password($scope.app.forms.pass, function(data){
-                      $scope.app.settings.message = data;
+                    $scope.app.settings.top_message = data;
                   });
 
                 break;
               }
+            } else if (!valid && form == 'pic'){
+              $scope.app.forms.profile.pic.name = 'no file chosen';
             }
 
           }, update_privacy: function(index){
@@ -86,7 +87,7 @@ app.controller('SettingsController', [ '$scope', '$rootScope', '$location', 'Pag
               if (!has_err){ $scope.app.topics[index].is_public = true; }
 
               //display message
-              $scope.app.settings.message = data;
+              $scope.app.settings.bottom_message = data;
 
             });
 
@@ -104,7 +105,7 @@ app.controller('SettingsController', [ '$scope', '$rootScope', '$location', 'Pag
             ? $scope.app.table = data.users
             : $scope.app.topics = data.topics;
         } else {
-          $scope.app.settings.message = data;
+          $scope.app.settings.top_message = data;
         }
       });
     }

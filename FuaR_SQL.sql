@@ -109,19 +109,19 @@ INSERT INTO topics(user_id, type, title, status, description, views, latest_vers
 INSERT INTO topics(user_id, type, title, status, description, views, latest_version, is_public) VALUES (4, 'image',  'Awesome Image',     'reviewed',  'desc', 25, 8, FALSE);
 
 INSERT INTO videos(topic_id, user_id, key) VALUES (1, 1, 'http://v88_fuar.s3.amazonaws.com/1/vid/1425027689928.mp4');
-INSERT INTO videos(topic_id, user_id, key) VALUES (2, 1, 'http://v88_fuar.s3.amazonaws.com/1/vid/1425028118211.mp4');
+INSERT INTO videos(topic_id, user_id, key) VALUES (2, 1, 'http://v88_fuar.s3.amazonaws.com/1/vid/1425027689928.mp4');
 INSERT INTO videos(topic_id, user_id, key) VALUES (3, 1, 'http://v88_fuar.s3.amazonaws.com/1/vid/1425027689928.mp4');
-INSERT INTO videos(topic_id, user_id, key) VALUES (1, 1, 'http://v88_fuar.s3.amazonaws.com/1/vid/1425027689928.mp4');
+INSERT INTO videos(topic_id, user_id, key) VALUES (1, 1, 'http://v88_fuar.s3.amazonaws.com/1/vid/1425028118211.mp4');
 
-INSERT INTO files (topic_id, version, key) VALUES (1, 1, '1/file/1425027140441.pdf');
-INSERT INTO files (topic_id, version, key) VALUES (1, 2, '1/file/1425027483611.pdf');
-INSERT INTO files (topic_id, version, key) VALUES (1, 3, '1/file/1425027140441.pdf');
-INSERT INTO files (topic_id, version, key) VALUES (2, 1, '1/file/1425027140441.pdf');
-INSERT INTO files (topic_id, version, key) VALUES (3, 2, '1/file/1425027140441.pdf');
-INSERT INTO files (topic_id, version, key) VALUES (3, 1, '1/file/1425027483611.pdf');
-INSERT INTO files (topic_id, version, key) VALUES (4, 2, '1/file/1425027140441.pdf');
-INSERT INTO files (topic_id, version, key) VALUES (4, 3, '1/file/1425027483611.pdf');
-INSERT INTO files (topic_id, version, key) VALUES (4, 4, '1/file/1425027140441.pdf');
+INSERT INTO files (topic_id, version, key) VALUES (1, 1, 'http://v88_fuar.s3.amazonaws.com/1/file/1425027140441.pdf');
+INSERT INTO files (topic_id, version, key) VALUES (1, 2, 'http://v88_fuar.s3.amazonaws.com/1/file/1425027483611.pdf');
+INSERT INTO files (topic_id, version, key) VALUES (1, 3, 'http://v88_fuar.s3.amazonaws.com/1/file/1425027140441.pdf');
+INSERT INTO files (topic_id, version, key) VALUES (2, 1, 'http://v88_fuar.s3.amazonaws.com/1/file/1425027140441.pdf');
+INSERT INTO files (topic_id, version, key) VALUES (3, 2, 'http://v88_fuar.s3.amazonaws.com/1/file/1425027140441.pdf');
+INSERT INTO files (topic_id, version, key) VALUES (3, 1, 'http://v88_fuar.s3.amazonaws.com/1/file/1425027483611.pdf');
+INSERT INTO files (topic_id, version, key) VALUES (4, 2, 'http://v88_fuar.s3.amazonaws.com/1/file/1425027140441.pdf');
+INSERT INTO files (topic_id, version, key) VALUES (4, 3, 'http://v88_fuar.s3.amazonaws.com/1/file/1425027483611.pdf');
+INSERT INTO files (topic_id, version, key) VALUES (4, 4, 'http://v88_fuar.s3.amazonaws.com/1/file/1425027140441.pdf');
 
 INSERT INTO posts(topic_id, user_id, post, created_at, updated_at) VALUES (1, 2, 'Post 1', '2014-11-01 00:00:00', '2014-11-01 00:00:00');
 INSERT INTO posts(topic_id, user_id, parent_id, post) VALUES (1, 3,  1, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.');

@@ -1,13 +1,13 @@
 <!-- navbar beginning -->
   <nav>
     <div class="nav-wrapper">
-            <img src="./../img/coding_dojo.png"><!-- Coding Dojo log -->
- <ul id="nav-mobile" class="right right hide-on-med-and-down">
-      <li ng-if='app.settings.user_level <= 5'><a class='mdi-action-account-circle' ng-href="/#/user/{{app.settings.user_id}}">Profile</a></li>
-      <li><a class='mdi-action-dashboard' href="/#/dashboard">Dashboard</a></li>
-      <li><a class='mdi-action-settings-applications' ng-href="/#/settings">Settings</a></li>
-      <li><a class='mdi-navigation-arrow-back' ng-click="app.functions.log_out()">Log off</a></li>
-    </ul>
+      <img src="./../img/coding_dojo.png"><!-- Coding Dojo log -->
+      <ul id="nav-mobile" class="right right hide-on-med-and-down">
+        <li ng-if='app.settings.user_level <= 5'><a class='mdi-action-account-circle' ng-href="/#/user/{{app.settings.user_id}}">Profile</a></li>
+        <li><a class='mdi-action-dashboard' href="/#/dashboard">Dashboard</a></li>
+        <li><a class='mdi-action-settings-applications' ng-href="/#/settings">Settings</a></li>
+        <li><a class='mdi-navigation-arrow-back' ng-click="app.functions.log_out()">Log off</a></li>
+      </ul>
     <div class='nav-drop'>
   <i class='mdi-navigation-more-vert right '>
     <ul class='nav-drop-group right'>
@@ -27,16 +27,16 @@
   <!--  update email  -->
   <form name="app.forms.emailForm" ng-submit="app.functions.submitForm(app.forms.emailForm.$valid, 'email')" novalidate>
     <h4>Update Email</h4>
-    <label for='email'>
+    <label for="email">
       <h6>Email:</h6>
       <!-- email error messages -->
-      <div class='error_msg right' ng-messages="app.forms.emailForm.email.$error" ng-if="app.forms.emailForm.$submitted || !app.forms.emailForm.email.$pristine">
+      <div class="error_msg right" ng-messages="app.forms.emailForm.email.$error" ng-if="app.forms.emailForm.$submitted || !app.forms.emailForm.email.$pristine">
         <h6 ng-message="required" class="help-block">Email is required.</h6>
         <h6 ng-message="pattern"  class="help-block">Email is invalid.</h6>
-      </div>
-     <!--end email error messages -->
+      </div><!--end email error messages -->
+
     </label>
-    <input type="email" ng-model="app.forms.email.emailInput" ng-pattern="app.patterns.email" name="email" id='email' required/>
+    <input type="email" ng-model="app.forms.email" ng-pattern="app.patterns.email" name="email" id='email' required/>
     <button type="submit" class="btn">Update Email</button>
   </form>
   <!--  update email  -->
@@ -50,7 +50,6 @@
           <h6>Password:</h6>
           <!-- password input error messages -->
           <div class='error_msg right' ng-messages="app.forms.passwordForm.password.$error" ng-if="app.forms.passwordForm.$submitted || !app.forms.passwordForm.password.$pristine">
-
             <h6 ng-message="required" class="help-block">Password is required</h6>
             <h6 ng-message="minlength" class="help-block">Password is too short</h6>
             <h6 ng-message="maxlength" class="help-block">Password is too long</h6>

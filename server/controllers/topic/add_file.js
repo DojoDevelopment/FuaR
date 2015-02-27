@@ -22,7 +22,7 @@ module.exports = (function(req, res, db){
 
         file      = req.files.file;
         topic_id  = req.params.id;
-        file_name = topic_id + '/file/' + Date.now() + path.extname(file.originalname);
+        file_name = 'http://v88_fuar.s3.amazonaws.com/' + topic_id + '/file/' + Date.now() + path.extname(file.originalname);
 
         //place values into an array for database
         fs.readFile(file.path, function(err, data){
