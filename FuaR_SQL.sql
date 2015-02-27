@@ -101,27 +101,27 @@ INSERT INTO users(name, email, password, user_level, file_name, graduation, loca
 INSERT INTO users(name, email, password, user_level, file_name, graduation, location) VALUES ('Julian Nguyen',   'julian@gmail.com', '$2a$10$EiFH511e9MLWiT2fvueuVu9x7USM3vsuDixSy/ByMgTBqsuPxH/La', 1,  'user_id.jpg', '2014-09-01 00:00:00', 'San Jose');
 INSERT INTO users(name, email, password, user_level, file_name, graduation, location) VALUES ('Jay Patel',       'jay@gmail.com',    '$2a$10$EiFH511e9MLWiT2fvueuVu9x7USM3vsuDixSy/ByMgTBqsuPxH/La', 5,  'user_id.jpg', '2010-01-01 00:00:00', 'Seattle' );
 
-INSERT INTO topics(user_id, type, title, status, description, views, latest_version, is_public) VALUES (2, 'resume', 'Anthonys resumee',  'enqueue',   'desc',  3, 1, TRUE);
+INSERT INTO topics(user_id, type, title, status, description, views, latest_version, is_public) VALUES (2, 'resume', 'DON\'T DELETE',  'enqueue',   'desc',  3, 1, TRUE);
 INSERT INTO topics(user_id, type, title, status, description, views, latest_version, is_public) VALUES (3, 'resume', 'Alvaros resumee',   'enqueue',   'desc', 25, 4, FALSE);
 INSERT INTO topics(user_id, type, title, status, description, views, latest_version, is_public) VALUES (3, 'image',  'CICO Wireframe',    'completed', 'desc', 41, 3, TRUE);
 INSERT INTO topics(user_id, type, title, status, description, views, latest_version, is_public) VALUES (4, 'resume', 'Juilans Resume',    'completed', 'desc', 48, 5, FALSE);
 INSERT INTO topics(user_id, type, title, status, description, views, latest_version, is_public) VALUES (4, 'image',  'Julians portfolio', 'reviewed',  'desc',  9, 3, TRUE);
 INSERT INTO topics(user_id, type, title, status, description, views, latest_version, is_public) VALUES (4, 'image',  'Awesome Image',     'reviewed',  'desc', 25, 8, FALSE);
 
-INSERT INTO videos(topic_id, user_id, key) VALUES (1, 1, 'http://v88_fuar.s3.amazonaws.com/1/vid/1424312735149.mov');
-INSERT INTO videos(topic_id, user_id, key) VALUES (2, 1, 'http://v88_fuar.s3.amazonaws.com/1/vid/1424688353771.mp4');
-INSERT INTO videos(topic_id, user_id, key) VALUES (3, 1, 'http://v88_fuar.s3.amazonaws.com/1/vid/1424688353771.mp4');
-INSERT INTO videos(topic_id, user_id, key) VALUES (1, 1, 'http://v88_fuar.s3.amazonaws.com/1/vid/1424688353771.mp4');
+INSERT INTO videos(topic_id, user_id, key) VALUES (1, 1, 'http://v88_fuar.s3.amazonaws.com/1/vid/1425027689928.mp4');
+INSERT INTO videos(topic_id, user_id, key) VALUES (2, 1, 'http://v88_fuar.s3.amazonaws.com/1/vid/1425028118211.mp4');
+INSERT INTO videos(topic_id, user_id, key) VALUES (3, 1, 'http://v88_fuar.s3.amazonaws.com/1/vid/1425027689928.mp4');
+INSERT INTO videos(topic_id, user_id, key) VALUES (1, 1, 'http://v88_fuar.s3.amazonaws.com/1/vid/1425027689928.mp4');
 
-INSERT INTO files (topic_id, version, key) VALUES (1, 1, '1/file/1424318123192.pdf');
-INSERT INTO files (topic_id, version, key) VALUES (1, 2, '1/file/1424318123192.pdf');
-INSERT INTO files (topic_id, version, key) VALUES (1, 3, '1/file/1424318123192.pdf');
-INSERT INTO files (topic_id, version, key) VALUES (2, 1, '1/file/1424318123192.pdf');
-INSERT INTO files (topic_id, version, key) VALUES (3, 2, '1/file/1424318123192.pdf');
-INSERT INTO files (topic_id, version, key) VALUES (3, 1, '1/file/1424318123192.pdf');
-INSERT INTO files (topic_id, version, key) VALUES (4, 2, '1/file/1424318123192.pdf');
-INSERT INTO files (topic_id, version, key) VALUES (4, 3, '1/file/1424318123192.pdf');
-INSERT INTO files (topic_id, version, key) VALUES (4, 4, '1/file/1424318123192.pdf');
+INSERT INTO files (topic_id, version, key) VALUES (1, 1, '1/file/1425027140441.pdf');
+INSERT INTO files (topic_id, version, key) VALUES (1, 2, '1/file/1425027483611.pdf');
+INSERT INTO files (topic_id, version, key) VALUES (1, 3, '1/file/1425027140441.pdf');
+INSERT INTO files (topic_id, version, key) VALUES (2, 1, '1/file/1425027140441.pdf');
+INSERT INTO files (topic_id, version, key) VALUES (3, 2, '1/file/1425027140441.pdf');
+INSERT INTO files (topic_id, version, key) VALUES (3, 1, '1/file/1425027483611.pdf');
+INSERT INTO files (topic_id, version, key) VALUES (4, 2, '1/file/1425027140441.pdf');
+INSERT INTO files (topic_id, version, key) VALUES (4, 3, '1/file/1425027483611.pdf');
+INSERT INTO files (topic_id, version, key) VALUES (4, 4, '1/file/1425027140441.pdf');
 
 INSERT INTO posts(topic_id, user_id, post, created_at, updated_at) VALUES (1, 2, 'Post 1', '2014-11-01 00:00:00', '2014-11-01 00:00:00');
 INSERT INTO posts(topic_id, user_id, parent_id, post) VALUES (1, 3,  1, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.');
