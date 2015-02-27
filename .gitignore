@@ -1,3 +1,4 @@
+/node_modules
 /node_uploads
 /config
 *.DS_Store
