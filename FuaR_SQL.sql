@@ -101,7 +101,7 @@ INSERT INTO users(name, email, password, user_level, file_name, graduation, loca
 INSERT INTO users(name, email, password, user_level, file_name, graduation, location) VALUES ('Julian Nguyen',   'julian@gmail.com', '$2a$10$EiFH511e9MLWiT2fvueuVu9x7USM3vsuDixSy/ByMgTBqsuPxH/La', 1,  'user_id.jpg', '2014-09-01 00:00:00', 'San Jose');
 INSERT INTO users(name, email, password, user_level, file_name, graduation, location) VALUES ('Jay Patel',       'jay@gmail.com',    '$2a$10$EiFH511e9MLWiT2fvueuVu9x7USM3vsuDixSy/ByMgTBqsuPxH/La', 5,  'user_id.jpg', '2010-01-01 00:00:00', 'Seattle' );
 
-INSERT INTO topics(user_id, type, title, status, description, views, latest_version, is_public) VALUES (2, 'resume', 'DON\'T DELETE',  'enqueue',   'desc',  3, 1, TRUE);
+INSERT INTO topics(user_id, type, title, status, description, views, latest_version, is_public) VALUES (2, 'resume', 'DONT DELETE',  'enqueue',   'desc',  3, 1, TRUE);
 INSERT INTO topics(user_id, type, title, status, description, views, latest_version, is_public) VALUES (3, 'resume', 'Alvaros resumee',   'enqueue',   'desc', 25, 4, FALSE);
 INSERT INTO topics(user_id, type, title, status, description, views, latest_version, is_public) VALUES (3, 'image',  'CICO Wireframe',    'completed', 'desc', 41, 3, TRUE);
 INSERT INTO topics(user_id, type, title, status, description, views, latest_version, is_public) VALUES (4, 'resume', 'Juilans Resume',    'completed', 'desc', 48, 5, FALSE);
