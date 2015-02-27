@@ -13,16 +13,15 @@ app.controller('AlterTopicController', ['$scope', '$rootScope', '$location', 'Us
             }
           }
         }
-      },
-      settings : {
+      }, settings = {
         user_level : $rootScope.user.user_level
         , name     : $rootScope.user.name
         , user_id  : $rootScope.user.id
         , message  : null
-      }, patterns : {
+      }, patterns = {
         //regular expression patterns
         loose : /^[a-zA-Z\s\[\]()\/`~\-_:.,'"!@#$%^&*]*$/
-      }, functions : {
+      }, functions = {
         submitForm : function(valid){
           //add topic display or error messages
           if (valid && $scope.app.forms.topic.doc.size !== undefined){
