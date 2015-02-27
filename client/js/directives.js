@@ -14,28 +14,35 @@ app.directive('fileModel', ['$parse', function($parse) {
     };
 }]);
 
-app.directive('myTag', ['$http', function($http) {
-  return {
-    restrict: 'E',
-    transclude: true,
-    replace: true,
-    template: '<iframe height="100%" width="100%" frameborder="0"></iframe>',
-    scope:{
-        src:"="
-    },
-    controller:function($scope){
+app.directive("displayFile", function () {
 
-      $http
-        .get($scope.src, {
-           'x-amz-acl': 'public-read'
-          ,'Content-Type': 'application/pdf'
-          ,'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-        }).success(function(result){
-         console.log(result);
-        })
-        .error(function(result){
-          alert("Error: No data returned");
-        })
-    }
-  }
-}]);
+    var updateElem = function (element) {
+        return function (displayFile) {
+            element.empty();
+
+            var objectElem = {}
+            if (displayFile && displayFile.type !== "") {
+                if (displayFile.type === "pdf") {
+                    objectElem = angular.element(document.createElement("object"));
+                    objectElem.attr("data", displayFile.fileUrl);
+                    objectElem.attr("type", "application/pdf");
+                }
+                else {
+                    objectElem = angular.element(document.createElement("img"));
+                    objectElem.attr("src", displayFile.fileUrl);
+                }
+            }
+            element.append(objectElem);
+        };
+    };
+
+    return {
+        restrict: "EA",
+        scope: {
+            displayFile: "="
+        },
+        link: function (scope, element) {
+            scope.$watch("displayFile", updateElem (element));
+        }
+    };
+});

@@ -119,8 +119,8 @@ app.controller('TopicController', [ '$scope', '$location', '$rootScope', 'PageFa
 
           }, switch_file: function(index){
             //Switch file_path based on button pressed
-            $scope.app.topic.file_path = "http://v88_fuar.s3.amazonaws.com/" + $scope.app.topic.files[index].key;
-console.log($scope.app.topic.file_path);
+            $scope.app.topic.file.fileUrl = $scope.app.topic.files[index].key;
+
           }, log_out: function(){
             //log out function
             UserFactory.log_out();
@@ -142,8 +142,10 @@ console.log($scope.app.topic.file_path);
 
           //set video path to last video or null
           $scope.app.topic.show_video = $scope.app.topic.videos.length > 0 ? $scope.app.topic.videos.length - 1  : null;
-          $scope.app.topic.file_path = "http://v88_fuar.s3.amazonaws.com/" + _.last($scope.app.topic.files).key;
-          console.log($scope.app.topic.file_path)
+          $scope.app.topic.file = {
+            fileUrl: _.last($scope.app.topic.files).key,
+            type : 'pdf'
+          }
         } else {
           $scope.app.settings.message = data;
         }

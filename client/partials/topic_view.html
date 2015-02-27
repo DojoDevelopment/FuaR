@@ -114,8 +114,8 @@
           <div class="btn-group" role="group" aria-label="...">
             <button ng-repeat="f in app.topic.files" type="button" class="btn btn-version" ng-click="app.functions.switch_file($index)">{{$index + 1}}</button>
           </div>
-          <object data="{{app.topic.file_path}}" alt="file"></object>
-          <!-- <object data="http://v88_fuar.s3.amazonaws.com/1/file/1425027140441.pdf" alt="file" ></object> -->
+
+          <div data-display-file="app.topic.file"></div>
         </div>
       </div>
     </div><!-- end left page -->

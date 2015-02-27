@@ -79,6 +79,7 @@ app.factory('UserFactory', ['$http', '$location', '$rootScope', function($http, 
         });
 
     }, update_email : function(obj, callback){
+      console.log(obj);
       $http.post('/api/users/email', obj)
         .success(function(data){
           callback(data);
