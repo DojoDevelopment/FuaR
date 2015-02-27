@@ -35,24 +35,31 @@
 
   <!-- server error message -->
   <p ng-if="app.settings.message !== null" ng-bind="app.settings.message"></p>
-
     <h3 class='center teal-text' ng-if='app.settings.user_id != app.settings.page_id'>{{}} PlaceHolder's topics</h3>
     <h3 class='center teal-text' ng-if='app.settings.user_id == app.settings.page_id'>My topics</h3>
-
+    <img class='circle' src="../assets/users/anon.png" />
   <!-- add topic button -->
   <div>
     <div class="row">
-      <div class='col s6 m6'>
-        <a href="/#/topic/add"><label for='add-topic'>Add a new topic</label></a>
+      <div ng-if='app.settings.user_id != app.settings.page_id' class='col s4 m4'>
+          <a href="/#/dashboard"><label for='back'>Dashboard</label></a>
+          <a ng-href="/#/dashboard" class='btn btn-floating blue left' id='back'><i class='mdi-navigation-arrow-back'></i></a>
+      </div>
+      <div ng-if='app.settings.user_id == app.settings.page_id' class='col s4 m4'>
+          <a href="/#/topic/add"><label for='add-topic'>Add topic</label></a>
           <a ng-href="/#/topic/add" class='btn btn-floating red left' id='add-topic'><i class='mdi-content-add'></i></a>
       </div>
-      <div class='col s6 m6'>
+      <div class='col s4 m4'>
+           <p class='center'>Gradtuation Date: 9/2014 <br/> Silicon Valley Cohort</p>
+      </div>
+      <div class='col s4 m4'>
          <input type="text" ng-model="app.forms.search" placeholder="&#xF002;" class='right'/>
       </div>
     </div>
   </div>
   <!-- ng-repeat for topics -->
-<div class='btn btn-cool row'ng-repeat="t in app.topics | filter:app.forms.search">
+  <h4 class='center red-text'ng-if='(app.topics | filter:app.forms.search).length == 0'>No Results</h4>
+<div class='btn btn-cool row' ng-repeat="t in app.topics | filter:app.forms.search">
           <a href="/#/topic/{{t.topic_id}}">
       <!-- icon depending on topic type -->
       <div class='col s12 m12 l1 icon-grp'>

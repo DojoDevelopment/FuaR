@@ -85,15 +85,10 @@
       <span id='file' ng-bind='app.forms.profile.pic.name'></span>
         <input type="file" ng-model="app.forms.profile.pic" file-model="app.forms.profile.pic" name="pic" required/>
     </button>
-
-
-            <button type="submit" class="btn mdi-image-portrait orange darken-2">Update</button>
-
+    <button type="submit" class="btn mdi-image-portrait orange darken-2">Update</button>
   </form>
 <!-- end update profile-pic form -->
-
 <hr/>
-
 <h4 ng-if='app.settings.user_level <=5' class='center'>Current Topics</h4>
 <h4 ng-if='app.settings.user_level ==10' class='center'>Admin Privileges</h4>
 
