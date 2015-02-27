@@ -8,7 +8,7 @@ app.controller('SettingsController', [ '$scope', '$rootScope', '$location', 'Pag
           user_level : $rootScope.user.user_level
           , name     : $rootScope.user.name
           , user_id  : $rootScope.user.id
-          , top_message  : null,
+          , top_message  : null
           , bottom_message : null
         }, forms : {
           profile : {
