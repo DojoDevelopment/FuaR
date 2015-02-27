@@ -32,8 +32,8 @@ module.exports = (function(values, file, db, callback){
     db.client.query(query[1], values, function(err, results){
       if (err) return rollback(db.client, 2, query[1], err);
       topic_id = results.rows[0].topic_id
-      key = topic_id + '/file/' + Date.now() + path.extname(file.originalname);
-      values = [topic_id, key];
+      key      = 'http://v88_fuar.s3.amazonaws.com/' + topic_id + '/file/' + Date.now() + path.extname(file.originalname);
+      values   = [topic_id, key];
 
       db.client.query(query[2], values, function(err, results){
         if (err) return rollback(db.client, 3, query[2], err);
