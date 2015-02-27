@@ -22,9 +22,12 @@
 </nav><!-- navbar end -->
 
 <!-- main container -->
-
 <div ng-if='app.topics.length <= 0' class='container'>
-  <h1>You don't yet have any topics.</h1>
+  <div class="center">
+  <h1 class='orange'>You don't yet have any topics.</h1>
+    <p class='teal'>Add a new topic to start yourself off!</p>
+    <a ng-href="/#/topic/add" class='btn btn-floating blue' id='add-topic'><i class='mdi-content-add'></i></a>
+  </div>
 </div>
 <!-- server error message -->
 <p ng-if="app.settings.message !== null" ng-bind="app.settings.message"></p>

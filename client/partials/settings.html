@@ -98,6 +98,9 @@
 <h4 ng-if='app.settings.user_level ==10' class='center'>Admin Privileges</h4>
 
   <table ng-if="app.settings.user_level < 10" class='table'>
+      <div class="error-container center">
+            <h4  ng-if="app.settings.message !== null && app.settings.user_level < 10" ng-bind="app.settings.message"></h4>
+      </div>
     <thead>
       <tr>
         <th>Title</th>
@@ -133,7 +136,7 @@
     <tbody>
       <!--# Server error message -->
       <div class="error-container center">
-        <h4  ng-if="app.settings.message !== null" ng-bind="app.settings.message"></h4>
+        <h4  ng-if="app.settings.message !== null && app.settings.user_level === 10" ng-bind="app.settings.message"></h4>
       </div>
 
       <!-- ng-repeat for table body defines user's name, email and admin setting -->

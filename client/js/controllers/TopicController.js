@@ -16,7 +16,6 @@ app.controller('TopicController', [ '$scope', '$location', '$rootScope', 'PageFa
         , graduation : $rootScope.user.graduation
         , file_name : $rootScope.user.file_name
         , user_id : $rootScope.user.id
-
       }, forms : {
         file : { name : 'Select File' }
         , video : { name : 'Select File' }

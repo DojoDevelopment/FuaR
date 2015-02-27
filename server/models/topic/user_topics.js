@@ -9,6 +9,7 @@
 var query
 module.exports = (function(id, filter, db, callback){
 
+
   query = 'SELECT topics.topic_id, topics.title, topics.description, topics.views, topics.type, topics.latest_version, topics.is_public, topics.created_at, topics.status, topics.updated_at, count(videos) AS videos, count(posts) AS posts'
         +  ' FROM topics'
         +  ' LEFT JOIN videos ON videos.topic_id = topics.topic_id'
@@ -19,7 +20,8 @@ module.exports = (function(id, filter, db, callback){
   query += ' ORDER BY topics.topic_id';
 
   //query for user topics dislpay message on error else return results
-  db.client.query(query, [id], function(err, results){
+  db.client.query(query, values, function(err, results){
+
     if (err === null){
       callback(false, results.rows);
     } else {

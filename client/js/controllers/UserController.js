@@ -19,7 +19,6 @@ app.controller('UserController', ['$scope', '$rootScope', '$location', 'PageFact
 
     //get approiate topics for the user id of topic_id
     PageFactory.profile($scope.app.settings.topic_id, function(has_err, data){
-      console.log(data);
       if (!has_err) {
         $scope.app.topics = data.topics;
         $scope.app.user = data.user;
