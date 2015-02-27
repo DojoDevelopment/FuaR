@@ -44,9 +44,9 @@
 
             <h4>What is the topic type</h4>
             <!-- type input -->
-            <select  class='browser-default teal lighten-2 white-text' ng-model="app.forms.topic.type" name="type" required>
+            <select  class='browser-default' ng-model="app.forms.topic.type" name="type" ng-class="{red : app.forms.topicForm.$submitted && app.forms.topicForm.type.$pristine}"required>
               <!-- type error message -->
-              <option ng-messages="app.forms.topicForm.type.$error" ng-if="app.forms.topicForm.$submitted && !app.forms.topicForm.type.$pristine" selected disabled="">
+              <option ng-messages="app.forms.topicForm.type.$error" ng-if="app.forms.topicForm.$submitted" selected disabled>
                 <p ng-message="required" class="help-block">&#xf00d; This field is required</p>
               </option>
               <option value="" disabled selected>Topic Type</option>
@@ -69,14 +69,10 @@
             <h4>Upload your file (resume, mockup...)</h4>
 
             <!-- topic file -->
-            <span id='file' class='btn btn-file '>
+            <span class='btn btn-file' ng-class="{red : app.forms.topic.doc.name == 'No File Chosen'}">
               <span id='file' ng-bind='app.forms.topic.doc.name'></span>
-              <input type="file" file-model="app.forms.topic.doc" ng-model="app.forms.topic.doc" name="revision" id="inputFile"/>
+              <input type="file" file-model="app.forms.topic.doc" ng-model="app.forms.topic.doc" id="inputFile"/>
             </span>
-            <!-- about error messages -->
-            <div class='error_msg' ng-messages="app.forms.topic.doc.$error" ng-if="app.forms.topicForm.$submitted">
-              <h6 ng-message="file"  class="help-block">PDF or PNG required</h6>
-            </div>
 
             <h4>You're done, add the topic and wait for feedback!</h4>
             <!-- submit topic form -->

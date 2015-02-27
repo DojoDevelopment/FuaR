@@ -101,6 +101,7 @@ app.controller('TopicController', [ '$scope', '$location', '$rootScope', 'PageFa
                 $scope.app.settings.message = data.msg;
               });
             } else {
+              $scope.app.forms.video.name = 'no file chosen';
               $scope.app.forms.file.name = 'no file chosen';
               alert('Please choose a file to upload!');
             }

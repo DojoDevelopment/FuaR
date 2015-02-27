@@ -12,6 +12,11 @@
 * a {
   cursor: pointer;
 }
+* select {
+  font-family: 'FontAwesome', 'Roboto';
+  background-color: #26A69A;
+  color: white;
+}
 .help-block {
   color: #f79771 !important;
   margin: 0;
@@ -613,6 +618,6 @@ object {
 }
 @media screen and (min-width: 300px) and (max-width: 1340px) {
   .btn-cool h4 {
-    font-size: 17px;
+    font-size: 17px !important;
   }
 }

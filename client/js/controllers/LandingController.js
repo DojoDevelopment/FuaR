@@ -70,7 +70,7 @@ app.controller('LandingController', ['$scope', 'UserFactory', function($scope, U
   //delete when in production
   $scope.app.forms = {
     login : {
-        email: 'tony@gmail.com'
+        email: 'julian@gmail.com'
       , password: 'password'
     }, registration:{
       pic : {
