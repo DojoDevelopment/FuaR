@@ -20,7 +20,7 @@ module.exports = (function(id, filter, db, callback){
   query += ' ORDER BY topics.topic_id';
 
   //query for user topics dislpay message on error else return results
-  db.client.query(query, values, function(err, results){
+  db.client.query(query, [id], function(err, results){
 
     if (err === null){
       callback(false, results.rows);
