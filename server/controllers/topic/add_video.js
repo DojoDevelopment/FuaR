@@ -34,7 +34,7 @@ module.exports = (function(req, res, db){
             fs.unlinkSync(file.path)
             if (complete){
               values.key = "http://v88_fuar.s3.amazonaws.com/" + file_name;
-              console.log(values.key);
+
               video(values, db, function(has_err, data){
                 !has_err ? response.success(res, data)
                          : response.error_data(res, data, page_code + '0105');

@@ -109,24 +109,23 @@ app.factory('UserFactory', ['$http', '$location', '$rootScope', function($http, 
           callback(data);
         })
 
-    }, check_login : function(){
-      //check if user has $rootscope data
-      if ($rootScope.user === undefined ){
-        console.log('Error UF0101: Unauthorized user')
-        $location.path('/');
+    }, check_session : function(callback){
+      if ($rootScope.user !== undefined) {
+        callback(true);
+      } else {
+        $http.get('/api/users/session')
+          .success(function(data){
+            $rootScope.user = {
+              user_level   : data.user_level
+              , file_name  : data.file_name
+              , name       : data.name
+              , id         : data.id
+            }
+            callback(true);
+          }).error(function(){
+            $location.path('/')
+          });
       }
-      return $rootScope.user === undefined ? false : true;
-    }, check_session : function(){
-      $http.get('/api/users/session')
-        .success(function(data){
-          console.log(data);
-          $rootScope.user = {
-            user_level   : data.user_level
-            , file_name  : data.file_name
-            , name       : data.name
-            , id         : data.id
-          }
-        })
     }
   }
 }]);

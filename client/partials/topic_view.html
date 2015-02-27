@@ -144,13 +144,15 @@
 
               <!-- profile image -->
               <div class='col s12 m4 l4'>
-                <img ng-if="app.topic.posts[$index].file_name === 'anon.png'" ng-src="../assets/users/anon.png" class="circle">
-                <img ng-if="app.topic.posts[$index].file_name !== 'anon.png'" ng-src="../assets/users/{{p.user_id}}/{{p.file_name}}" class="circle">
+                <a ng-href="/#/user/{{p.user_id}}">
+                  <img ng-if="app.topic.posts[$index].file_name === 'anon.png'" ng-src="../assets/users/anon.png" class="circle">
+                  <img ng-if="app.topic.posts[$index].file_name !== 'anon.png'" ng-src="../assets/users/{{p.user_id}}/{{p.file_name}}" class="circle">
+                </a>
               </div>
 
               <!-- poster's name date and comment or post -->
               <div class='col s12 m8 l8'>
-                <p><span ng-bind="p.name"></span> <small ng-bind="p.created_at | date:'mediumDate'"></small></p>
+                <p><a ng-href="/#/user/{{p.user_id}}" class="blue-text lighten-3"><span ng-bind="p.name"></span></a> <small ng-bind="p.created_at | date:'mediumDate'"></small></p>
                 <p ng-bind="p.post"></p>
               </div>
 

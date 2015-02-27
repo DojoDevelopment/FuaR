@@ -1,14 +1,16 @@
 //[AlterTopicController is used to Add Topics]
 app.controller('AlterTopicController', ['$scope', '$rootScope', '$location', 'UserFactory', 'TopicFactory', function($scope, $rootScope, $location, UserFactory, TopicFactory) {
   //reroute to root if not logged in
-  if (UserFactory.check_login()){
-    //obj to hold for all scope variables
-    $scope.app = {
-      //default page settings and $rootScope variables
-      forms : {
-        topic : {
-          doc : {
-            name : 'Choose File'
+  UserFactory.check_session(function(logged){
+    if (logged){
+      //obj to hold for all scope variables
+      $scope.app = {
+        //default page settings and $rootScope variables
+        forms : {
+          topic : {
+            doc : {
+              name : 'Choose File'
+            }
           }
         }
       },
@@ -38,7 +40,7 @@ app.controller('AlterTopicController', ['$scope', '$rootScope', '$location', 'Us
           //logout function
           UserFactory.log_out();
         }
-      }
-    };
-  }
+      };
+    }
+  })
 }]);
