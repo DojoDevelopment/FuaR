@@ -7,8 +7,7 @@ app.factory('UserFactory', ['$http', '$location', '$rootScope', function($http, 
     //on err send them a message
     login : function(form, callback){
 
-      $http
-        .post('/api/users/login', form)
+      $http.post('/api/users/login', form)
         .success(function(data){
           $rootScope.user = {
               user_level : data.user_level
@@ -36,15 +35,13 @@ app.factory('UserFactory', ['$http', '$location', '$rootScope', function($http, 
           fd.append(key, value);
         });
 
-        $http
-          .post('/api/users/register', fd, {
+        $http.post('/api/users/register', fd, {
             transformRequest: angular.identity
             , headers: { 'Content-Type': undefined }  //lets the browser decide that it's multipart form, if defined as multipart process throws error
           })
           .success(function(data){
             $rootScope.user = {
               user_level   : data.user_level
-              , graduation : data.graduation
               , file_name  : data.file_name
               , name       : data.name
               , id         : data.user_id
@@ -58,8 +55,7 @@ app.factory('UserFactory', ['$http', '$location', '$rootScope', function($http, 
 
     //logout function to clear session data and rootscope data.
     }, log_out : function(){
-      $http
-        .post('/api/users/logout')
+      $http.post('/api/users/logout')
         .success(function(){
           $rootScope.user = undefined;
           $location.path('/');
@@ -70,8 +66,7 @@ app.factory('UserFactory', ['$http', '$location', '$rootScope', function($http, 
     //on success set callback error to false and pass message
     //on error set callback error to true and pass message
 
-      $http
-        .post('/api/users/level', obj)
+      $http.post('/api/users/level', obj)
         .success(function(data){
           callback(false, data);
         })
@@ -84,8 +79,7 @@ app.factory('UserFactory', ['$http', '$location', '$rootScope', function($http, 
         });
 
     }, update_email : function(obj, callback){
-      $http
-        .post('/api/users/email', obj)
+      $http.post('/api/users/email', obj)
         .success(function(data){
           callback(data);
         }).error(function(data){
@@ -93,8 +87,7 @@ app.factory('UserFactory', ['$http', '$location', '$rootScope', function($http, 
         })
 
     }, update_password : function(obj, callback){
-      $http
-        .post('/api/users/password', obj)
+      $http.post('/api/users/password', obj)
         .success(function(data){
           callback(data);
         }).error(function(data){
@@ -105,17 +98,16 @@ app.factory('UserFactory', ['$http', '$location', '$rootScope', function($http, 
 
       fd = new FormData();
       fd.append('pic_info', obj.pic);
-      $http
-        .post('/api/users/pic', fd, {
-            transformRequest: angular.identity
-            , headers: { 'Content-Type': undefined }  //lets the browser decide that it's multipart form, if defined as multipart process throws error
-          })
-          .success(function(data){
-            $rootScope.user.file_name = data;
-            callback(data);
-          }).error(function(data){
-            callback(data);
-          })
+      $http.post('/api/users/pic', fd, {
+          transformRequest: angular.identity
+          , headers: { 'Content-Type': undefined }  //lets the browser decide that it's multipart form, if defined as multipart process throws error
+        })
+        .success(function(data){
+          $rootScope.user.file_name = data;
+          callback(data);
+        }).error(function(data){
+          callback(data);
+        })
 
     }, check_login : function(){
       //check if user has $rootscope data

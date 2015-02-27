@@ -51,7 +51,7 @@ module.exports = (function(req, res, db){
     });
 
     EventHandler.on("get_users", function(){
-      get_users([user_id], false, db, function(has_err, data){
+      get_users([user_id], db, function(has_err, data){
         check_data(res, has_err, data, results, flags, 'users');
       });
     });

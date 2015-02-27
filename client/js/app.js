@@ -17,10 +17,7 @@ app.config(function($routeProvider, $sceDelegateProvider){
         templateUrl: '/partials/landing.html',
         controller:  'LandingController',
         css: 'css/splash.css',
-        data: {
-            login : false
-            , userLevel : 0
-        }
+        data: { login : false }
 
     //going to try to combine this page with landing.html
     }).when('/register', {
@@ -28,10 +25,7 @@ app.config(function($routeProvider, $sceDelegateProvider){
         templateUrl: '/partials/register.html',
         controller: 'LandingController',
         css: 'css/splash.css',
-        data: {
-            login : false
-            , userLevel : 0
-        }
+        data: { login : false }
 
     //topic page
     }).when('/dashboard', {
@@ -39,10 +33,7 @@ app.config(function($routeProvider, $sceDelegateProvider){
         templateUrl: '/partials/dashboard.html',
         controller: 'DashboardController',
         css: 'css/secondary.css',
-        data: {
-            login : true
-            , userLevel : 1
-        }
+        data: { login : true }
 
     //add topic
     }).when('/topic/add', {
@@ -50,10 +41,7 @@ app.config(function($routeProvider, $sceDelegateProvider){
         templateUrl: '/partials/topic_add.html',
         controller: 'AlterTopicController',
         css: 'css/secondary.css',
-        data: {
-            login : true
-            , userLevel : 1
-        }
+        data: { login : true }
 
     //view topic
     }).when('/topic/:id', {
@@ -61,10 +49,7 @@ app.config(function($routeProvider, $sceDelegateProvider){
         templateUrl: '/partials/topic_view.html',
         controller: 'TopicController',
         css: 'css/secondary.css',
-        data: {
-            login : true
-            , userLevel : 1
-        }
+        data: { login : true }
 
     //user profile
     }).when('/user/:id', {
@@ -72,10 +57,7 @@ app.config(function($routeProvider, $sceDelegateProvider){
         templateUrl: '/partials/profile.html',
         controller: 'UserController',
         css: 'css/secondary.css',
-        data: {
-            login : true
-            , userLevel : 1
-        }
+        data: { login : true }
 
     //admin settings
     }).when('/settings', {
@@ -83,57 +65,49 @@ app.config(function($routeProvider, $sceDelegateProvider){
         templateUrl: '/partials/settings.html',
         controller: 'SettingsController',
         css: 'css/secondary.css',
-        data: {
-            login : true
-            , userLevel : 1
-        }
+        data: { login : true }
+
     //route to root index
     }).otherwise({
         redirectTo: '/',
     });
 
-}).run(function ($rootScope, $location) {
+}).run(function ($rootScope, $location, $http, ServerFactory) {
 
   // //on load
   $rootScope.$on('$routeChangeStart', function (event, next, current) {
+
     if (next && next.$$route && next.$$route.data){
-      //get login and user_level requirement and set variables
-      req_login = next.$$route.data.login;
-      userLevel = next.$$route.data.userLevel;
 
       //verify if login is true or user_level is greater than 0
-      verification = ( req_login || userLevel > 0 ? true : false );
+      verification = next.$$route.data.login;
 
-      user = {
-          user_level : $rootScope.user.user_level
-        , graduation : $rootScope.user.graduation
-        , file_name  : $rootScope.user.file_name
-        , name       : $rootScope.user.name
-        , id         : $rootScope.user.user_id
-      }
+      if ($rootScope.user !== undefined){
+        user = {
+            user_level : $rootScope.user.user_level
+          , file_name  : $rootScope.user.file_name
+          , name       : $rootScope.user.name
+          , user_id    : $rootScope.user.id
+        }
 
-console.log(user);
-
-      //if verification is true and user isn't set send them to login
-      if ( verification && $rootScope.user === undefined ) {
-        console.log('Error A0101: Access Denied')
-        $location.path('/');
-      //verification is true and user is set do further checks
-      } else if (verification && $rootScope.user !== undefined) {
-
-        //check if user_id is a number else send them the login
-        if ( req_login && !RegExp(/^[0-9]*$/).test($rootScope.user.id) ) {
-          console.log('Error A0102')
+        //if verification is true and user isn't set send them to login
+        if ( verification && $rootScope.user === undefined ) {
+          console.log('Error A0103: Access Denied');
           $location.path('/');
         }
 
-        //check user_level is higher than required level else send them to dashboard
-        if ( $rootScope.user.user_level < userLevel ){
-          console.log('Error A0103')
-          $location.path('/dashboard');
-        }
+      } else {
+        ServerFactory.check_session(function(){
+
+          //if verification is true and user isn't set send them to login
+          if ( verification && $rootScope.user === undefined ) {
+            console.log('Error A0102: Access Denied');
+            $location.path('/');
+          }
+        });
       }
     } else {
+      console.log('Error A0101: Access Denied');
       $location.path('/');
     }
   });
