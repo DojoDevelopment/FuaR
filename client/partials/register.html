@@ -59,7 +59,7 @@
       <input type="password" ng-model="app.forms.registration.confirm"  ng-pattern="app.patterns.password" ng-change="app.functions.isMatch()" name="confirm" id='confirm' required/>
 
       <!-- location input -->
-      <select  name="location" ng-model="app.forms.registration.location"class='browser-default' required>
+      <select  name="location" ng-model="app.forms.registration.location"class='browser-default' ng-class="{'red darken-2': app.forms.regForm.$submitted && app.forms.regForm.location.$pristine}"required>
         <option class='error_msg' ng-messages="app.forms.regForm.location.$error" ng-if="app.forms.regForm.$submitted " disabled selected>
             <p ng-message="required" class="help-block">&#xf00d; Location is required.</p>
         </option>
@@ -68,16 +68,16 @@
       </select>
       <!-- location error messages -->
       <!-- month input -->
-      <select name="month" ng-model="app.forms.registration.month" class='browser-default' required>
+      <select name="month" ng-model="app.forms.registration.month" class='browser-default' ng-class="{'red darken-2': app.forms.regForm.$submitted && app.forms.regForm.month.$pristine}" required>
          <!-- month error messages -->
-        <option class='error_msg' ng-messages="app.forms.regForm.month.$error" ng-if="app.forms.regForm.$submitted " disabled selected>
+        <option class='error_msg' ng-messages="app.forms.regForm.month.$error" ng-if="app.forms.regForm.$submitted" disabled selected>
           <p ng-message="required" class="help-block">&#xf00d; Month is required.</p>
         </option>
         <option value="" disabled selected>Graduation Month</option>
         <option ng-repeat="l in app.lists.months" value="{{l.id}}" ng-bind="l.month"></option>
       </select>
 
-      <select name="year" ng-model="app.forms.registration.year" class='browser-default' required>
+      <select name="year" ng-model="app.forms.registration.year" class='browser-default' ng-class="{'red darken-2': app.forms.regForm.$submitted && app.forms.regForm.year.$pristine}"required>
         <!-- year error messges -->
         <option class='error_msg' ng-messages="app.forms.regForm.year.$error" ng-if="app.forms.regForm.$submitted " selected disabled>
            <p ng-message="required" class="help-block">&#xf00d; Year is required.</p>

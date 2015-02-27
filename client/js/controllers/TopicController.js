@@ -39,15 +39,15 @@ app.controller('TopicController', [ '$scope', '$location', '$rootScope', 'PageFa
               if (!has_err){
                 //set post object
                 var post = {
-                    file_name : $scope.app.settings.file_name
-                    , name : $rootScope.user.name
-                    , parent_id : (index === null ? data.post_id : parent_id)
-                    , post : text
-                    , post_id : data.post_id
-                    , created_at : new Date().toISOString()
-                    , updated_at : new Date().toISOString()
-                    , user_id : $scope.app.settings.user_id
-                  };
+                  file_name : $scope.app.settings.file_name
+                  , name : $rootScope.user.name
+                  , parent_id : (index === null ? data.post_id : parent_id)
+                  , post : text
+                  , post_id : data.post_id
+                  , created_at : new Date().toISOString()
+                  , updated_at : new Date().toISOString()
+                  , user_id : $scope.app.settings.user_id
+                };
                 //if index is null creat new post else add comment to correct post/comment
                 if ( index === null ){
                   // add post at first position of posts and erase post input
@@ -64,53 +64,57 @@ app.controller('TopicController', [ '$scope', '$location', '$rootScope', 'PageFa
               }
             });
 
-          }, update_privacy: function(input){
+}, update_privacy: function(input){
             //method for admin to update privacy
 
-            //check if form is already at new wanted state
-            if ( $scope.app.topic.stats.is_public != input ){
-              //check if user is an admin or the creator of the topic
-              if ( $scope.app.settings.user_level >= 5 || ($scope.app.settings.user_id === $scope.app.topic.stats.user_id )){
-                //update privacy setting
-                TopicFactory.privacy(topic_id, function(has_err, data){
-                  //if no errors occured switch public state or get rid of button
-                  if (has_err === false ){
-                    $scope.app.topic.stats.is_public = input;
-                  }
-                  //display message
-                  $scope.app.settings.message = data;
-                });
-              }
+//<<<<<<< HEAD
+          //check if form is already at new wanted state
+          if ( $scope.app.topic.stats.is_public != input ){
+            //check if user is an admin or the creator of the topic
+            if ( $scope.app.settings.user_level >= 5 || ($scope.app.settings.user_id === $scope.app.topic.stats.user_id )){
+              //update privacy setting
+              TopicFactory.privacy(topic_id, function(has_err, data){
+                //if no errors occured switch public state or get rid of button
+                if (has_err === false ){
+                  $scope.app.topic.stats.is_public = input;
+                }
+                //display message
+                $scope.app.settings.message = data;
+              });
             }
-          }, submitForm: function(valid, form){
-            if (valid){
-              if (form === 'video' && $scope.app.forms.video.size !== undefined ){
-                //upload video response
-                TopicFactory.add_video(topic_id, $scope.app.forms.video, function(has_err, data){
-                  //display message
-                  $scope.app.topic.videos.push({key: data.key})
-                  $scope.app.topic.show_video = $scope.app.topic.videos.length - 1;
-                  $scope.app.settings.message = data.msg;
-                });
-              } else if (form === 'file' && $scope.app.forms.file.size !== undefined ){
-                //upload file revision
-                TopicFactory.add_file(topic_id, $scope.app.forms.file, function(has_err, data){
-                  //add topic to page and display message
-                  $scope.app.topic.files.push({key: data.key})
-                  $scope.app.settings.message = data.msg;
-                });
-              } else {
-                console.log('no file');
-              }
+          }
+        }, submitForm: function(valid, form){
+          if (valid){
+            if (form === 'video' && $scope.app.forms.video.size !== undefined ){
+              //upload video response
+              TopicFactory.add_video(topic_id, $scope.app.forms.video, function(has_err, data){
+                //display message
+                $scope.app.topic.videos.push({key: data.key})
+                $scope.app.topic.show_video = $scope.app.topic.videos.length - 1;
+                $scope.app.settings.message = data.msg;
+              });
+            } else if (form === 'file' && $scope.app.forms.file.size !== undefined ){
+              //upload file revision
+              TopicFactory.add_file(topic_id, $scope.app.forms.file, function(has_err, data){
+                //add topic to page and display message
+                $scope.app.topic.files.push({key: data.key})
+                $scope.app.settings.message = data.msg;
+              });
+            } else {
+              $scope.app.forms.video.name = 'no file chosen';
+              $scope.app.forms.file.name = 'no file chosen';
+              alert('Please choose a file to upload!');
             }
-          }, delete_topic: function(topic_id){
-            TopicFactory.delete_topic(topic_id, function(has_err, data){
-              if (!has_err){
-                $location.url('/dashboard');
-              }
-            })
+          }
 
-          }, switch_video: function(index){
+        }, delete_topic: function(topic_id){
+          TopicFactory.delete_topic(topic_id, function(has_err, data){
+            if (!has_err){
+              $location.url('/dashboard');
+            }
+          })
+
+        }, switch_video: function(index){
             //Switch video_path based on button pressed
             $scope.app.topic.show_video = index;
 

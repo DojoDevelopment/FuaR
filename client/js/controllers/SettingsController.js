@@ -62,12 +62,11 @@ app.controller('SettingsController', [ '$scope', '$rootScope', '$location', 'Pag
 
                 break;
                 case 'pic' :
-
-                  //check if file is there or send error message
-                  UserFactory.update_pic($scope.app.forms.profile, function(data){
-                      $scope.app.settings.message = data;
-                  });
-
+                //check if file is there or send error message
+                UserFactory.update_pic($scope.app.forms.profile, function(data){
+                    // $scope.app.settings.message = data;
+                    $scope.app.forms.profile.pic.name = 'no file chosen';
+                });
                 break;
                 case 'password' :
 

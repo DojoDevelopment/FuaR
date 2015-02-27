@@ -18,13 +18,12 @@
 
           <!-- add response form -->
           <form name="app.forms.videoForm" ng-submit="app.functions.submitForm(app.forms.videoForm.$valid, 'video')" novalidate>
-            <span id='file' class='btn btn-file '>
+            <span id='file' class='btn btn-file' ng-class="{'red' : app.forms.video.name === 'no file chosen'}">
               <span id='file' ng-bind='app.forms.video.name'></span>
               <input type='file' file-model="app.forms.video" ng-model="app.forms.video" name="video_path" id="inputFile" class='btn green'/>
             </span>
             <button class='btn blue'>Upload Video</button>
           </form>
-
           <!-- completion button -->
           <button style='display:block;'class='btn green' ng-if="app.topic.stats.status !== 'completed'" ng-click="app.functions.mark_complete()">Mark as Complete</button>
           <!-- delete topic link -->
@@ -51,7 +50,7 @@
           <div ng-if='app.settings.user_id === app.topic.stats.user_id && app.settings.user_level < 5'>
 
             <form name="app.forms.fileForm" ng-submit="app.functions.submitForm(app.forms.fileForm.$valid, 'file')" novalidate>
-              <span id='file' class='btn btn-file'>
+              <span id='file' class='btn btn-file' ng-class="{'red' : app.forms.file.name == 'no file chosen'}">
                 <span id='file' ng-bind='app.forms.file.name'></span>
                 <input type="file" file-model="app.forms.file" ng-model="app.forms.file" name="revision" id="inputFile"/>
               </span>
