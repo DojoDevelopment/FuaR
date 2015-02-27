@@ -13,7 +13,6 @@ app.controller('TopicController', [ '$scope', '$location', '$rootScope', 'PageFa
         , isVideo : false
         , message : null
         , name : $rootScope.user.name
-        , graduation : $rootScope.user.graduation
         , file_name : $rootScope.user.file_name
         , user_id : $rootScope.user.id
       }, forms : {

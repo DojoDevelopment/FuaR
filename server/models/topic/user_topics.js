@@ -9,7 +9,6 @@
 var query
 module.exports = (function(id, filter, db, callback){
 
-
   query = 'SELECT topics.topic_id, topics.title, topics.description, topics.views, topics.type, topics.latest_version, topics.is_public, topics.created_at, topics.status, topics.updated_at, count(videos) AS videos, count(posts) AS posts'
         +  ' FROM topics'
         +  ' LEFT JOIN videos ON videos.topic_id = topics.topic_id'

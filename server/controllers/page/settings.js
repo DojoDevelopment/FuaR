@@ -23,7 +23,7 @@ module.exports = (function(req, res, db){
 
   //check if user is logged in
   if ( auth.check_login(req.session.user, 1) ) {
-    user_id      = [req.session.user.id]
+    user_id      = req.session.user.id;
     user_level   = req.session.user.user_level;
     eventEmitter = require('events').EventEmitter;
     EventHandler = new eventEmitter();
@@ -37,7 +37,7 @@ module.exports = (function(req, res, db){
     //set listener for emails
     EventHandler.on("get_email", function() {
       //get user's email
-      email(user_id, db, function(has_err, data){
+      email([user_id], db, function(has_err, data){
         check_data(res, has_err, data, results, flags, 'email');
       });
     });
@@ -51,15 +51,14 @@ module.exports = (function(req, res, db){
     });
 
     EventHandler.on("get_users", function(){
-      get_users(user_id, db, function(has_err, data){
+      get_users([user_id], false, db, function(has_err, data){
         check_data(res, has_err, data, results, flags, 'users');
       });
     });
 
     EventHandler.emit("get_email");
-    user_level === 10
-      ? EventHandler.emit("get_users")
-      : EventHandler.emit("get_topics")
+    user_level === 10 ? EventHandler.emit("get_users")
+                      : EventHandler.emit("get_topics")
 
   } else {
     //user is not logged in

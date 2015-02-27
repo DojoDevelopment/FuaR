@@ -12,7 +12,6 @@ app.factory('UserFactory', ['$http', '$location', '$rootScope', function($http, 
         .success(function(data){
           $rootScope.user = {
               user_level : data.user_level
-            , graduation : data.graduation
             ,  file_name : data.file_name
             ,       name : data.name
             ,         id : data.id
