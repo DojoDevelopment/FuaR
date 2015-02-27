@@ -23,20 +23,14 @@ module.exports = (function(req, res, db){
           if ( !has_err ){
             //set session user_id, user_level
             req.session.user = {
+                      id : data.user_id,
+                    name : data.name,
               user_level : data.user_level,
-                      id : data.user_id
+               file_name : data.file_name
             }
 
-            //send rootscope graduation, name,
-            //file_name, user_level, user_id
-
-            res.json({
-              graduation : data.graduation,
-               file_name : data.file_name,
-              user_level : data.user_level,
-                      id : data.user_id,
-                    name : data.name
-            });
+            //send to rootscope the session data
+            res.json(req.session.user);
 
           } else {
             //error occured during in model

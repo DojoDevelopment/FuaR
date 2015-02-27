@@ -2,6 +2,7 @@
 //routeStyles is for individual css pages in each partial
 //ngMessages is for form validation
 var app = angular.module('myApp', ['ngRoute', 'routeStyles', 'ngMessages']);
+var req_login, userLevel, verification, user;
 
 app.config(function($routeProvider, $sceDelegateProvider){
 
@@ -93,38 +94,47 @@ app.config(function($routeProvider, $sceDelegateProvider){
 
 }).run(function ($rootScope, $location) {
 
-    // //on load
-    $rootScope.$on('$routeChangeStart', function (event, next, current) {
+  // //on load
+  $rootScope.$on('$routeChangeStart', function (event, next, current) {
+    if (next && next.$$route && next.$$route.data){
+      //get login and user_level requirement and set variables
+      req_login = next.$$route.data.login;
+      userLevel = next.$$route.data.userLevel;
 
-        if (next && next.$$route && next.$$route.data){
-            //get login and user_level requirement and set variables
-            var req_login = next.$$route.data.login;
-            var userLevel = next.$$route.data.userLevel;
+      //verify if login is true or user_level is greater than 0
+      verification = ( req_login || userLevel > 0 ? true : false );
 
-            //verify if login is true or user_level is greater than 0
-            var verification = ( req_login || userLevel > 0 ? true : false );
+      user = {
+          user_level : $rootScope.user.user_level
+        , graduation : $rootScope.user.graduation
+        , file_name  : $rootScope.user.file_name
+        , name       : $rootScope.user.name
+        , id         : $rootScope.user.user_id
+      }
 
-            //if verification is true and user isn't set send them to login
-            if ( verification && $rootScope.user === undefined ) {
-                console.log('Error A0101: Access Denied')
-                $location.path('/');
-            //verification is true and user is set do further checks
-            } else if (verification && $rootScope.user !== undefined) {
+console.log(user);
 
-                //check if user_id is a number else send them the login
-                if ( req_login && !RegExp(/^[0-9]*$/).test($rootScope.user.id) ) {
-                    console.log('Error A0102')
-                    $location.path('/');
-                }
+      //if verification is true and user isn't set send them to login
+      if ( verification && $rootScope.user === undefined ) {
+        console.log('Error A0101: Access Denied')
+        $location.path('/');
+      //verification is true and user is set do further checks
+      } else if (verification && $rootScope.user !== undefined) {
 
-                //check user_level is higher than required level else send them to dashboard
-                if ( $rootScope.user.user_level < userLevel ){
-                    console.log('Error A0103')
-                    $location.path('/dashboard');
-                }
-            }
-        } else {
-            $location.path('/');
+        //check if user_id is a number else send them the login
+        if ( req_login && !RegExp(/^[0-9]*$/).test($rootScope.user.id) ) {
+          console.log('Error A0102')
+          $location.path('/');
         }
-    });
+
+        //check user_level is higher than required level else send them to dashboard
+        if ( $rootScope.user.user_level < userLevel ){
+          console.log('Error A0103')
+          $location.path('/dashboard');
+        }
+      }
+    } else {
+      $location.path('/');
+    }
+  });
 });
