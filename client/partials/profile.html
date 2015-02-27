@@ -29,45 +29,51 @@
     <a ng-href="/#/topic/add" class='btn btn-floating blue' id='add-topic'><i class='mdi-content-add'></i></a>
   </div>
 </div>
-<!-- server error message -->
-<p ng-if="app.settings.message !== null" ng-bind="app.settings.message"></p>
-
 <div ng-if='app.topics.length > 0' class='container' id="topics_container">
-  <h3 class='center teal-text' ng-if='app.settings.user_id != app.settings.page_id'>{{}} PlaceHolder's topics</h3>
-  <h3 class='center teal-text' ng-if='app.settings.user_id == app.settings.page_id'>My topics</h3>
 
+  <!-- server error message -->
+  <p ng-if="app.settings.message !== null" ng-bind="app.settings.message"></p>
+    <h3 class='center teal-text' ng-if='app.settings.user_id != app.settings.page_id'>{{app.user.name}}'s topics</h3>
+    <h3 class='center teal-text' ng-if='app.settings.user_id == app.settings.page_id'>My topics</h3>
+    <img class='circle' ng-src="../assets/users/{{app.settings.page_id}}/{{app.user.file_name}}" />
   <!-- add topic button -->
   <div>
     <div class="row">
-      <div class='col s6 m6'>
-        <a href="/#/topic/add"><label for='add-topic'>Add a new topic</label></a>
-        <a ng-href="/#/topic/add" class='btn btn-floating red left' id='add-topic'><i class='mdi-content-add'></i></a>
+      <div ng-if='app.settings.user_id != app.settings.page_id' class='col s4 m4'>
+          <a href="/#/dashboard"><label for='back'>Dashboard</label></a>
+          <a ng-href="/#/dashboard" class='btn btn-floating blue left' id='back'><i class='mdi-navigation-arrow-back'></i></a>
       </div>
-      <div class='col s6 m6'>
-       <input type="text" ng-model="app.forms.search" placeholder="&#xF002;" class='right'/>
-     </div>
-   </div>
- </div>
- <!-- ng-repeat for topics -->
- <div class='btn btn-cool row'ng-repeat="t in app.topics | filter:app.forms.search">
-  <a href="/#/topic/{{t.topic_id}}">
-    <!-- icon depending on topic type -->
-    <div class='col s12 m12 l1 icon-grp'>
-      <i class='mdi-action-description' ng-if="t.type=='resume'"><span>V{{t.latest_version}}</span></i>
-      <i class='mdi-image-photo' ng-if="t.type=='image'"><span>V{{t.latest_version}}</span></i>
-      <!-- <div>{{t.status}}</div> -->
+      <div ng-if='app.settings.user_id == app.settings.page_id' class='col s4 m4'>
+          <a href="/#/topic/add"><label for='add-topic'>Add topic</label></a>
+          <a ng-href="/#/topic/add" class='btn btn-floating red left' id='add-topic'><i class='mdi-content-add'></i></a>
+      </div>
+      <div class='col s4 m4'>
+           <p class='center'>Gradtuation Date: {{app.user.graduation | date:"MMM, yyyy "}} <br/> {{app.user.location}} Cohort</p>
+      </div>
+      <div class='col s4 m4'>
+         <input type="text" ng-model="app.forms.search" placeholder="&#xF002;" class='right'/>
+      </div>
     </div>
+  </div>
+  <!-- ng-repeat for topics -->
+  <h4 class='center red-text'ng-if='(app.topics | filter:app.forms.search).length == 0'>No Results</h4>
+<div class='btn btn-cool row' ng-repeat="t in app.topics | filter:app.forms.search">
+          <a href="/#/topic/{{t.topic_id}}">
+      <!-- icon depending on topic type -->
+      <div class='col s12 m12 l1 icon-grp'>
+          <i class='mdi-action-description' ng-if="t.type=='resume'"><span>V{{t.latest_version}}</span></i>
+          <i class='mdi-image-photo' ng-if="t.type=='image'"><span>V{{t.latest_version}}</span></i>
+      </div>
 
     <!-- title & description -->
     <div class='col s12 m12 l6 title-desc'>
-      <!-- <h4>GGGGGGGGGGGGGGGGGGG</h4> -->
-      <h4>{{t.title | limitTo: 20 }}{{t.title.length > 20 ? '...' : ''}}</h4>
+      <h4>{{t.title | limitTo: 20 }}{{t.title.length > 20 ? '...' : ''}}:<span ng-class="{'orange-text bold': t.status == 'reviewed', 'red-text bold': t.status == 'enqueue', 'teal-text bold': t.status == 'completed' }">{{t.status}}</span></h4>
     </div>
 
     <!-- topic stats -->
     <div id='topic-stats' class='col s12 m12 l5'>
-      <i ng-if='t.is_public === false' class='mdi-action-lock-outline'></i>
-      <i ng-if='t.is_public === true' class='mdi-action-lock-open'></i>
+          <i ng-if='t.is_public === false' class='mdi-action-lock-outline'></i>
+          <i ng-if='t.is_public === true' class='mdi-action-lock-open'></i>
       <i class='mdi-action-visibility'>
         <span>{{t.views}}</span>
       </i>
@@ -80,45 +86,10 @@
     </div>
   </a>
   <div class='row'>
-    <div class="col l12 desc">
-      <!-- <p>{{t.description | limitTo: 150 }}{{t.description.length > 150 ? '...' : ''}}</p> -->
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-        quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
+    <div class="col s12 desc">
+      <p>{{t.description | limitTo: 150 }}{{t.description.length > 150 ? '...' : ''}}</p>
       </div>
     </div>
   </div>
 
-  <!-- *******************************************************-->
-  <!-- ****** timeline  to be implemented later **************-->
-  <!-- *******************************************************-->
-
-  <!-- topic timeline -->
-  <!-- <div class="bar"></div> -->
-  <!-- revision history -->
-  <!-- <div class="timeline">
-    <div class="entry">
-      <h1>v1.0</h1>
-      <h2>Resume 1st submission</h2>
-      Here's the info about this date
-    </div>
-    <div class="entry">
-      <h1>v2.0</h1>
-      Here's the info about this date
-    </div>
-    <div class="entry">
-      <h1>v3.0</h1>
-      Here's the info about this date
-    </div>
-    <div class="entry">
-      <h1>v4.0</h1>
-      Here's the info about this date
-    </div>
-    <div class="entry">
-      <h1>v5.0</h1>
-      Here's the info about this date
-    </div>
-  </div>
-</div>
--->
 </div>

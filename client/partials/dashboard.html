@@ -29,7 +29,7 @@
           <!-- input for search filter function -->
           <h4>Search By:</h4>
           <input class='input-field col s12' placeholder='file type, author, title' type="text" ng-model="app.forms.search" autofocus/>
-
+          <h4 class='red-text' ng-if='(app.topics | filter:app.forms.search).length == 0'>No Results</h4>
           <!-- select for search by type -->
           <h4>Select type:</h4>
           <div style='display:inline;'>

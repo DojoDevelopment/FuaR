@@ -24,7 +24,6 @@
 
 <!-- main content container -->
 <div class='container'>
-
   <!--  update email  -->
   <form name="app.forms.emailForm" ng-submit="app.functions.submitForm(app.forms.emailForm.$valid, 'email')" novalidate>
     <h4>Update Email</h4>
@@ -85,19 +84,14 @@
       <span id='file' ng-bind='app.forms.profile.pic.name'></span>
         <input type="file" ng-model="app.forms.profile.pic" file-model="app.forms.profile.pic" name="pic" required/>
     </button>
-
-
-            <button type="submit" class="btn mdi-image-portrait orange darken-2">Update</button>
-
+    <button type="submit" class="btn mdi-image-portrait orange darken-2">Update</button>
   </form>
 <!-- end update profile-pic form -->
-
 <hr/>
-
 <h4 ng-if='app.settings.user_level <=5' class='center'>Current Topics</h4>
 <h4 ng-if='app.settings.user_level ==10' class='center'>Admin Privileges</h4>
 
-  <table ng-if="app.settings.user_level < 10" class='table'>
+  <table ng-if="app.settings.user_level < 10" class='table hoverable responsive-table'>
       <div class="error-container center">
             <h4  ng-if="app.settings.message !== null && app.settings.user_level < 10" ng-bind="app.settings.message"></h4>
       </div>
@@ -117,15 +111,14 @@
         <td>Revised</td>
         <td ng-if="t.is_public == true">Yes</td>
         <td ng-if="t.is_public == false">
-          <button class='btn blue darken-2'ng-click="app.functions.update_privacy($index)">Make public</button>
+          <a ng-click="app.functions.update_privacy($index)">Make public</a>
         </td>
-        <td><button class="btn red darken-2" ng-click="app.functions.delete_topic($index)">Delete</button></td>
-
+        <td><a ng-click="app.functions.delete_topic($index)">Delete</a></td>
       </tr>
     </tbody>
   </table>
 
-  <table ng-if="app.settings.user_level === 10" class='table table-striped'>
+  <table ng-if="app.settings.user_level === 10" class='table striped responsive-table'>
     <thead>
       <tr>
         <th>Name</th>
@@ -138,31 +131,20 @@
       <div class="error-container center">
         <h4  ng-if="app.settings.message !== null && app.settings.user_level === 10" ng-bind="app.settings.message"></h4>
       </div>
-
       <!-- ng-repeat for table body defines user's name, email and admin setting -->
       <tr ng-repeat="row in app.table">
         <td ng-bind="row.name"></td>
         <td ng-bind="row.email"></td>
         <td>
-
-          <!-- Start admin switch -->
-
             <!-- input to set user to user level  -->
             <input type="radio" id="no[{{$index}}]" ng-click='app.functions.update_admin($index, 1)' name="view[{{$index}}]" ng-checked="row.user_level == 1" class="switch-input">
             <label for="no[{{$index}}]" class="switch-label switch-label-off">No</label>
-
             <!-- input to set user to admin level  -->
             <input type="radio" id="yes[{{$index}}]"  ng-click='app.functions.update_admin($index, 5)' name="view[{{$index}}]" ng-checked="row.user_level == 5" class="switch-input">
             <label for="yes[{{$index}}]" class="switch-label switch-label-on">Yes</label>
-
             <!-- <span class="switch-selection"></span> -->
-
-          </div><!-- End admin switch -->
-
         </td>
       </tr><!-- end ng-repeat  -->
-
     </tbody>
   </table>
-
-</div><!-- End main content container
+</div><!-- End main content container -->

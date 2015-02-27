@@ -13,6 +13,9 @@
   h5{
     font-size: 15px;
   }
+  a{
+    cursor: pointer;
+  }
 }
 
 // error messages
@@ -118,7 +121,13 @@ label{
     position: relative;
     margin-right: 13px;
     width:65%;
-     font-family: 'FontAwesome';
+    font-family: 'FontAwesome', 'Roboto';
+  }
+  img{
+    display:block;
+    margin:0 auto 0 auto;
+    height:80px; 
+    width:80px;
   }
   .btn-cool{
     height:100%;
@@ -139,6 +148,7 @@ label{
       }
   }
   a{
+    margin-top: 10px;
     text-decoration:none;
     color:white;
     label{
@@ -156,9 +166,10 @@ label{
       }
       line-height: 12px;
     }
-
+      [class^="mdi-"], [class*=" mdi-"] {
+          font-family: "Material-Design-Icons","Roboto" !important;
+      }
     .icon-grp{
-
             margin-left: auto;
             margin-right: auto;
               display: -webkit-box;
@@ -168,11 +179,10 @@ label{
               display: flex;
             flex-direction: row;
             margin-top: 24px;
-
         i{
              font-size: 3.3rem;
              span{
-                position: absolute;
+                  position: absolute;
                   width: 2rem;
                   border-radius: 10px;
                   background-color: @res-ints-red;
@@ -232,6 +242,9 @@ label{
   width:60%;
 }
 
+table{
+  margin-bottom: 50px;
+}
 
 //########## ng-class border & logo styling  #############//
 
@@ -379,6 +392,7 @@ nav{
     }​
 
   a {
+    font-family: "Material-Design-Icons", "Roboto" !important;
     color:@res-blue;
     &:hover{
       text-decoration:none;
@@ -399,8 +413,7 @@ nav{
     display:inline-block;
   }
   .empty input[type="text"] {
-    font-family: 'FontAwesome';
-    font-style: normal;
+    font-family: 'FontAwesome', 'Roboto';
   }
 //aligns the user's link and logout button vertically
     a, button{
@@ -410,9 +423,7 @@ nav{
    [type="radio"]:not(:checked)+label:before {
       border: 2px solid @res-ghost;
     }
-
 }
-
 //collapsed links in nav bar, hidden on large screens
 .nav-drop{
   i{
@@ -578,91 +589,62 @@ margin-left: -150px;
 }
 
 
-//################## timeline horizontal css ##################//
-
-
-.timeline {
-  white-space:nowrap;
-  overflow-x: scroll;
-  padding:30px 0 10px 0;
-  position:relative;
-}
-
-.entry {
-  display:inline-block;
-  vertical-align:top;
-  background:#13519C;
-  color:#fff;
-  padding:10px;
-  font-size:12px;
-  text-align:center;
-  position:relative;
-  border-top:4px solid #06182E;
-  border-radius:3px;
-  min-width:200px;
-  max-width:500px;
-}
-
-.entry img {
-  display:block;
-  max-width:100%;
-  height:auto;
-  margin-bottom:10px;
-}
-
-.entry:after {
-  content:'';
-  display:block;
-  background:#eee;
-  width:7px;
-  height:7px;
-  border-radius:6px;
-  border:3px solid #06182E;
-  position:absolute;
-  left:51%;
-  top:-30px;
-  margin-left:-6px;
-}
-
-.entry:before {
-  content:'';
-  display:block;
-  background:#06182E;
-  width:5px;
-  height:20px;
-  position:absolute;
-  left:50%;
-  top:-20px;
-  margin-left:-2px;
-}
-
-.entry h1 {
-  color:#fff;
-  font-size:18px;
-  font-weight:bold;
-  margin-bottom:10px;
-}
-
-.entry h2 {
-  letter-spacing:.2em;
-  margin-bottom:10px;
-  font-size:14px;
-}
-
-.bar {
-  margin-top:2%;
-  height:4px;
-  background:#eee;
-  width:100%;
-  position:relative;
-  top:13px;
-  left:0;
-}
-
-//################## end timeline css ##################//
-
-
 //################## media queries ##################//
+
+@media screen and (min-width: 300px) and (max-width: 992px){
+    .desc{
+        p{
+            display: inline-flex;
+            display: -webkit-inline-flex;
+            display: -moz-inline-flex;
+            display: -ms-inline-flexbox;
+        } 
+    }
+
+      #topics_container a .icon-grp i {
+            font-size: 4.3rem;
+            margin: auto;
+      }
+
+      .nav-drop{
+            display:block;
+            -webkit-transition-duration: 0.3s;
+            -moz-transition-duration: 0.3s;
+            -o-transition-duration: 0.3s;
+            transition-duration: 0.3s;
+      .nav-drop-group{
+            position:fixed;
+            background:@res-obsidian;
+            right:-120px;
+            top:-12px;
+            -webkit-transition-duration: 0.3s;
+            -moz-transition-duration: 0.3s;
+            -o-transition-duration: 0.3s;
+            transition-duration: 0.3s;
+              li{
+                  float:none;
+              }
+        }
+      }
+      .nav-drop:hover{
+          .nav-drop-group{
+              right:0px;
+          }
+      }
+
+      .title-desc{
+            line-height: 12px;
+            h4{
+                  margin-top: 2.14rem;
+                  font-size: x-large !important;
+                  text-align: center !important;
+            }
+            i{
+                  font-size: 35px;
+            }
+      } 
+}
+
 @media screen and (min-width: 601px) and (max-width: 992px){
   .btn-cool{
     display: block;
@@ -671,8 +653,6 @@ margin-left: -150px;
     width:55%;
   }
 }
-
-
 @media screen and (min-width: 460px) and (max-width: 1124px){
   .nav-wrapper{
     i{
@@ -688,32 +668,6 @@ margin-left: -150px;
     }
   }
   @media screen and (min-width: 300px) and (max-width: 459px){
-    .nav-drop{
-     display:block;
-    -webkit-transition-duration: 0.3s;
-    -moz-transition-duration: 0.3s;
-    -o-transition-duration: 0.3s;
-    transition-duration: 0.3s;
-      .nav-drop-group{
-        position:fixed;
-        background:@res-obsidian;
-        right:-120px;
-        top:-12px;
-        -webkit-transition-duration: 0.3s;
-        -moz-transition-duration: 0.3s;
-        -o-transition-duration: 0.3s;
-        transition-duration: 0.3s;
-          li{
-            float:none;
-          }
-      }
-    }
-    .nav-drop:hover{
-      .nav-drop-group{
-      right:0px;
-      }
-    }
-
     .dash-posts{
       padding:10%;
     }
@@ -723,59 +677,15 @@ margin-left: -150px;
           margin-left: -33px;
         }
       }
-
-  .cmt, .pst {
-    margin-left: 5%;
-    width:93%;
-    i{
-      font-size: 10px;
-    }
-  }
-
-    .title-desc{
-      h4{
-        margin-top: 2.14rem;
-        font-size: x-large !important;
-        text-align: center !important;
+      .cmt, .pst {
+        margin-left: 5%;
+        width:93%;
+        i{
+          font-size: 10px;
+        }
       }
-      i{
-        font-size: 35px;
-      }
-      line-height: 12px;
-  }
-  #topics_container a .icon-grp i {
-  font-size: 4.3rem;
-  margin: auto;
-}
-
   }
   @media screen and (min-width: 450px) and (max-width: 990px){
-    .nav-drop{
-     display:block;
-    -webkit-transition-duration: 0.3s;
-    -moz-transition-duration: 0.3s;
-    -o-transition-duration: 0.3s;
-    transition-duration: 0.3s;
-      .nav-drop-group{
-        position:fixed;
-        background:@res-obsidian;
-        right:-120px;
-        top:-11px;
-        -webkit-transition-duration: 0.3s;
-        -moz-transition-duration: 0.3s;
-        -o-transition-duration: 0.3s;
-        transition-duration: 0.3s;
-          li{
-            float:none;
-          }
-      }
-    }
-    .nav-drop:hover{
-      .nav-drop-group{
-      right:0px;
-      }
-    }
-
     .dash-posts{
       padding:3%;
     }
@@ -788,23 +698,6 @@ margin-left: -150px;
     .posts{
       height:300px;
     }
-
-  .title-desc{
-      h4{
-        margin-top: 2.14rem;
-        font-size: x-large !important;
-        text-align: center !important;
-      }
-      i{
-        font-size: 35px;
-      }
-      line-height: 12px;
-  }
-
-  #topics_container a .icon-grp i {
-  font-size: 4.3rem;
-  margin: auto;
-}
 
   }
   @media screen and (min-height: 850px) and (max-height: 1000px){
@@ -825,5 +718,14 @@ margin-left: -150px;
   -webkit-box-shadow: 0 1px 6px 0 rgba(0,0,0,0.16),0 0 0 0 rgba(0,0,0,0.12);
   -moz-box-shadow: 0 1px 6px 0 rgba(0,0,0,0.16),0 0 0 0 rgba(0,0,0,0.12);
   box-shadow: 0 1px 6px 0 rgba(0,0,0,0.16),0 0 0 0 rgba(0,0,0,0.12);
+}
+
+//literally just for the h4 topic title on the profile page.
+@media screen and (min-width:300px) and (max-width: 1340px){
+      .btn-cool{
+        h4{
+              font-size: 17px
+        }
+    }
 }
 

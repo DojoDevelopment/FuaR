@@ -135,7 +135,7 @@ label .error_msg {
   color: white !important;
 }
 .reg-container select {
-  font-family: FontAwesome;
+  font-family: 'FontAwesome', 'Roboto';
   background-color: rgba(43, 187, 173, 0.6) !important;
   border: none !important;
   margin-bottom: 5px;
