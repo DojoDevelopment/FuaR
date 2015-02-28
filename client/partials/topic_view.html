@@ -114,14 +114,8 @@
           <div class="btn-group" role="group" aria-label="...">
             <button ng-repeat="f in app.topic.files" type="button" class="btn btn-version" ng-click="app.functions.switch_file($index)">{{$index + 1}}</button>
           </div>
-
-<<<<<<< HEAD
-          <div>
-            <object ng-show="app.topic.show_video === $index" alt="user_file" >If you're using Chrome please download the PdfJS Chrome extension and restart your browser to view this file.</object>
-          </div>
-=======
           <div data-display-file="app.topic.file"></div>
->>>>>>> 30ba0a4e65a605afd9d0c6266560c8e74ee5faa5
+          <iframe ng-repeat="f in app.topic.files" src="{{f.key}}" ng-show="app.topic.show_file === $index"></iframe>
         </div>
       </div>
     </div><!-- end left page -->

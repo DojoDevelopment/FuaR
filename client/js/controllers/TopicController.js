@@ -119,7 +119,7 @@ app.controller('TopicController', [ '$scope', '$location', '$rootScope', 'PageFa
 
           }, switch_file: function(index){
             //Switch file_path based on button pressed
-            $scope.app.topic.file.fileUrl = $scope.app.topic.files[index].key;
+            $scope.app.topic.show_file = index;
 
           }, log_out: function(){
             //log out function
@@ -142,10 +142,7 @@ app.controller('TopicController', [ '$scope', '$location', '$rootScope', 'PageFa
 
           //set video path to last video or null
           $scope.app.topic.show_video = $scope.app.topic.videos.length > 0 ? $scope.app.topic.videos.length - 1  : null;
-          $scope.app.topic.file = {
-            fileUrl: _.last($scope.app.topic.files).key,
-            type : 'pdf'
-          }
+          $scope.app.topic.show_file = $scope.app.topic.files.length - 1;
         } else {
           $scope.app.settings.message = data;
         }

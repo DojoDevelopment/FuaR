@@ -13,36 +13,3 @@ app.directive('fileModel', ['$parse', function($parse) {
       }
     };
 }]);
-
-app.directive("displayFile", function () {
-
-    var updateElem = function (element) {
-        return function (displayFile) {
-            element.empty();
-
-            var objectElem = {}
-            if (displayFile && displayFile.type !== "") {
-                if (displayFile.type === "pdf") {
-                    objectElem = angular.element(document.createElement("object"));
-                    objectElem.attr("data", displayFile.fileUrl);
-                    objectElem.attr("type", "application/pdf");
-                }
-                else {
-                    objectElem = angular.element(document.createElement("img"));
-                    objectElem.attr("src", displayFile.fileUrl);
-                }
-            }
-            element.append(objectElem);
-        };
-    };
-
-    return {
-        restrict: "EA",
-        scope: {
-            displayFile: "="
-        },
-        link: function (scope, element) {
-            scope.$watch("displayFile", updateElem (element));
-        }
-    };
-});
