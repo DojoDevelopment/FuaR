@@ -2,7 +2,7 @@ var auth         = require('../../helpers/Auth.js');
 var response     = require('../../helpers/Response.js');
 var delete_topic = require('../../models/topic/delete_topic.js');
 var page_code    = 'CTDT';
-var user_id, topic_id, topic, eventEmitter, EventHandler, flags;
+var obj;
 
 module.exports = (function(req,res,db){
 
@@ -15,7 +15,7 @@ module.exports = (function(req,res,db){
     }
 
     delete_topic(obj, db, function(has_err, data){
-      !has_err ? response.success(res)
+      !has_err ? response.success(res, data)
                : response.error_data(res, data, page_code + '0102');
     });
 

@@ -32,9 +32,7 @@ module.exports = {
         params.Delete.Objects.push({Key: content.Key});
       });
 
-      s3.deleteObjects(params, function(err, data) {
-        if (err) return console.log('no objects in that location' + err);
-      });
+      s3.deleteObjects(params);
     });
   }
 }
