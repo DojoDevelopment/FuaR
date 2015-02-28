@@ -112,7 +112,7 @@
         <!-- PDF -->
         <div ng-if="!app.settings.isVideo">
           <div class="btn-group" role="group" aria-label="...">
-            <button ng-repeat="f in app.topic.files" type="button" class="btn btn-version" ng-click="app.functions.switch_file($index)">{{$index + 1}}</button>
+            <button ng-repeat="f in app.topic.files" type="button" class="btn btn-version" ng-click="app.functions.switch_file($index)" autofocus>{{$index + 1}}</button>
           </div>
           <div data-display-file="app.topic.file"></div>
           <iframe ng-repeat="f in app.topic.files" src="{{f.key}}" ng-show="app.topic.show_file === $index"></iframe>

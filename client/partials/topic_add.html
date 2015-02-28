@@ -1,35 +1,35 @@
-  <nav>
-    <div class="nav-wrapper">
-      <img src="./../img/coding_dojo.png"><!-- Coding Dojo log -->
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li ng-if='app.settings.user_level <= 6'><a class='mdi-action-account-circle' ng-href="/#/user/{{app.settings.user_id}}">Profile</a></li>
-        <li><a class='mdi-action-dashboard' href="/#/dashboard">Dashboard</a></li>
-        <li><a class='mdi-action-settings-applications' ng-href="/#/settings">Settings</a></li>
-        <li><a class='mdi-navigation-arrow-back' ng-click="app.functions.log_out()">Log off</a></li>
-      </ul>
-      <div class='nav-drop'>
-        <i class='mdi-navigation-more-vert right'>
-          <ul class='nav-drop-group right'>
-            <li ng-if='app.settings.user_level <= 5'><a class='mdi-action-account-circle' ng-href="/#/user/{{app.settings.user_id}}">Profile</a></li>
-            <li><a class='mdi-action-dashboard' href="/#/dashboard">Dashboard</a></li>
-            <li><a class='mdi-action-settings-applications' ng-href="/#/settings">Settings</a></li>
-            <li><a class='mdi-navigation-arrow-back' ng-click="app.functions.log_out()">Log off</a></li>
-          </ul>
-        </i>
-      </div>
+<nav>
+  <div class="nav-wrapper">
+    <img src="./../img/coding_dojo.png"><!-- Coding Dojo log -->
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li ng-if='app.settings.user_level <= 5'><a class='mdi-action-account-circle' ng-href="/#/user/{{app.settings.user_id}}">Profile</a></li>
+      <li><a class='mdi-action-dashboard' href="/#/dashboard">Dashboard</a></li>
+      <li><a class='mdi-action-settings-applications' ng-href="/#/settings">Settings</a></li>
+      <li><a class='mdi-navigation-arrow-back' ng-click="app.functions.log_out()">Log off</a></li>
+    </ul>
+    <div class='nav-drop'>
+      <i class='mdi-navigation-more-vert right'>
+        <ul class='nav-drop-group right'>
+          <li ng-if='app.settings.user_level <= 5'><a class='mdi-action-account-circle' ng-href="/#/user/{{app.settings.user_id}}">Profile</a></li>
+          <li><a class='mdi-action-dashboard' href="/#/dashboard">Dashboard</a></li>
+          <li><a class='mdi-action-settings-applications' ng-href="/#/settings">Settings</a></li>
+          <li><a class='mdi-navigation-arrow-back' ng-click="app.functions.log_out()">Log off</a></li>
+        </ul>
+      </i>
     </div>
-  </nav>
-  <!-- navbar end -->
+  </div>
+</nav>
+<!-- navbar end -->
 
-  <!-- main container -->
-  <div class='container'>
-    <div class='wrapper'>
+<!-- main container -->
+<div class='container'>
+  <div class='wrapper'>
 
-      <!-- server error message -->
-      <p ng-if="app.settings.message !== null" ng-bind="app.settings.message"></p>
+    <!-- server error message -->
+    <p ng-if="app.settings.message !== null" ng-bind="app.settings.message"></p>
 
-      <!-- add topic form -->
-      <form  class='form-group' name="app.forms.topicForm" ng-submit="app.functions.submitForm(app.forms.topicForm.$valid)" novalidate>
+    <!-- add topic form -->
+    <form class='form-group' name="app.forms.topicForm" ng-submit="app.functions.submitForm(app.forms.topicForm.$valid)" novalidate>
 
         <h4>Enter a title for your topic</h4>
         <!-- topic message -->
@@ -42,42 +42,42 @@
             </label>
             <input class='form-control' type="text" ng-model="app.forms.topic.title" ng-pattern="app.patterns.loose" id='title' name="title" ng-trim="true" required/>
 
-            <h4>What is the topic type</h4>
-            <!-- type input -->
-            <select  class='browser-default' ng-model="app.forms.topic.type" name="type" ng-class="{red : app.forms.topicForm.$submitted && app.forms.topicForm.type.$pristine}"required>
-              <!-- type error message -->
-              <option ng-messages="app.forms.topicForm.type.$error" ng-if="app.forms.topicForm.$submitted" selected disabled>
-                <p ng-message="required" class="help-block">&#xf00d; This field is required</p>
-              </option>
-              <option value="" disabled selected>Topic Type</option>
-              <option value='resume'>Resume</option>
-              <option value='image'>Image</option>
-            </select>
+      <h4>What is the topic type</h4>
+      <!-- type input -->
+      <select  class='browser-default' ng-model="app.forms.topic.type" name="type" ng-class="{red : app.forms.topicForm.$submitted && app.forms.topicForm.type.$pristine}"required>
+        <!-- type error message -->
+        <option ng-messages="app.forms.topicForm.type.$error" ng-if="app.forms.topicForm.$submitted && app.forms.topicForm.type.$pristine" selected disabled>
+          <p ng-message="required" class="help-block">&#xf00d; This field is required</p>
+        </option>
+        <option value="" disabled selected>Topic Type</option>
+        <option value='resume'>Resume</option>
+        <option value='image'>Image</option>
+      </select>
 
-            <h4>What should we look for in your submission?</h4>
+      <h4>What should we look for in your submission?</h4>
 
-            <!-- about textarea -->
-            <label for='about'>
-              <!-- about error messages -->
-              <div class='error_msg right' ng-messages="app.forms.topicForm.about.$error" ng-if="app.forms.topicForm.$submitted || !app.forms.topicForm.about.$pristine">
-                <h6 ng-message="required" class="help-block">This field is required</h6>
-                <h6 ng-message="pattern"  class="help-block">No wedges</h6>
-              </div>
-            </label>
-            <textarea ng-model="app.forms.topic.about" ng-pattern="app.patterns.loose" placeholder='Tell us about your file' id='about' name="about" ng-trim="true" required></textarea>
+      <!-- about textarea -->
+      <label for='about'>
+        <!-- about error messages -->
+        <div class='error_msg right' ng-messages="app.forms.topicForm.about.$error" ng-if="app.forms.topicForm.$submitted || !app.forms.topicForm.about.$pristine">
+          <h6 ng-message="required" class="help-block">This field is required</h6>
+          <h6 ng-message="pattern"  class="help-block">No wedges</h6>
+        </div>
+      </label>
+      <textarea ng-model="app.forms.topic.about" ng-pattern="app.patterns.loose" placeholder='Tell us about your file' id='about' name="about" ng-trim="true" required></textarea>
 
-            <h4>Upload your file (resume, mockup...)</h4>
+      <h4>Upload your file (resume, mockup...)</h4>
 
-            <!-- topic file -->
-            <span class='btn btn-file' ng-class="{red : app.forms.topic.doc.name == 'No File Chosen'}">
-              <span id='file' ng-bind='app.forms.topic.doc.name'></span>
-              <input type="file" file-model="app.forms.topic.doc" ng-model="app.forms.topic.doc" id="inputFile"/>
-            </span>
+      <!-- topic file -->
+      <span class='btn btn-file' ng-class="{red : app.forms.topic.doc.name == 'No File Chosen'}">
+        <span id='file' ng-bind='app.forms.topic.doc.name'></span>
+        <input type="file" file-model="app.forms.topic.doc" ng-model="app.forms.topic.doc" id="inputFile"/>
+      </span>
 
-            <h4>You're done, add the topic and wait for feedback!</h4>
-            <!-- submit topic form -->
-            <button class='btn' type="submit" ng-click="app.functions.check_file()">Add Topic</button>
+      <h4>You're done, add the topic and wait for feedback!</h4>
+      <!-- submit topic form -->
+      <button class='btn' type="submit">Add Topic</button>
 
-          </form><!-- end form -->
-        </div><!-- end wrapper -->
+    </form><!-- end form -->
+  </div><!-- end wrapper -->
 </div><!-- end main topic container
