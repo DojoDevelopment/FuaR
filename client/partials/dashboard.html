@@ -9,16 +9,16 @@
       <li><a class='mdi-action-settings-applications' ng-href="/#/settings">Settings</a></li>
       <li><a class='mdi-navigation-arrow-back' ng-click="app.functions.log_out()">Log off</a></li>
     </ul>
-<div class='nav-drop'>
-  <i class='mdi-navigation-more-vert right'>
-    <ul class='nav-drop-group right'>
-      <li ng-if='app.settings.user_level <= 5'><a class='mdi-action-account-circle' ng-href="/#/user/{{app.settings.user_id}}">Profile</a></li>
-      <li><a class='mdi-action-dashboard' href="/#/dashboard">Dashboard</a></li>
-      <li><a class='mdi-action-settings-applications' ng-href="/#/settings">Settings</a></li>
-      <li><a class='mdi-navigation-arrow-back' ng-click="app.functions.log_out()">Log off</a></li>
-    </ul>
-  </i>
-</div>
+    <div class='nav-drop'>
+      <i class='mdi-navigation-more-vert right'>
+        <ul class='nav-drop-group right'>
+          <li ng-if='app.settings.user_level <= 5'><a class='mdi-action-account-circle' ng-href="/#/user/{{app.settings.user_id}}">Profile</a></li>
+          <li><a class='mdi-action-dashboard' href="/#/dashboard">Dashboard</a></li>
+          <li><a class='mdi-action-settings-applications' ng-href="/#/settings">Settings</a></li>
+          <li><a class='mdi-navigation-arrow-back' ng-click="app.functions.log_out()">Log off</a></li>
+        </ul>
+      </i>
+    </div>
     <!-- search button -->
     <div id="slideout">
       <i class='mdi-action-search'></i><!-- search icon -->
