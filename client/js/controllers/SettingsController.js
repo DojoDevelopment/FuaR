@@ -75,6 +75,7 @@ app.controller('SettingsController', [ '$scope', '$rootScope', '$location', 'Pag
                 break;
               }
             } else if (!valid && form == 'pic'){
+              console.log('in pic');
               $scope.app.forms.profile.pic.name = 'no file chosen';
             }
 

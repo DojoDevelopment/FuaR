@@ -21,6 +21,12 @@
   color: #f79771 !important;
   margin: 0;
 }
+.errors {
+  height: 25px;
+}
+.errors h4 {
+  margin: 0;
+}
 label {
   color: black;
   padding: 2%;
@@ -500,6 +506,10 @@ iframe {
 }
 #slideout_inner .btn {
   width: 100%;
+}
+#slideout_inner .btn i {
+  display: flex;
+  font-size: 25px;
 }
 #slideout:hover #slideout_inner {
   top: -10px;

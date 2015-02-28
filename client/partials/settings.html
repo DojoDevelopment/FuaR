@@ -23,7 +23,7 @@
 <!-- navbar end -->
 <!-- main content container -->
 <div class='container'>
-  <div class="teal-text center">
+  <div class="errors teal-text center">
       <h4 ng-bind='app.settings.top_message'></h4>
   </div>
   <!--  update email  -->
@@ -86,6 +86,7 @@
         <input type="file" ng-model="app.forms.profile.pic" file-model="app.forms.profile.pic" name="pic" required/>
     </button>
     <button type="submit" class="btn mdi-image-portrait orange darken-2">Update</button>
+    <i class="fa fa-circle-o-notch fa-spin"></i>
   </form>
 <!-- end update profile-pic form -->
 <hr/>
