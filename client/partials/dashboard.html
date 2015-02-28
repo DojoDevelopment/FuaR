@@ -33,11 +33,11 @@
           <!-- select for search by type -->
           <h4>Select type:</h4>
           <div style='display:inline;'>
-            <input ng-click='' type="radio" name="view" value="resume" id="resume" checked>
+            <input ng-click="app.functions.setSortType('resume')" type="radio" name="view" value="resume" id="resume" checked>
             <label for="resume" class='white-text'>Resume</label>
-            <input ng-click='' type="radio" name="view" value="image" id="image">
+            <input ng-click="app.functions.setSortType('image')" type="radio" name="view" value="image" id="image">
             <label for="image" class="white-text">Image</label>
-            <input ng-click='' type="radio" name="view" value="all" id="all">
+            <input ng-click="app.functions.setSortType('')" type="radio" name="view" value="all" id="all">
             <label for="all" class="white-text">All</label>
           </div>
           <!-- Switch -->
@@ -70,7 +70,7 @@
   <div class='row'>
 
     <!-- ng-repeat for topic container -->
-    <div class='col l3 md3 s12 topic' ng-repeat="topic in app.topics | filter:app.forms.search | orderBy:app.topics.sortVariable : reverse=app.topics.isReverse">
+    <div class='col l3 md3 s12 topic' ng-repeat="topic in app.topics | filter:app.topics.type | filter:app.forms.search | orderBy:app.topics.sortVariable : reverse=app.topics.isReverse">
       <a ng-href="/#/topic/{{topic.topic_id}}">
 
         <!-- ng-class sets container background color -->
