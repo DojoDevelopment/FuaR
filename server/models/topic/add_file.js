@@ -30,7 +30,7 @@ module.exports = (function(obj, db, callback){
     db.client.query(query[0], values.get, function(err, res){
       if (err) return rollback(db.client, 2, query[0], err);
       version = Number(res.rows[0].latest_version) + 1;
-      values.post = [obj.id, version, obj.key]
+      values.post = [obj.id, version, obj.key];
 
       //insert file info into database
       db.client.query(query[1], values.post, function(err, res){

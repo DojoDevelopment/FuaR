@@ -9,9 +9,9 @@ module.exports = (function(req,res,db){
   if ( auth.check_login(req.session.user, 1) ) {
 
     obj = {
-           user_id : req.session.user.id,
-          topic_id : req.params.id,
-        user_level : req.session.user.user_level
+        topic_id : req.params.id,
+         user_id : req.session.user.id,
+      user_level : req.session.user.user_level
     }
 
     delete_topic(obj, db, function(has_err, data){

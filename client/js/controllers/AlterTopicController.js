@@ -22,7 +22,6 @@ app.controller('AlterTopicController', ['$scope', '$rootScope', '$location', 'Us
           submitForm : function(valid){
             //add topic display or error messages
             if (valid && $scope.app.forms.topic.doc.size !== undefined){
-              console.log('click');
               TopicFactory.add_topic($scope.app.forms.topic, function(has_err, data){
                 if (has_err){
                   $scope.app.settings.message = data; //error message
@@ -40,5 +39,5 @@ app.controller('AlterTopicController', ['$scope', '$rootScope', '$location', 'Us
         }
       }
     }
-  })
+  });
 }])

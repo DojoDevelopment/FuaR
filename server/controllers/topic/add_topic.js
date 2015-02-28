@@ -6,7 +6,6 @@ var add_topic = require('../../models/topic/add_topic.js');
 var page_code = 'CTAT'
 var topic, form, file, user_id, suffix;
 
-
 //add topic to database
 module.exports = (function(req, res, db){
 
@@ -31,6 +30,7 @@ module.exports = (function(req, res, db){
           !has_err ? response.success(res, data)
                    : response.error_data(res, data, page_code + '0104');
         });
+
       } else {
         //info is not in the correct format
         response.error_generic(res, page_code + '0103', 'invalid');
