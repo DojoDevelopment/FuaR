@@ -54,7 +54,7 @@
                 <span id='file' ng-bind='app.forms.file.name'></span>
                 <input type="file" file-model="app.forms.file" ng-model="app.forms.file" name="revision" id="inputFile"/>
               </span>
-              <button class='btn blue' ng-if='stuff===true'>Upload File <i class="fa fa-circle-o-notch fa-spin"></i></button>
+              <button class='btn blue'>Upload File <i ng-if='stuff===true' class="fa fa-circle-o-notch fa-spin"></i></button>
             </form>
           </div>
         </div><!-- end user privacy switch -->

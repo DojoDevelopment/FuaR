@@ -53,26 +53,30 @@ app.controller('SettingsController', [ '$scope', '$rootScope', '$location', 'Pag
 
           }, submitForm : function(valid, form){
             if (valid){
-              switch(form){
-                case 'email' :
-                  UserFactory.update_email({email: $scope.app.forms.email}, function(data){
-                    $scope.app.settings.top_message = data;
-                  });
+              if (form === 'pic' && $scope.app.forms.profile.pic.size === undefined ){
+                $scope.app.forms.profile.pic.name = 'no file chosen';
+              } else {
+                switch(form){
+                  case 'email' :
+                    UserFactory.update_email({email: $scope.app.forms.email}, function(data){
+                      $scope.app.settings.top_message = data;
+                    });
 
-                break;
-                case 'pic' :
-                  //check if file is there or send error message
-                  UserFactory.update_pic($scope.app.forms.profile, function(data){
-                    $scope.app.settings.top_message = data;
-                  });
-                break;
-                case 'password' :
+                  break;
+                  case 'pic' :
+                    //check if file is there or send error message
+                    UserFactory.update_pic($scope.app.forms.profile, function(data){
+                      $scope.app.settings.top_message = data;
+                    });
+                  break;
+                  case 'password' :
 
-                  UserFactory.update_password($scope.app.forms.pass, function(data){
-                    $scope.app.settings.top_message = data;
-                  });
+                    UserFactory.update_password($scope.app.forms.pass, function(data){
+                      $scope.app.settings.top_message = data;
+                    });
 
-                break;
+                  break;
+                }
               }
             } else if (!valid && form == 'pic'){
               console.log('in pic');

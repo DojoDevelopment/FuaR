@@ -8,16 +8,16 @@
         <li><a class='mdi-action-settings-applications' ng-href="/#/settings">Settings</a></li>
         <li><a class='mdi-navigation-arrow-back' ng-click="app.functions.log_out()">Log off</a></li>
       </ul>
-    <div class='nav-drop'>
-  <i class='mdi-navigation-more-vert right '>
-    <ul class='nav-drop-group right'>
-      <li ng-if='app.settings.user_level <= 5'><a class='mdi-action-account-circle' ng-href="/#/user/{{app.settings.user_id}}">Profile</a></li>
-      <li><a class='mdi-action-dashboard' href="/#/dashboard">Dashboard</a></li>
-      <li><a class='mdi-action-settings-applications' ng-href="/#/settings">Settings</a></li>
-      <li><a class='mdi-navigation-arrow-back' ng-click="app.functions.log_out()">Log off</a></li>
-    </ul>
-  </i>
-</div>
+      <div class='nav-drop'>
+        <i class='mdi-navigation-more-vert right '>
+          <ul class='nav-drop-group right'>
+            <li ng-if='app.settings.user_level <= 5'><a class='mdi-action-account-circle' ng-href="/#/user/{{app.settings.user_id}}">Profile</a></li>
+            <li><a class='mdi-action-dashboard' href="/#/dashboard">Dashboard</a></li>
+            <li><a class='mdi-action-settings-applications' ng-href="/#/settings">Settings</a></li>
+            <li><a class='mdi-navigation-arrow-back' ng-click="app.functions.log_out()">Log off</a></li>
+          </ul>
+        </i>
+      </div>
     </div>
   </nav>
 <!-- navbar end -->
@@ -95,7 +95,7 @@
 
   <table ng-if="app.settings.user_level < 10" class='table hoverable responsive-table'>
       <div class="error-container center">
-            <h4  ng-if="app.settings.bottom_message !== null && app.settings.user_level < 10" ng-bind="app.settings.bottom_message"></h4>
+          <h4  ng-if="app.settings.bottom_message !== null && app.settings.user_level < 10" ng-bind="app.settings.bottom_message"></h4>
       </div>
     <thead>
       <tr>
@@ -138,13 +138,13 @@
         <td ng-bind="row.name"></td>
         <td ng-bind="row.email"></td>
         <td>
-            <!-- input to set user to user level  -->
-            <input type="radio" id="no[{{$index}}]" ng-click='app.functions.update_admin($index, 1)' name="view[{{$index}}]" ng-checked="row.user_level == 1" class="switch-input">
-            <label for="no[{{$index}}]" class="switch-label switch-label-off">No</label>
-            <!-- input to set user to admin level  -->
-            <input type="radio" id="yes[{{$index}}]"  ng-click='app.functions.update_admin($index, 5)' name="view[{{$index}}]" ng-checked="row.user_level == 5" class="switch-input">
-            <label for="yes[{{$index}}]" class="switch-label switch-label-on">Yes</label>
-            <!-- <span class="switch-selection"></span> -->
+          <!-- input to set user to user level  -->
+          <input type="radio" id="no[{{$index}}]" ng-click='app.functions.update_admin($index, 1)' name="view[{{$index}}]" ng-checked="row.user_level == 1" class="switch-input">
+          <label for="no[{{$index}}]" class="switch-label switch-label-off">No</label>
+          <!-- input to set user to admin level  -->
+          <input type="radio" id="yes[{{$index}}]"  ng-click='app.functions.update_admin($index, 5)' name="view[{{$index}}]" ng-checked="row.user_level == 5" class="switch-input">
+          <label for="yes[{{$index}}]" class="switch-label switch-label-on">Yes</label>
+          <!-- <span class="switch-selection"></span> -->
         </td>
       </tr><!-- end ng-repeat  -->
     </tbody>

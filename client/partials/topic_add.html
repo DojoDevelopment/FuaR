@@ -2,7 +2,7 @@
     <div class="nav-wrapper">
       <img src="./../img/coding_dojo.png"><!-- Coding Dojo log -->
       <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li ng-if='app.settings.user_level <= 5'><a class='mdi-action-account-circle' ng-href="/#/user/{{app.settings.user_id}}">Profile</a></li>
+        <li ng-if='app.settings.user_level <= 6'><a class='mdi-action-account-circle' ng-href="/#/user/{{app.settings.user_id}}">Profile</a></li>
         <li><a class='mdi-action-dashboard' href="/#/dashboard">Dashboard</a></li>
         <li><a class='mdi-action-settings-applications' ng-href="/#/settings">Settings</a></li>
         <li><a class='mdi-navigation-arrow-back' ng-click="app.functions.log_out()">Log off</a></li>
@@ -36,8 +36,8 @@
         <label for='title'>
           <h6>Title</h6>
           <div class='error_msg right' ng-messages="app.forms.topicForm.title.$error" ng-if="app.forms.topicForm.$submitted || !app.forms.topicForm.title.$pristine">
-            <h6 ng-message="required" class="help-block">This field is required<h6>
-              <h6 ng-message="pattern"  class="help-block">Password can containe letters and numbers only.<h6>
+            <h6 ng-message="required" class="help-block">This field is required</h6>
+              <h6 ng-message="pattern"  class="help-block">Password can containe letters and numbers only.</h6>
               </div>
             </label>
             <input class='form-control' type="text" ng-model="app.forms.topic.title" ng-pattern="app.patterns.loose" id='title' name="title" ng-trim="true" required/>

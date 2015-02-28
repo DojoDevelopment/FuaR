@@ -32,9 +32,9 @@ app.controller('AlterTopicController', ['$scope', '$rootScope', '$location', 'Us
                 $location.url('/user/' + $scope.app.settings.user_id)
               }
             });
-            } else if ($scope.app.forms.topic.doc.size === undefined){
-              $scope.app.forms.topic.doc.name = 'No File Chosen';
-            }
+          } else if ($scope.app.forms.topic.doc.size === undefined){
+            $scope.app.forms.topic.doc.name = 'No File Chosen';
+          }
         }, log_out : function(){
           //logout function
           UserFactory.log_out();
