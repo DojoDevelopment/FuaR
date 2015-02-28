@@ -24,8 +24,8 @@
 <!-- main container -->
 <div ng-if='app.topics.length <= 0' class='container'>
   <div class="center">
-  <h1 class='orange'>You don't yet have any topics.</h1>
-    <p class='teal'>Add a new topic to start yourself off!</p>
+      <h1 class='red-text'>There are N<i class='fa fa-frown-o fa-spin'></i> topics here</h1>
+      <p class='teal-text'>Let's add a new topic!</p>
     <a ng-href="/#/topic/add" class='btn btn-floating blue' id='add-topic'><i class='mdi-content-add'></i></a>
   </div>
 </div>
@@ -67,7 +67,9 @@
 
     <!-- title & description -->
     <div class='col s12 m12 l6 title-desc'>
-      <h4>{{t.title | limitTo: 20 }}{{t.title.length > 20 ? '...' : ''}}:<span ng-class="{'orange-text bold': t.status == 'reviewed', 'red-text bold': t.status == 'enqueue', 'teal-text bold': t.status == 'completed' }">{{t.status}}</span></h4>
+      <h4>{{t.title | limitTo: 20 }}{{t.title.length > 20 ? '...' : ''}}:<span class='lighten-2 bold' ng-class="{'orange-text': t.status == 'reviewed', 'red-text': t.status == 'enqueue', 'light-green-text': t.status == 'completed' }">{{t.status}}</span> <br />
+        <small>Updated: {{t.updated_at | date:"mediumDate"}} at {{t.updated_at | date: "shortTime"}}</small>
+      </h4>
     </div>
 
     <!-- topic stats -->

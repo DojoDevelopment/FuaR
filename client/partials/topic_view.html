@@ -22,7 +22,7 @@
               <span id='file' ng-bind='app.forms.video.name'></span>
               <input type='file' file-model="app.forms.video" ng-model="app.forms.video" name="video_path" id="inputFile" class='btn green'/>
             </span>
-            <button class='btn blue'>Upload Video</button>
+            <button class='btn blue'>Upload Video<i class="fa fa-circle-o-notch fa-spin"></i></button>
           </form>
           <!-- completion button -->
           <button style='display:block;'class='btn green' ng-if="app.topic.stats.status !== 'completed'" ng-click="app.functions.mark_complete()">Mark as Complete</button>
@@ -54,7 +54,7 @@
                 <span id='file' ng-bind='app.forms.file.name'></span>
                 <input type="file" file-model="app.forms.file" ng-model="app.forms.file" name="revision" id="inputFile"/>
               </span>
-              <button class='btn blue'>Upload File</button>
+              <button class='btn blue'>Upload File <i ng-if='stuff===true' class="fa fa-circle-o-notch fa-spin"></i></button>
             </form>
           </div>
         </div><!-- end user privacy switch -->
@@ -112,8 +112,9 @@
         <!-- PDF -->
         <div ng-if="!app.settings.isVideo">
           <div class="btn-group" role="group" aria-label="...">
-            <button ng-repeat="f in app.topic.files" type="button" class="btn btn-version" ng-click="app.functions.switch_file($index)">{{$index + 1}}</button>
+            <button ng-repeat="f in app.topic.files" type="button" class="btn btn-version" ng-click="app.functions.switch_file($index)" autofocus>{{$index + 1}}</button>
           </div>
+          <div data-display-file="app.topic.file"></div>
           <iframe ng-repeat="f in app.topic.files" src="{{f.key}}" ng-show="app.topic.show_file === $index"></iframe>
         </div>
       </div>
@@ -124,7 +125,7 @@
       <!--  users start a new post on the topic  -->
       <div class='form-group new_post'>
         <h6 class='teal-text'>A bit about this topic: <span class='grey-text'>{{app.topic.stats.description}}</span></h6>
-        <button class="btn btn-floating red" ng-click="app.functions.add_post(null, 0, app.forms.post)"><i class='fa fa-pencil fa-2x'></i></button>
+        <button class="btn btn-floating red" ng-click="app.functions.add_post(null, 0, app.forms.post)"><i class='mdi-image-edit'></i></button>
         <input ng-model="app.forms.post" type="text" class='form-control' placeholder='start a new post!' value="">
       </div>
 
@@ -139,7 +140,7 @@
             <div class='row post' ng-class="{post: p.parent_id == p.post_id, comment: p.parent_id != p.post_id}">
 
               <!-- profile image -->
-              <div class='col s12 m4 l4'>
+              <div class='col s12 m4 l3'>
                 <a ng-href="/#/user/{{p.user_id}}">
                   <img ng-if="app.topic.posts[$index].file_name === 'anon.png'" ng-src="../assets/users/anon.png" class="circle">
                   <img ng-if="app.topic.posts[$index].file_name !== 'anon.png'" ng-src="../assets/users/{{p.user_id}}/{{p.file_name}}" class="circle">
@@ -147,8 +148,8 @@
               </div>
 
               <!-- poster's name date and comment or post -->
-              <div class='col s12 m8 l8'>
-                <p><a ng-href="/#/user/{{p.user_id}}" class="blue-text lighten-3"><span ng-bind="p.name"></span></a> <small ng-bind="p.created_at | date:'mediumDate'"></small></p>
+              <div class='col s12 m8 l9'>
+                <p><a ng-href="/#/user/{{p.user_id}}" class="deep-orange-text darken-3"><span ng-bind="p.name"></span></a> <small ng-bind="p.created_at | date:'mediumDate'"></small></p>
                 <p ng-bind="p.post"></p>
               </div>
 
@@ -156,7 +157,7 @@
 
             <!-- user input for commenting on a post -->
             <div class='input-fields new_post' ng-class="{pst: p.parent_id == p.post_id, cmt: p.parent_id != p.post_id}" ng-if="app.topic.posts[$index+1].parent_id != p.parent_id">
-              <button class="btn btn-floating blue" ng-click="app.functions.add_post($index, p.parent_id, app.forms.comment[$index])"><i class='fa fa-comments fa-2x'></i></button>
+              <button class="btn btn-floating blue" ng-click="app.functions.add_post($index, p.parent_id, app.forms.comment[$index])"><i class='mdi-action-question-answer'></i></button>
               <input type="text" ng-model="app.forms.comment[$index]" placeholder='comment on this post'>
             </div><!-- end post input-->
           </div><!-- end block element -->

@@ -1,4 +1,4 @@
-app.controller('LandingController', ['$scope', 'UserFactory', function($scope, UserFactory) {
+app.controller('LandingController', ['$scope', 'UserFactory',  function($scope, UserFactory) {
 
   //set default app object
   $scope.app = {

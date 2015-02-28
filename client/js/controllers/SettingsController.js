@@ -52,7 +52,6 @@ app.controller('SettingsController', [ '$scope', '$rootScope', '$location', 'Pag
             $scope.app.forms.passwordForm.confirm.$setValidity('match', ($scope.app.forms.pass.isMatch == false ? false : true ));
 
           }, submitForm : function(valid, form){
-
             if (valid){
               if (form === 'pic' && $scope.app.forms.profile.pic.size === undefined ){
                 $scope.app.forms.profile.pic.name = 'no file chosen';
@@ -79,6 +78,9 @@ app.controller('SettingsController', [ '$scope', '$rootScope', '$location', 'Pag
                   break;
                 }
               }
+            } else if (!valid && form == 'pic'){
+              console.log('in pic');
+              $scope.app.forms.profile.pic.name = 'no file chosen';
             }
 
           }, update_privacy: function(index){

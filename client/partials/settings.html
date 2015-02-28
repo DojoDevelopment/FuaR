@@ -21,9 +21,11 @@
     </div>
   </nav>
 <!-- navbar end -->
-
 <!-- main content container -->
 <div class='container'>
+  <div class="errors teal-text center">
+      <h4 ng-bind='app.settings.top_message'></h4>
+  </div>
   <!--  update email  -->
   <form name="app.forms.emailForm" ng-submit="app.functions.submitForm(app.forms.emailForm.$valid, 'email')" novalidate>
     <h4>Update Email</h4>
@@ -84,6 +86,7 @@
         <input type="file" ng-model="app.forms.profile.pic" file-model="app.forms.profile.pic" name="pic" required/>
     </button>
     <button type="submit" class="btn mdi-image-portrait orange darken-2">Update</button>
+    <i class="fa fa-circle-o-notch fa-spin"></i>
   </form>
 <!-- end update profile-pic form -->
 <hr/>
@@ -91,9 +94,9 @@
 <h4 ng-if='app.settings.user_level ==10' class='center'>Admin Privileges</h4>
 
   <table ng-if="app.settings.user_level < 10" class='table hoverable responsive-table'>
-    <div class="error-container center">
-      <h4  ng-if="app.settings.message !== null && app.settings.user_level < 10" ng-bind="app.settings.message"></h4>
-    </div>
+      <div class="error-container center">
+          <h4  ng-if="app.settings.bottom_message !== null && app.settings.user_level < 10" ng-bind="app.settings.bottom_message"></h4>
+      </div>
     <thead>
       <tr>
         <th>Title</th>
@@ -128,7 +131,7 @@
     <tbody>
       <!--# Server error message -->
       <div class="error-container center">
-        <h4  ng-if="app.settings.message !== null && app.settings.user_level === 10" ng-bind="app.settings.message"></h4>
+        <h4  ng-if="app.settings.bottom_message !== null && app.settings.user_level === 10" ng-bind="app.settings.bottom_message"></h4>
       </div>
       <!-- ng-repeat for table body defines user's name, email and admin setting -->
       <tr ng-repeat="row in app.table">
