@@ -74,6 +74,9 @@ label .error_msg {
   margin-left: auto;
   margin-right: auto;
 }
+.btn-group .active {
+  background-color: #00635a;
+}
 .btn-group #grp-1 .btn-filter {
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
@@ -403,7 +406,6 @@ iframe {
   margin-right: auto;
   width: 89%;
   display: inline-block !important;
-  color: #1dacd6;
 }
 .new_post .btn-p {
   display: inline-block;
@@ -417,7 +419,7 @@ iframe {
 .posts {
   clear: both;
   color: ghostwhite;
-  padding-top: 0px !important;
+  padding: 0 40px 40px 40px !important;
   width: 100%;
   height: 73vh;
   overflow-y: scroll;
