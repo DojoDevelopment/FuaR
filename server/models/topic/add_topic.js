@@ -30,17 +30,16 @@ module.exports = (function(obj, db, callback){
     //query for user topics dislpay message on error else return results
     db.client.query(query.topic.insert.topic, args.topic, function(err, results){
       if (err) return rollback(db.client, 2, query.topic.insert.topic, args.topic, err);
-      args.data = {
-         path : 'http://v88_fuar.s3.amazonaws.com/' + results.rows[0].topic_id + '/file/' + Date.now() + path.extname(obj.file_name)
-        , key : results.rows[0].topic_id + '/file/' + Date.now() + path.extname(obj.file_name)
-      };
+      args.data = {};
+      args.data.id   = results.rows[0].topic_id
+      args.data.key  = args.data.id + '/file/' + Date.now() + path.extname(obj.file_name);
+      args.data.path = 'http://v88_fuar.s3.amazonaws.com/' + args.data.key;
 
-      args.file = [obj.user_id, args.data.path, obj.suffix];
+      args.file = [args.data.id, args.data.path, obj.suffix];
 
       //add file to db
       db.client.query(query.topic.insert.file, args.file, function(err, results){
-        if (err) return rollback(db.client, 4, query.topic.insert.files, args.file, err);
-
+        if (err) return rollback(db.client, 4, query.topic.insert.file, args.file, err);
         //read file in temp folder
         fs.readFile(obj.file_path, function(err, file_data){
           if (err) return rollback(db.client, 3, 'reading file err', err);

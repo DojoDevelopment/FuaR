@@ -1,3 +1,6 @@
 confirm regex and error messages
 MAX characters in add topic/settings forms
 CSRF
+
+input text for comments does not show up or is white
+set firm size for user page pic when there is no topics

@@ -87,18 +87,22 @@ app.controller('TopicController', [ '$scope', '$location', '$rootScope', 'PageFa
           if (valid){
             if (form === 'video' && $scope.app.forms.video.size !== undefined ){
               //upload video response
+//              $scope.app.forms.video.name = '<i class="fa fa-circle-o-notch fa-spin"></i>'
               TopicFactory.add_video(topic_id, $scope.app.forms.video, function(has_err, data){
                 //display message
                 $scope.app.topic.videos.push({key: data.key})
                 $scope.app.topic.show_video = $scope.app.topic.videos.length - 1;
                 $scope.app.settings.message = data.msg;
+//                $scope.app.forms.video.name = 'Upload Complete';
               });
             } else if (form === 'file' && $scope.app.forms.file.size !== undefined ){
               //upload file revision
+//              $scope.app.forms.file.name = '<i class="fa fa-circle-o-notch fa-spin"></i>'
               TopicFactory.add_file(topic_id, $scope.app.forms.file, function(has_err, data){
                 //add topic to page and display message
-                $scope.app.topic.files.push({key: data.key})
+                $scope.app.topic.files.push({key: data.key, type: data.type})
                 $scope.app.settings.message = data.msg;
+//                $scope.app.forms.file.name = 'Upload Complete'
               });
             } else {
               $scope.app.forms.video.name = 'no file chosen';

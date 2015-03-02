@@ -114,8 +114,6 @@ app.factory('UserFactory', ['$http', '$location', '$rootScope', function($http, 
       } else {
         $http.get('/api/users/session')
           .success(function(data){
-            console.log($rootScope.user);
-            console.log(data)
             $rootScope.user = {
                user_level : data.user_level
               , file_name : data.file_name

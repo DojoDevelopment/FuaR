@@ -29,7 +29,7 @@ module.exports = (function(obj, db, callback){
 
     //insert file info into database
     db.client.query(query.topic.insert.file, args.post, function(err, res){
-      if (err) return rollback(db.client, 1, query.topic.insert.files, args.post, err);
+      if (err) return rollback(db.client, 1, query.topic.insert.file, args.post, err);
 
       //update topics latest version
       db.client.query(query.topic.update.version, args.update, function(err, res){
@@ -37,12 +37,11 @@ module.exports = (function(obj, db, callback){
 
         fs.readFile(obj.file_path, function(err, file_data){
           if (err) throw err;
+
+          //add to s3, delete temp file, send path and message to user, or rollback
           s3.add_file(file_data, obj.key, function(complete){
             if (complete){
-              //delete temp file
               fs.unlinkSync(obj.file_path)
-
-              //commit and send message to client
               db.client.query('COMMIT');
               callback(false, {msg: 'Revision has been successfully added', key: obj.path, type: obj.suffix});
             } else {

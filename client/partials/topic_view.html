@@ -22,7 +22,7 @@
               <span id='file' ng-bind='app.forms.video.name'></span>
               <input type='file' file-model="app.forms.video" ng-model="app.forms.video" name="video_path" id="inputFile" class='btn green'/>
             </span>
-            <button class='btn blue'>Upload Video<i class="fa fa-circle-o-notch fa-spin"></i></button>
+            <button class='btn blue'>Upload Video</button>
           </form>
           <!-- completion button -->
           <button style='display:block;'class='btn green' ng-if="app.topic.stats.status !== 'completed'" ng-click="app.functions.mark_complete()">Mark as Complete</button>
@@ -54,7 +54,7 @@
                 <span id='file' ng-bind='app.forms.file.name'></span>
                 <input type="file" file-model="app.forms.file" ng-model="app.forms.file" name="revision" id="inputFile"/>
               </span>
-              <button class='btn blue' type='submit'>Upload File <i class="fa fa-circle-o-notch fa-spin"></i></button>
+              <button class='btn blue' type='submit'>Upload File</button>
             </form>
           </div>
         </div><!-- end user privacy switch -->

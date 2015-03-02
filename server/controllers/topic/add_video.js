@@ -1,13 +1,9 @@
-var fs        = require('fs');
 var path      = require('path');
-var s3        = require('../../helpers/s3.js');
 var auth      = require('../../helpers/Auth.js');
 var response  = require('../../helpers/Response.js');
-var video     = require('../../models/topic/add_video.js');
-//var update_status = require('../../models/topic/update_status.js');
+var add_video = require('../../models/topic/add_video.js');
 var code = 'CTAV'
-var file, user_id, topic_id, file_name, values, f_name;
-
+var video = {};
 module.exports = (function(req, res, db){
 
   //check if user is logged in
@@ -16,35 +12,21 @@ module.exports = (function(req, res, db){
     if ( auth.check_params(req.params.id) ) {
       //check for a file
       if ( req.files instanceof Object && path.extname(req.files.file.originalname) === '.mp4' ) {
-        file      = req.files.file;
-        user_id   = req.session.user.user_id;
-        topic_id  = req.params.id;
-        file_name = topic_id + '/vid/' + Date.now() + path.extname(file.originalname);
 
         //place values into an object for database
-        values = {
-          topic_id : topic_id,
-          user_id : user_id,
-          key : file_name
-        }
+          video.file      = req.files.file;
+          video.file_path = video.file.path;
+          video.file_name = video.file.originalname
+          video.topic_id  = req.params.id;
+          video.user_id   = req.session.user.user_id;
+          video.key       = video.topic_id + '/vid/' + Date.now() + path.extname(video.file_name);;
+          video.path      = "http://v88_fuar.s3.amazonaws.com/" + video.key
 
-        fs.readFile(file.path, function(err, file_data){
-          if (err) throw err;
-          s3.add_file(file_data, file_name, function(complete){
-            fs.unlinkSync(file.path)
-            if (complete){
-              values.key = "http://v88_fuar.s3.amazonaws.com/" + file_name;
+          add_video(video, db, function(has_err, data){
+            !has_err ? response.success(res, data)
+                     : response.error_data(res, data, code + '0105');
+          });
 
-              video(values, db, function(has_err, data){
-                !has_err ? response.success(res, data)
-                         : response.error_data(res, data, code + '0105');
-              });
-            } else {
-              //error uploading to amazon
-              response.error_generic(res, code + '0104', 's3');
-            }
-          })
-        });
       } else {
         //missing required info
         response.error_generic(res, code + '0103', 'missing');
