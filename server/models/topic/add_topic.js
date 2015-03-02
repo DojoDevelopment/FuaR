@@ -32,26 +32,28 @@ module.exports = (function(values, file, db, callback){
     db.client.query(query[1], values, function(err, results){
       if (err) return rollback(db.client, 2, query[1], err);
       topic_id = results.rows[0].topic_id
-      key      = 'http://v88_fuar.s3.amazonaws.com/' + topic_id + '/file/' + Date.now() + path.extname(file.originalname);
-      values   = [topic_id, key];
+      key      = topic_id + '/file/' + Date.now() + path.extname(file.originalname);
 
-      db.client.query(query[2], values, function(err, results){
-        if (err) return rollback(db.client, 3, query[2], err);
+      fs.readFile(file.path, function(err, file_data){
+        if (err) return rollback(db.client, 3, 'reading file err', err);
+        s3.add_file(file_data, key, function(complete){
+          fs.unlinkSync(file.path);
+          if (complete){
+            file_name = 'http://v88_fuar.s3.amazonaws.com/' + key;
+            values    = [topic_id, file_name];
 
-        fs.readFile(file.path, function(err, file_data){
-          if (err) return rollback(db.client, 4, 's3', err);
-          s3.add_file(file_data, key, function(complete){
-            fs.unlinkSync(file.path)
-            if (complete){
-              db.client.query('COMMIT');
+            db.client.query(query[2], values, function(err, results){
+              if (err) return rollback(db.client, 4, query[2], err);
+              db.client.query(query[3]);
               callback(false, 'Topic has been added successfully.');
-            } else {
-              //error uploading to amazon
-              callback(true, 'Failed to send to s3.');
-            }
-          });
+            })
+          } else {
+            //error uploading to amazon
+            return rollback(db.client, 3, 's3', 'failed to send to s3');
+            callback(true, 'Failed to send to s3.');
+          }
         });
-      })
+      });
     });
   });
 });

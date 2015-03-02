@@ -19,6 +19,9 @@ app.controller('DashboardController', ['$scope', '$rootScope', 'PageFactory', 'U
             $scope.app.topics.sortVariable = sortVariable;
             $scope.app.topics.isReverse = !$scope.app.topics.isReverse;
 
+          }, setSortType: function(sortType){
+            $scope.app.topics.type = sortType;
+
           }, log_out: function(){
             //logout function
             UserFactory.log_out();
@@ -33,6 +36,7 @@ app.controller('DashboardController', ['$scope', '$rootScope', 'PageFactory', 'U
           $scope.app.topics = data;
           $scope.app.topics.sortVariable = "updated_at";
           $scope.app.topics.isReverse = false;
+          $scope.app.topics.type = '';
         } else {
           //display error message
           $scope.app.settings.message = data;
