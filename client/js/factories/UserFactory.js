@@ -12,12 +12,11 @@ app.factory('UserFactory', ['$http', '$location', '$rootScope', function($http, 
           $rootScope.user = {
               user_level : data.user_level
             ,  file_name : data.file_name
-            ,       name : data.name
-            ,         id : data.id
+            ,    user_id : data.user_id
           }
           if ( $rootScope.user.user_level < 5 ){
             // $location.path('/settings');
-           $location.path('/user/' + $rootScope.user.id);
+           $location.path('/user/' + $rootScope.user.user_id);
           } else {
             $location.path('/dashboard');
           }
@@ -41,10 +40,9 @@ app.factory('UserFactory', ['$http', '$location', '$rootScope', function($http, 
           })
           .success(function(data){
             $rootScope.user = {
-              user_level   : data.user_level
-              , file_name  : data.file_name
-              , name       : data.name
-              , id         : data.user_id
+               user_level : data.user_level
+              , file_name : data.file_name
+              ,   user_id : data.user_id
             }
             $location.path('/dashboard');
 
@@ -116,11 +114,12 @@ app.factory('UserFactory', ['$http', '$location', '$rootScope', function($http, 
       } else {
         $http.get('/api/users/session')
           .success(function(data){
+            console.log($rootScope.user);
+            console.log(data)
             $rootScope.user = {
-              user_level   : data.user_level
-              , file_name  : data.file_name
-              , name       : data.name
-              , id         : data.id
+               user_level : data.user_level
+              , file_name : data.file_name
+              ,   user_id : data.user_id
             }
             callback(true);
           }).error(function(){

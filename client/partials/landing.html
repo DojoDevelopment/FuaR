@@ -26,14 +26,14 @@
             <h6>Password</h6>
             <!-- password input error messages -->
             <div class='error_msg' ng-messages="app.forms.loginForm.password.$error" ng-if="app.forms.loginForm.$submitted || !app.forms.loginForm.password.$pristine">
-              <h6 ng-message="required"  class="help-block">Required<h6>
+              <h6 ng-message="required" class="help-block">Required<h6>
             </div>
           </label>
-          <input type="password" ng-model="app.forms.login.password" ng-pattern="app.patterns.password" ng-minlength="6" ng-maxlength="72" for="password" name="password" required/>
+          <input type="password" ng-model="app.forms.login.password" for="password" name="password" required/>
         </div>
         <div class='server-errors'>
           <!-- server error message -->
-          <p ng-if="app.messages.login !== null" ng-bind="app.messages.login" class='help-block center'></p>
+          <p ng-if="app.messages !== null" ng-bind="app.messages" class='help-block center'></p>
         </div>
         <!-- submit button for login -->
         <button type="submit" class='waves-effect btn btn-log'>Login</button>

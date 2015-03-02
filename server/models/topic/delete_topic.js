@@ -5,8 +5,9 @@
  * @param  {Function} callback [function to send results ([boolean] has_err, [obj/array] data)]
  * @return {[Object]} results  [object of query results]
  */
-var s3 = require('../../helpers/s3.js');
-var query, topic_user;
+var s3    = require('../../helpers/s3.js');
+var query = require('../../helpers/Queries.js');
+var rollback, topic_user;
 module.exports = (function(obj, db, callback){
 
   rollback = function(client, num, query, err) {
@@ -17,24 +18,20 @@ module.exports = (function(obj, db, callback){
     callback(true, 'Oops something went wrong.');
   };
 
-  query = [];
-  query.push('BEGIN');
-  query.push('SELECT user_id FROM topics WHERE topic_id = $1');
-  query.push('DELETE FROM topics WHERE topic_id = $1');
   values = { get : [obj.topic_id] };
 
   //preforms all db queries as a transaction roll back if any fail
-  db.client.query(query[0], function(err, result){
-    if (err) return rollback(db.client, 1, query[0], err);
+  db.client.query('BEGIN', function(err, result){
+    if (err) return rollback(db.client, 1, 'BEGIN', err);
 
-    db.client.query(query[1], values.get, function(err,results){
-      if (err) return rollback(db.client, 2, query[1], err);
+    db.client.query(query.user.select.user_id_from_topic, values.get, function(err,results){
+      if (err) return rollback(db.client, 2, query.user.select.user_id_from_topic, err);
       topic_user = results.rows[0].user_id;
 
       if (obj.user_level >= 5 || obj.user_id === topic_user){
         s3.delete_topic(obj.topic_id);
-        db.client.query(query[2], values.get, function(err){
-          if (err) return rollback(db.client, 3, query[2], err);
+        db.client.query(query.topic.delete.topic, values.get, function(err){
+          if (err) return rollback(db.client, 3, query.topic.delete.topic, err);
           db.client.query('COMMIT');
           callback(false, 'Topic has been succssfully deleted.');
         });

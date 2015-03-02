@@ -1,7 +1,8 @@
 var login     = require('../../models/user/login.js');
 var regex     = require('../../helpers/RegexFunctions.js');
 var response  = require('../../helpers/Response.js');
-var page_code = 'CUL';
+var q  = require('../../helpers/Queries.js');
+var code = 'CUL';
 var cred, values;
 module.exports = (function(req, res, db){
 
@@ -23,8 +24,7 @@ module.exports = (function(req, res, db){
           if ( !has_err ){
             //set session user_id, user_level
             req.session.user = {
-                      id : data.user_id,
-                    name : data.name,
+                 user_id : data.user_id,
               user_level : data.user_level,
                file_name : data.file_name
             }
@@ -34,18 +34,18 @@ module.exports = (function(req, res, db){
 
           } else {
             //error occured during in model
-            response.error_data(res, data, page_code + '0103');
+            response.error_data(res, data, code + '0103');
 
           }
         });
       } else {
         //form is not in the correct format
-        response.error_generic(res, page_code + '0102', 'invalid');
+        response.error_generic(res, code + '0102', 'invalid');
 
       }
     } else {
       //missing the status
-      response.error_generic(res, page_code + '0101', 'missing');
+      response.error_generic(res, code + '0101', 'missing');
 
     }
 });

@@ -1,10 +1,11 @@
 var auth        = require('../../helpers/Auth.js');
 var response    = require('../../helpers/Response.js')
-var email       = require('../../models/user/get_email.js');
-var user_topics = require('../../models/topic/user_topics.js');
-var get_users   = require('../../models/admin/get_users.js')
-var page_code   = 'CPS'
-var eventEmitter, EventHandler, flags, user_id, results, user_level;
+var email       = require('../../models/user/email.js');
+var user_topics = require('../../models/page/profile.js');
+var get_users   = require('../../models/user/get_users.js')
+var code        = 'CPS';
+var results     = {};
+var eventEmitter, EventHandler, flags, user_id, user_level;
 
 //get the settings page information
 module.exports = (function(req, res, db){
@@ -17,17 +18,16 @@ module.exports = (function(req, res, db){
         response.success(res, storage);
       }
     } else {
-      response.error_generic(res, page_code + '0106', 'db');
+      response.error_generic(res, code + '0106', 'db');
     }
   }
 
   //check if user is logged in
   if ( auth.check_login(req.session.user, 1) ) {
-    user_id      = req.session.user.id;
+    user_id      = req.session.user.user_id;
     user_level   = req.session.user.user_level;
     eventEmitter = require('events').EventEmitter;
     EventHandler = new eventEmitter();
-    results = {};
     flags = {
       email: false,
       topics: user_level !== 10 ? false : true,
@@ -37,7 +37,7 @@ module.exports = (function(req, res, db){
     //set listener for emails
     EventHandler.on("get_email", function() {
       //get user's email
-      email([user_id], db, function(has_err, data){
+      email.get([user_id], db, function(has_err, data){
         check_data(res, has_err, data, results, flags, 'email');
       });
     });
@@ -62,6 +62,6 @@ module.exports = (function(req, res, db){
 
   } else {
     //user is not logged in
-    response.error_generic(res, page_code + '0101', 'login', 401);
+    response.error_generic(res, code + '0101', 'login', 401);
   }
 });

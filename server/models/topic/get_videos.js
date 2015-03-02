@@ -5,17 +5,11 @@
    * @param  {Function} callback [function to send results to TopicController.js ([boolean] has_err, [obj/array] data)]
    * @return {[Object]} results  [object of query results]
    */
-var query;
+var query = require('../../helpers/Queries.js');
 module.exports = (function(values, db, callback){
-//videos.video_id, users.user_id, users.name, videos.created_at
-  query = 'SELECT  videos.key'
-        + ' FROM videos'
-//        + ' LEFT JOIN users ON videos.user_id = users.user_id'
-        + ' WHERE topic_id = $1'
-        + ' ORDER BY video_id ASC';
 
   //query for user topics dislpay message on error else return results
-  db.client.query(query, values, function(err, results){
+  db.client.query(query.topic.select.videos, values, function(err, results){
     if (err === null){
       callback(false, results.rows);
     } else {

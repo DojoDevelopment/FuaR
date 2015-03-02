@@ -2,7 +2,7 @@ var auth     = require('../../helpers/Auth.js');
 var response = require('../../helpers/Response.js');
 var privacy  = require('../../models/topic/update_privacy.js');
 var stats    = require('../../models/topic/get_stats.js');
-var page_code = 'CTUP'
+var code = 'CTUP'
 module.exports = (function(req, res, db){
 
   //check if user has a user_level of at least 1 and params are a number
@@ -13,7 +13,7 @@ module.exports = (function(req, res, db){
         //if no errors
         if ( !has_err ){
           //check if user is the creator of the topic or if the user is admin
-          if (data.user_id === req.session.user.id || req.session.user.user_level >= 5){
+          if (data.user_id === req.session.user.user_id || req.session.user.user_level >= 5){
 
             //switch public states
             is_public = (data.is_public === false ? true : false);
@@ -23,24 +23,24 @@ module.exports = (function(req, res, db){
             //update privacy return success or error message
             privacy(form, db, function(has_err, data){
               !has_err ? response.success(res, data)
-                       : response.error_data(res, data, page_code + '0105');
+                       : response.error_data(res, data, code + '0105');
             });
 
           } else {
             //user is not creator or admin
-            response.error_generic(res, page_code + '0104', 'access');
+            response.error_generic(res, code + '0104', 'access');
           }
         } else {
           //error posted in model
-          response.error_data(res, data, page_code + '0103');
+          response.error_data(res, data, code + '0103');
         }
       });
     } else {
       //params are not numbers
-      response.error_generic(res, page_code + '0102', 'params');
+      response.error_generic(res, code + '0102', 'params');
     }
   } else {
     //user is not logged in
-    response.error_generic(res, page_code + '0101', 'login', 401);
+    response.error_generic(res, code + '0101', 'login', 401);
   }
 });

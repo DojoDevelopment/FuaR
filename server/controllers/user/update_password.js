@@ -2,7 +2,7 @@ var regex           = require('../../helpers/RegexFunctions.js');
 var auth            = require('../../helpers/Auth.js');
 var response        = require('../../helpers/Response.js');
 var update_password = require('../../models/user/update_password.js');
-var page_code       = 'CUUP';
+var code       = 'CUUP';
 var values, form;
 
 //get all appropriate topics for dashboard
@@ -15,7 +15,7 @@ module.exports = (function(req, res, db){
     if (form.password !== undefined && form.confirm !== undefined) {
 
       form = regex.sanitizeForm(form);
-      values = [form.password, req.session.user.id, form.confirm];
+      values = [form.password, req.session.user.user_id, form.confirm];
 
       if (regex.isPassword(values[0]) && regex.isPassword(values[2])){
         if (values[0] === values[2]) {
@@ -23,27 +23,27 @@ module.exports = (function(req, res, db){
           values.splice(2,1);
           update_password(values, db, function(has_err, data){
             !has_err ? response.success(res, data)
-                     : response.error_data(res, data, page_code + '0105');
+                     : response.error_data(res, data, code + '0105');
           });
 
         } else {
           //password and confirm do not match
-          response.error(res, page_code + '0104', 400, 'Password & confirm do not match')
+          response.error(res, code + '0104', 400, 'Password & confirm do not match')
 
         }
       } else {
         //password or confirm do not match regex
-        response.error_generic(res, page_code + '0103', 'invalid');
+        response.error_generic(res, code + '0103', 'invalid');
 
       }
     } else {
       //missing password or confirm
-      response.error_generic(res, page_code + '0102', 'missing');
+      response.error_generic(res, code + '0102', 'missing');
 
     }
   } else {
     //user is not logged in
-    response.error_generic(res, page_code + '0101', 'login', 401);
+    response.error_generic(res, code + '0101', 'login', 401);
 
   }
 });

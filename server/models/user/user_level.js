@@ -6,14 +6,10 @@
  * @param  {Function} callback [function to send results to AdminController.js ([boolean] has_err, [obj/boolean] data)]
  * @return {[Object]} results  [object of query results]
  */
-var query;
+var query = require('../../helpers/Queries.js');
 module.exports = (function(values, user, db, callback){
 
-  query = 'UPDATE users'
-        + ' SET user_level = $1'
-        + ' WHERE user_id = $2';
-
-  db.client.query(query, values, function(err, results){
+  db.client.query(query.user.update.user_level, values, function(err, results){
     if (err === null){
       callback(false, user[0] +' has been updated to '+ (values[0] == '1' ? 'user.' : 'admin.'));
     } else {

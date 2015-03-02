@@ -5,15 +5,13 @@
  * @param  {Function} callback [function to send results to TopicController.js ([boolean] has_err, [obj/array] data)]
  * @return {[Object]} results  [object of query results]
  */
-var query;
+var query = require('../../helpers/Queries.js');
 module.exports = (function(values, db, callback){
 
   if (values[0] === 'enqueue' || 'reviewed' || 'completed' ){
-    query = 'UPDATE topics SET status = $1'
-          + ' WHERE topic_id = $2';
 
     //query topic update and send response message
-    db.client.query(query, values, function(err){
+    db.client.query(query.topic.update.status, values, function(err){
       if (err === null){
         callback(false, 'Status has been updated to ' + values[0] + '.');
       } else {

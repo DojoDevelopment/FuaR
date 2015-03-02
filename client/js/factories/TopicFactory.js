@@ -32,7 +32,7 @@ app.factory('TopicFactory', ['$http', '$location', '$rootScope', function($http,
             , headers: { 'Content-Type': undefined }  //lets the browser decide that it's multipart form, if defined as multipart process throws error
         })
         .success(function(){
-          $location.path('/user/' + $rootScope.user.id);
+          $location.path('/user/' + $rootScope.user.user_id);
         })
         .error(function(data, status){
           status === 401 ? $location.path('/dasboard') : callback(true, data);

@@ -23,7 +23,7 @@ app.config(function($routeProvider, $sceDelegateProvider){
       }).when('/register', {
 
           templateUrl: '/partials/register.html',
-          controller: 'LandingController',
+          controller: 'RegisterController',
           css: 'css/splash.css',
           data: { login : false }
 
@@ -39,7 +39,7 @@ app.config(function($routeProvider, $sceDelegateProvider){
       }).when('/topic/add', {
 
           templateUrl: '/partials/topic_add.html',
-          controller: 'AlterTopicController',
+          controller: 'AddTopicController',
           css: 'css/secondary.css',
           data: { login : true }
 

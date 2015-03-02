@@ -4,7 +4,7 @@
     <a href="/#/" class='btn btn-back'>Back to login</a>
 
     <!-- server error message -->
-    <p ng-if="app.messages.registration !== null" ng-bind="app.messages.registration"></p>
+    <p ng-if="app.messages !== null" ng-bind="app.messages"></p>
     <!-- link to login page -->
     <h3 class='center teal-text text-lighten-2'>Please fill the form to register</h3>
 
@@ -18,10 +18,10 @@
         <div class='error_msg' ng-messages="app.forms.regForm.name.$error" ng-if="app.forms.regForm.$submitted || !app.forms.regForm.name.$pristine">
           <h6 ng-message="required" class="help-block">Username is required</h6>
           <h6 ng-message="maxlength" class="help-block">Password is too long.</h6>
-          <h6 ng-message="pattern"  class="help-block">Letters &amp; Numbers only.</h6>
+          <h6 ng-message="pattern"  class="help-block">Alpha Numeric characters only.</h6>
         </div>
       </label>
-      <input type="text" ng-model="app.forms.registration.name" ng-pattern="app.patterns.letters" id='name' name="name" ng-trim="true" ng-maxlength="255" required/>
+      <input type="text" ng-model="app.forms.registration.name" ng-pattern="app.patterns.alphanumeric" id='name' name="name" ng-trim="true" ng-maxlength="255" required/>
 
       <!-- email input -->
       <label for='email'>

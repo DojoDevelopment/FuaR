@@ -5,16 +5,17 @@ app.controller('UserController', ['$scope', '$rootScope', '$location', 'PageFact
   UserFactory.check_session(function(logged){
     if (logged){
       //obj to hold for all scope variables
-      $scope.app = {
-        settings : {
-          user_level : $rootScope.user.user_level
-          , message : null
-          , name : $rootScope.user.name
-          , user_id : $rootScope.user.id
-          , page_id : _.last($location.path().split('/'))
-        }, functions : {
-          log_out : function(){ UserFactory.log_out(); }
-        }, search : ''
+      $scope.app = {};
+
+      $scope.app.settings = {
+          user_id    : $rootScope.user.user_id
+        , user_level : $rootScope.user.user_level
+        , page_id    : _.last($location.path().split('/'))
+        , message    : null
+      };
+
+      $scope.app.functions = {
+        log_out : function(){ UserFactory.log_out(); }
       };
 
       //get approiate topics for the user id of topic_id
@@ -27,5 +28,5 @@ app.controller('UserController', ['$scope', '$rootScope', '$location', 'PageFact
         }
       })
     }
-  })
-}]);
+  });//end check_session
+}]);//end controller

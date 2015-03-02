@@ -6,25 +6,20 @@
  * @return {[Object]} results  [object of query results]
  */
 var bcrypt = require('bcrypt');
-var query, info;
+var query  = require('../../helpers/Queries.js');
+var info;
 module.exports = (function(form, db, callback){
 
-  query = 'SELECT user_id, password, name, user_level, graduation, file_name'
-        + ' FROM users'
-        + ' WHERE email = $1';
-
-  db.client.query(query, [form.email], function(err, res){
+  db.client.query(query.user.select.login, [form.email], function(err, res){
 
     if (res.rows[0]){
       bcrypt.compare(form.pass, res.rows[0].password, function(err, test){
 
         if (test){
           info = {
-            graduation : res.rows[0].graduation,
-             file_name : res.rows[0].file_name,
-            user_level : res.rows[0].user_level,
-               user_id : res.rows[0].user_id,
-                  name : res.rows[0].name
+             user_level : res.rows[0].user_level
+            ,   user_id : res.rows[0].user_id
+            , file_name : res.rows[0].file_name
           }
           callback(false, info);
 

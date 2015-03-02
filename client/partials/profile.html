@@ -23,6 +23,13 @@
 
 <!-- main container -->
 <div ng-if='app.topics.length <= 0' class='container'>
+  <h3 class='center teal-text' ng-if='app.settings.user_id != app.settings.page_id'>{{app.user.name}}'s topics</h3>
+  <h3 class='center teal-text' ng-if='app.settings.user_id == app.settings.page_id'>My topics</h3>
+  <img class='circle' ng-if="app.user.file_name === 'anon.png'" ng-src="../assets/users/anon.png" alt="profile pic">
+  <img class='circle' ng-if="app.user.file_name !== 'anon.png'" ng-src="../assets/users/{{app.settings.page_id}}/{{app.user.file_name}}" alt="profile pic"/>
+  <div class='col s4 m4'>
+       <p class='center'>Gradtuation Date: {{app.user.graduation | date:"MMM, yyyy "}} <br/> {{app.user.location}} Cohort</p>
+  </div>
   <div class="center">
       <h1 class='red-text'>There are N<i class='fa fa-frown-o fa-spin'></i> topics here</h1>
       <p class='teal-text'>Let's add a new topic!</p>
@@ -35,7 +42,8 @@
   <p ng-if="app.settings.message !== null" ng-bind="app.settings.message"></p>
     <h3 class='center teal-text' ng-if='app.settings.user_id != app.settings.page_id'>{{app.user.name}}'s topics</h3>
     <h3 class='center teal-text' ng-if='app.settings.user_id == app.settings.page_id'>My topics</h3>
-    <img class='circle' ng-src="../assets/users/{{app.settings.page_id}}/{{app.user.file_name}}" />
+    <img class='circle' ng-if="app.user.file_name === 'anon.png'" ng-src="../assets/users/anon.png" alt="profile pic">
+    <img class='circle' ng-if="app.user.file_name !== 'anon.png'" ng-src="../assets/users/{{app.settings.page_id}}/{{app.user.file_name}}" alt="profile pic"/>
   <!-- add topic button -->
   <div>
     <div class="row">
@@ -61,8 +69,8 @@
           <a href="/#/topic/{{t.topic_id}}">
       <!-- icon depending on topic type -->
       <div class='col s12 m12 l1 icon-grp'>
-          <i class='mdi-action-description' ng-if="t.type=='resume'"><span>V{{t.latest_version}}</span></i>
-          <i class='mdi-image-photo' ng-if="t.type=='image'"><span>V{{t.latest_version}}</span></i>
+          <i class='mdi-action-description' ng-if="t.type=='pdf'"><span>V{{t.latest_version}}</span></i>
+          <i class='mdi-image-photo' ng-if="t.type=='img'"><span>V{{t.latest_version}}</span></i>
       </div>
 
     <!-- title & description -->

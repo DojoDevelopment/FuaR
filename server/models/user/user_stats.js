@@ -5,15 +5,11 @@
  * @param  {Function} callback [function to send results to UserController.js ([boolean] has_err, [obj/array] data)]
  * @return {[Object]} results  [object of query results]
  */
-var query;
+var query = require('../../helpers/Queries.js');
 module.exports = (function(values, db, callback){
 
-  query = 'SELECT name, file_name, graduation, location'
-        + ' FROM users'
-        + ' WHERE user_id = $1';
-
   //send error or user_id
-  db.client.query(query, [values], function(err, res){
+  db.client.query(query.user.select.stats, [values], function(err, res){
     if (err === null){
       callback(false, res.rows[0]);
     } else {

@@ -3,7 +3,7 @@ var path       = require('path');
 var auth       = require('../../helpers/Auth.js');
 var response   = require('../../helpers/Response.js');
 var update_pic = require('../../models/user/update_profile_pic.js');
-var page_code  = 'CUUP';
+var code  = 'CUUP';
 var user_id, user_dir, file, file_name, file_path, old_pics, i;
 //get all appropriate topics for dashboard
 module.exports = (function(req, res, db){
@@ -13,7 +13,7 @@ module.exports = (function(req, res, db){
 
     if (req.files !== undefined && req.files.pic_info instanceof Object){
       file     = req.files.pic_info;
-      user_id  = req.session.user.id;
+      user_id  = req.session.user.user_id;
       user_dir = __dirname + "/../../../client/assets/users/" + user_id + "/profile/";
       old_pics = fs.readdirSync(user_dir);
 
@@ -40,7 +40,7 @@ module.exports = (function(req, res, db){
               }
             }
             !has_err ? response.success(res, data)
-                     : response.error_data(res, data, page_code + '0103');
+                     : response.error_data(res, data, code + '0103');
 
           });//end update pic
         });//end write file
@@ -48,10 +48,10 @@ module.exports = (function(req, res, db){
 
     } else {
       //no file
-      response.error_generic(res, page_code + '0102', 'missing');
+      response.error_generic(res, code + '0102', 'missing');
     }
   } else {
     //user is not logged in
-    response.error_generic(res, page_code + '0101', 'login', 401);
+    response.error_generic(res, code + '0101', 'login', 401);
   }
 });

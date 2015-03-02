@@ -33,9 +33,9 @@
           <!-- select for search by type -->
           <h4>Select type:</h4>
           <div style='display:inline;'>
-            <input ng-click="app.functions.setSortType('resume')" type="radio" name="view" value="resume" id="resume" checked>
+            <input ng-click="app.functions.setSortType('pdf')" type="radio" name="view" value="resume" id="resume" checked>
             <label for="resume" class='white-text'>Resume</label>
-            <input ng-click="app.functions.setSortType('image')" type="radio" name="view" value="image" id="image">
+            <input ng-click="app.functions.setSortType('img')" type="radio" name="view" value="image" id="image">
             <label for="image" class="white-text">Image</label>
             <input ng-click="app.functions.setSortType('')" type="radio" name="view" value="all" id="all">
             <label for="all" class="white-text">All</label>
@@ -78,31 +78,31 @@
         <div  id='top-cont' ng-class="{reviewed : topic.status == 'reviewed', enqueue : topic.status == 'enqueue', completed : topic.status == 'completed' }">
 
           <!-- icon for topic type  & topic status messages for the user-->
-          <p><i class='medium' ng-class="{'mdi-action-description' : topic.type == 'resume', 'mdi-image-photo' : topic.type == 'image'}"></i></p>
+          <p><i class='medium' ng-class="{'mdi-action-description' : topic.type == 'pdf', 'mdi-image-photo' : topic.type == 'img'}"></i></p>
 
-            <p ng-if="topic.status == 'enqueue' ">Awaiting review</p>
-            <p ng-if="topic.status == 'reviewed' ">Reviewed</p>
-            <p ng-if="topic.status == 'completed' ">Completed</p>
+          <p ng-if="topic.status == 'enqueue' ">Awaiting review</p>
+          <p ng-if="topic.status == 'reviewed' ">Reviewed</p>
+          <p ng-if="topic.status == 'completed' ">Completed</p>
 
-            <!-- hr line -->
-            <hr  ng-class="{reviewed : topic.status == 'reviewed', enqueue : topic.status == 'enqueue', completed : topic.status == 'completed' }"/>
+          <!-- hr line -->
+          <hr  ng-class="{reviewed : topic.status == 'reviewed', enqueue : topic.status == 'enqueue', completed : topic.status == 'completed' }"/>
 
-            <!-- topic title -->
-            <h4>{{topic.title | limitTo: 20 }}{{topic.title.length > 10 ? '...' : ''}}</h4>
+          <!-- topic title -->
+          <h4>{{topic.title | limitTo: 20 }}{{topic.title.length > 10 ? '...' : ''}}</h4>
 
-            <!-- topic description -->
-            <p>{{topic.description | limitTo: 20 }}{{t.description.length > 20 ? '...' : ''}}</p>
+          <!-- topic description -->
+          <p>{{topic.description | limitTo: 20 }}{{t.description.length > 20 ? '...' : ''}}</p>
 
-            <!-- topic creator -->
-            <p>By <a class='topic_owner_link' ng-href="/#/user/{{topic.user_id}}" ng-bind='topic.user'></a></p>
+          <!-- topic creator -->
+          <p>By <a class='topic_owner_link' ng-href="/#/user/{{topic.user_id}}" ng-bind='topic.user'></a></p>
 
-            <!-- last updated date -->
-            <p>Updated: <span ng-bind='topic.updated_at | date:"mediumDate"'></span></p>
+          <!-- last updated date -->
+          <p>Updated: <span ng-bind='topic.updated_at | date:"mediumDate"'></span></p>
 
-          </div><!-- end background color -->
+        </div><!-- end background color -->
 
-        </a><!-- end link -->
-      </div><!-- end ng-repeat for topic container -->
+      </a><!-- end link -->
+    </div><!-- end ng-repeat for topic container -->
 
-    </div><!-- end row -->
-  </section><!-- end main content section -->
+  </div><!-- end row -->
+</section><!-- end main content section -->

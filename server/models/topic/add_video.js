@@ -5,7 +5,7 @@
  * @param  {Function} callback [function to send results to TopicController.js ([boolean] has_err, [obj/array] data)]
  * @return {[Object]} results  [object of query results]
  */
-var query;
+var query = require('../../helpers/Queries.js');
 module.exports = (function(obj, db, callback){
 
   rollback = function(client, num, query, err) {
@@ -15,10 +15,6 @@ module.exports = (function(obj, db, callback){
     console.log('ERROR MTAV010' + num + ': Database Error', num, query, err);
     callback(true, 'Oops something went wrong.');
   };
-
-  query = []
-  query.push('INSERT INTO videos (topic_id, user_id, key) VALUES ($1, $2, $3)');
-  query.push("UPDATE topics SET status='reviewed', updated_at=NOW() WHERE topic_id = $1")
 
   values  = {
     videos : [obj.topic_id, obj.user_id, obj.key],
@@ -30,12 +26,12 @@ module.exports = (function(obj, db, callback){
     if (err) return rollback(db.client, 1, 'BEGIN', err);
 
     //add videos to db
-    db.client.query(query[0], values.videos, function(err, results){
-      if (err) return rollback(db.client, 2, query[0], err);
+    db.client.query(query.topic.insert.video, values.videos, function(err, results){
+      if (err) return rollback(db.client, 2, query.topic.insert.video, err);
 
       //update topic status
-      db.client.query(query[1], values.topics, function(err, results){
-        if (err) return rollback(db.client, 3, query[1], err);
+      db.client.query(query.topic.update.video_added, values.topics, function(err, results){
+        if (err) return rollback(db.client, 3, query.topic.update.video_added, err);
 
         //commit and send message to client
         db.client.query('COMMIT');

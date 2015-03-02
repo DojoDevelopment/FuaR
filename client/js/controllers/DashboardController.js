@@ -9,9 +9,8 @@ app.controller('DashboardController', ['$scope', '$rootScope', 'PageFactory', 'U
         //set default settings object
         settings : {
           user_level : $rootScope.user.user_level
+          ,  user_id : $rootScope.user.user_id
           ,  message : null
-          ,     name : $rootScope.user.name
-          ,  user_id : $rootScope.user.id
         }, functions : {
 
           setSortVariable: function(sortVariable) {

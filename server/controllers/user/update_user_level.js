@@ -1,8 +1,8 @@
 var regex      = require('../../helpers/RegexFunctions.js');
 var response   = require('../../helpers/Response.js')
 var auth       = require('../../helpers/Auth.js');
-var user_level = require('../../models/admin/user_level.js')
-var page_code  = 'CUUUL';
+var user_level = require('../../models/user/user_level.js')
+var code  = 'CUUUL';
 var values, user;
 
 module.exports = (function(req, res, db){
@@ -22,18 +22,18 @@ module.exports = (function(req, res, db){
         //admin function to change a users user_level to and from admin returns result message
         user_level(values, user, db, function(has_err, data){
           !has_err ? response.success(res, data)
-                   : response.error_data(res, data, page_code + '0104');
+                   : response.error_data(res, data, code + '0104');
         });
 
       } else {
-        response.error_generic(res, page_code + '0103', 'invalid', 400);
+        response.error_generic(res, code + '0103', 'invalid', 400);
       }
     } else {
       //missing required info
-      response.error_generic(res, page_code + '0102', 'missing', 400);
+      response.error_generic(res, code + '0102', 'missing', 400);
     }
   } else {
     //user is not logged in
-    response.error_generic(res, page_code + '0101', 'login', 401);
+    response.error_generic(res, code + '0101', 'login', 401);
   }
 });

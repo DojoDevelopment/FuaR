@@ -31,16 +31,15 @@
     <!-- add topic form -->
     <form class='form-group' name="app.forms.topicForm" ng-submit="app.functions.submitForm(app.forms.topicForm.$valid)" novalidate>
 
-        <h4>Enter a title for your topic</h4>
-        <!-- topic message -->
-        <label for='title'>
-          <h6>Title</h6>
-          <div class='error_msg right' ng-messages="app.forms.topicForm.title.$error" ng-if="app.forms.topicForm.$submitted || !app.forms.topicForm.title.$pristine">
-            <h6 ng-message="required" class="help-block">This field is required</h6>
-              <h6 ng-message="pattern"  class="help-block">Password can containe letters and numbers only.</h6>
-              </div>
-            </label>
-            <input class='form-control' type="text" ng-model="app.forms.topic.title" ng-pattern="app.patterns.loose" id='title' name="title" ng-trim="true" required/>
+      <h4>Enter a title for your topic</h4>
+      <!-- topic message -->
+      <label for='title'>
+        <h6>Title</h6>
+        <div class='error_msg right' ng-messages="app.forms.topicForm.title.$error" ng-if="app.forms.topicForm.$submitted || !app.forms.topicForm.title.$pristine">
+          <h6 ng-message="required" class="help-block">The Title is required</h6>
+        </div>
+      </label>
+      <input class='form-control' type="text" ng-model="app.forms.topic.title" ng-pattern="app.patterns.loose" id='title' name="title" ng-trim="true" required/>
 
       <h4>What is the topic type</h4>
       <!-- type input -->
@@ -50,8 +49,8 @@
           <p ng-message="required" class="help-block">&#xf00d; This field is required</p>
         </option>
         <option value="" disabled selected>Topic Type</option>
-        <option value='resume'>Resume</option>
-        <option value='image'>Image</option>
+        <option value='pdf'>Resume</option>
+        <option value='img'>Image</option>
       </select>
 
       <h4>What should we look for in your submission?</h4>

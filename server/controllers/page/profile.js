@@ -1,8 +1,8 @@
 var auth      = require('../../helpers/Auth.js');
 var response  = require('../../helpers/Response.js')
-var topics    = require('../../models/topic/user_topics.js');
+var topics    = require('../../models/page/profile.js');
 var user      = require('../../models/user/user_stats.js');
-var page_code = 'CPP';
+var code = 'CPP';
 var values, filter;
 //all topics by user id
 module.exports = (function(req, res, db){
@@ -16,7 +16,7 @@ module.exports = (function(req, res, db){
 
       }
     } else {
-      response.error_generic(res, page_code + '0103', 'db');
+      response.error_generic(res, code + '0103', 'db');
     }
   }
 
@@ -32,7 +32,7 @@ module.exports = (function(req, res, db){
       //set listener for comments
       EventHandler.on("get_topics", function() {
         //filter if user isn't same as the page id or if user isn't admin
-        filter = (req.session.user.id == page.id || req.session.user.user_level >= 5 ? false : true );
+        filter = (req.session.user.user_id == page.id || req.session.user.user_level >= 5 ? false : true );
         //query database for comments set comment flag as true
         topics(page.id, filter, db, function(has_err, data){
           check_data(res, has_err, data, page, flags, 'topics')
@@ -50,10 +50,10 @@ module.exports = (function(req, res, db){
 
     } else {
       //params are not numbers
-      response.error_generic(res, page_code + '0102', 'params');
+      response.error_generic(res, code + '0102', 'params');
     }
   } else {
     //user is not logged in
-    response.error_generic(res, page_code + '0101', 'login', 401);
+    response.error_generic(res, code + '0101', 'login', 401);
   }
 });

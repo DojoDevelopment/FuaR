@@ -6,18 +6,14 @@
  * @return {[Object]} results  [object of query results]
  */
 var bcrypt = require('bcrypt');
-var query;
+var query  = require('../../helpers/Queries.js');
 module.exports = (function(values, db, callback){
-
-  query = 'UPDATE users'
-        + ' SET password = $1'
-        + ' WHERE user_id = $2';
 
   bcrypt.genSalt(10, function(err, salt) {
     bcrypt.hash(values[0], salt, function(err, crypted) {
       values.splice(0, 1, crypted);
-      //send error or user_id
-      db.client.query(query, values, function(err){
+
+      db.client.query(query.user.update.password, values, function(err){
         if (err === null){
           callback(false, 'Password has been successfully updated.');
         } else {

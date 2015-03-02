@@ -14,7 +14,7 @@ var message = {
 
 module.exports = {
   success : function(res, data, status){
-    data = data || '';
+    data = data || {};
     status = status || 200;
     res.status(status).json(data).end();
 

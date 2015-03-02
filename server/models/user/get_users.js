@@ -5,15 +5,10 @@
  * @param  {Function} callback [function to send results to AdminController.js ([boolean] has_err, [obj/array] data)]
  * @return {[Object]} results  [object of query results]
  */
-var query;
+var query = require('../../helpers/Queries.js');
 module.exports = (function(values, db, callback){
 
-  query = 'SELECT user_id, name, email, user_level, graduation'
-        + ' FROM users'
-        + ' WHERE user_id <> $1'
-        + ' ORDER BY user_id';
-
-  db.client.query(query, values, function(err, results){
+  db.client.query(query.user.select.all_users, values, function(err, results){
     if (err === null){
       callback(false, results.rows);
     } else {

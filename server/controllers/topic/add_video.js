@@ -5,7 +5,7 @@ var auth      = require('../../helpers/Auth.js');
 var response  = require('../../helpers/Response.js');
 var video     = require('../../models/topic/add_video.js');
 //var update_status = require('../../models/topic/update_status.js');
-var page_code = 'CTAV'
+var code = 'CTAV'
 var file, user_id, topic_id, file_name, values, f_name;
 
 module.exports = (function(req, res, db){
@@ -17,7 +17,7 @@ module.exports = (function(req, res, db){
       //check for a file
       if ( req.files instanceof Object && path.extname(req.files.file.originalname) === '.mp4' ) {
         file      = req.files.file;
-        user_id   = req.session.user.id;
+        user_id   = req.session.user.user_id;
         topic_id  = req.params.id;
         file_name = topic_id + '/vid/' + Date.now() + path.extname(file.originalname);
 
@@ -37,26 +37,26 @@ module.exports = (function(req, res, db){
 
               video(values, db, function(has_err, data){
                 !has_err ? response.success(res, data)
-                         : response.error_data(res, data, page_code + '0105');
+                         : response.error_data(res, data, code + '0105');
               });
             } else {
               //error uploading to amazon
-              response.error_generic(res, page_code + '0104', 's3');
+              response.error_generic(res, code + '0104', 's3');
             }
           })
         });
       } else {
         //missing required info
-        response.error_generic(res, page_code + '0103', 'missing');
+        response.error_generic(res, code + '0103', 'missing');
       }
 
     } else {
       //params are not numbers
-      response.error_generic(res, page_code + '0102', 'params');
+      response.error_generic(res, code + '0102', 'params');
     }
 
   } else {
     //user is not logged in
-    response.error_generic(res, page_code + '0101', 'login', 401);
+    response.error_generic(res, code + '0101', 'login', 401);
   }
 });

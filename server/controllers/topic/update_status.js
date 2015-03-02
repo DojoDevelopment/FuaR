@@ -1,7 +1,7 @@
 var auth          = require('../../helpers/Auth.js');
 var response      = require('../../helpers/Response.js');
 var update_status = require('../../models/topic/update_status.js');
-var page_code     = 'CTUS'
+var code     = 'CTUS'
 var form;
 module.exports = (function(req, res, db){
 
@@ -15,18 +15,18 @@ module.exports = (function(req, res, db){
           //update privacy return success or error message
           update_status(form, db, function(has_err, data){
               !has_err ? response.success(res, data)
-                       : response.error_data(res, data, page_code + '0104');
+                       : response.error_data(res, data, code + '0104');
           });
       } else {
         //missing the status
-        response.error_generic(res, page_code + '0103', 'missing');
+        response.error_generic(res, code + '0103', 'missing');
       }
     } else {
       //params are not numbers
-      response.error_generic(res, page_code + '0102', 'params');
+      response.error_generic(res, code + '0102', 'params');
     }
   } else {
     //user is not logged in
-    response.error_generic(res, page_code + '0101', 'login', 401);
+    response.error_generic(res, code + '0101', 'login', 401);
   }
 });

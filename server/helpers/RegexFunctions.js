@@ -18,7 +18,7 @@ module.exports = {
 
   }, isAlphaNumeric : function(input){ //letters numbers and spaces
 
-    return new RegExp(/^[a-zA-Z0-9\s]*$/).test(input);
+    return new RegExp(/^[a-zA-Z0-9_]*$/).test(input);
 
   }, isPassword : function(input){ //letters, numbers, underscore, 6, 72 characters
 
@@ -41,5 +41,13 @@ module.exports = {
       array[i] = String(array[i]).replace(/<script\b[^>]*>(.*?)<\/script>/i, '').trim();
     }
     return array;
+  }, sanitizeObj : function(obj){
+    Object.keys(obj).forEach(function(key) {
+      obj[key] = String(obj[key]).replace(/<script\b[^>]*>(.*?)<\/script>/g, '').trim();
+    });
+    return obj;
   }
+
+
+
 }

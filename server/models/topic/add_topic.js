@@ -1,57 +1,60 @@
 /**
  * [Add topic to database]
- * @param  {[Array]}  values   [user_id, type, title, description]
+ * @param  {[Object]} values   [user_id, type, title, about, file]
  * @param  {[Object]} db       [object containing database]
  * @param  {Function} callback [function to send results to TopicController.js ([boolean] has_err, [obj/array] data)]
- * @return {[Object]} results  [object of query results]
+ * @return {[Object]} results  [object with err status and message]
  */
-var fs   = require('fs');
-var path = require('path');
-var s3   = require('../../helpers/s3.js');
-var query, rollback, topic_id, key;
-module.exports = (function(values, file, db, callback){
+var fs    = require('fs');
+var path  = require('path');
+var s3    = require('../../helpers/s3.js');
+var query = require('../../helpers/Queries.js');
+var code  = 'MTAT'
+var args  = {};
+var rollback;
+module.exports = (function(obj, db, callback){
 
-  rollback = function(client, num, query, err) {
+  rollback = function(client, num, query, arg, err) {
     db.client.query('ROLLBACK', function() {
       client.end();
     });
-    console.log('ERROR MTAF010' + num + ': Database Error', num, query);
+    console.log('ERROR ' + code + '010' + num + ': Database Error', num, query, arg, err);
     callback(true, 'Oops something went wrong.');
   };
 
-  query = [];
-  query.push('BEGIN');
-  query.push('INSERT INTO topics (user_id, type, title, description) VALUES ($1, $2, $3, $4) RETURNING topic_id');
-  query.push('INSERT INTO files (topic_id, key) VALUES ($1, $2)');
-  query.push('COMMIT');
+  args.topic = [obj.user_id, obj.type, obj.title, obj.about];
 
   //  //preforms all db queries as a transaction roll back if any fail
-  db.client.query(query[0], function(err, result){
-    if (err) return rollback(db.client, 1, query[0], err);
+  db.client.query('BEGIN', function(err){
+
     //query for user topics dislpay message on error else return results
-    db.client.query(query[1], values, function(err, results){
-      if (err) return rollback(db.client, 2, query[1], err);
-      topic_id = results.rows[0].topic_id
-      key      = topic_id + '/file/' + Date.now() + path.extname(file.originalname);
+    db.client.query(query.topic.insert.topic, args.topic, function(err, results){
+      if (err) return rollback(db.client, 2, query.topic.insert.topic, args.topic, err);
+      args.data = {
+         path : 'http://v88_fuar.s3.amazonaws.com/' + results.rows[0].topic_id + '/file/' + Date.now() + path.extname(obj.file_name)
+        , key : results.rows[0].topic_id + '/file/' + Date.now() + path.extname(obj.file_name)
+      };
 
-      fs.readFile(file.path, function(err, file_data){
-        if (err) return rollback(db.client, 3, 'reading file err', err);
-        s3.add_file(file_data, key, function(complete){
-          fs.unlinkSync(file.path);
-          if (complete){
-            file_name = 'http://v88_fuar.s3.amazonaws.com/' + key;
-            values    = [topic_id, file_name];
+      args.file = [obj.user_id, args.data.path, obj.suffix];
 
-            db.client.query(query[2], values, function(err, results){
-              if (err) return rollback(db.client, 4, query[2], err);
-              db.client.query(query[3]);
+      //add file to db
+      db.client.query(query.topic.insert.file, args.file, function(err, results){
+        if (err) return rollback(db.client, 4, query.topic.insert.files, args.file, err);
+
+        //read file in temp folder
+        fs.readFile(obj.file_path, function(err, file_data){
+          if (err) return rollback(db.client, 3, 'reading file err', err);
+
+          //add file to s3 and delete temp file
+          s3.add_file(file_data, args.data.key, function(complete){
+            fs.unlinkSync(obj.file_path);
+            if (complete){
+              db.client.query('COMMIT');
               callback(false, 'Topic has been added successfully.');
-            })
-          } else {
-            //error uploading to amazon
-            return rollback(db.client, 3, 's3', 'failed to send to s3');
-            callback(true, 'Failed to send to s3.');
-          }
+            } else {
+              return rollback(db.client, 3, 's3', obj.key, err);
+            }
+          });
         });
       });
     });
