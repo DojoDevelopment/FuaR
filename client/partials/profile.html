@@ -22,22 +22,7 @@
 </nav><!-- navbar end -->
 
 <!-- main container -->
-<div ng-if='app.topics.length <= 0' class='container'>
-  <h3 class='center teal-text' ng-if='app.settings.user_id != app.settings.page_id'>{{app.user.name}}'s topics</h3>
-  <h3 class='center teal-text' ng-if='app.settings.user_id == app.settings.page_id'>My topics</h3>
-  <img class='circle' ng-if="app.user.file_name === 'anon.png'" ng-src="../assets/users/anon.png" alt="profile pic">
-  <img class='circle' ng-if="app.user.file_name !== 'anon.png'" ng-src="../assets/users/{{app.settings.page_id}}/{{app.user.file_name}}" alt="profile pic"/>
-  <div class='col s4 m4'>
-       <p class='center'>Gradtuation Date: {{app.user.graduation | date:"MMM, yyyy "}} <br/> {{app.user.location}} Cohort</p>
-  </div>
-  <div class="center">
-      <h1 class='red-text'>There are N<i class='fa fa-frown-o fa-spin'></i> topics here</h1>
-      <p class='teal-text'>Let's add a new topic!</p>
-    <a ng-href="/#/topic/add" class='btn btn-floating blue' id='add-topic'><i class='mdi-content-add'></i></a>
-  </div>
-</div>
-<div ng-if='app.topics.length > 0' class='container' id="topics_container">
-
+<div class='container' id="topics_container">
   <!-- server error message -->
   <p ng-if="app.settings.message !== null" ng-bind="app.settings.message"></p>
     <h3 class='center teal-text' ng-if='app.settings.user_id != app.settings.page_id'>{{app.user.name}}'s topics</h3>
@@ -61,10 +46,13 @@
       <div class='col s4 m4'>
          <input type="text" ng-model="app.forms.search" placeholder="&#xF002;" class='right'/>
       </div>
+      <div ng-if='app.topics.length <= 0' class='col s12 m12 l12'>
+              <h1 class='red-text center'>There are N<i class='fa fa-frown-o fa-spin'></i> topics here</h1>
+      </div>
     </div>
   </div>
   <!-- ng-repeat for topics -->
-  <h4 class='center red-text'ng-if='(app.topics | filter:app.forms.search).length == 0'>No Results</h4>
+  <h4 class='center red-text'ng-if='(app.topics | filter:app.forms.search).length == 0 && app.topics.length > 0'>No Results</h4>
 <div class='btn btn-cool row' ng-repeat="t in app.topics | filter:app.forms.search">
           <a href="/#/topic/{{t.topic_id}}">
       <!-- icon depending on topic type -->

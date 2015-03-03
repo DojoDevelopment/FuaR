@@ -27,6 +27,10 @@
 
     <!-- server error message -->
     <p ng-if="app.settings.message !== null" ng-bind="app.settings.message"></p>
+<!--     <div ng-if='app.forms.topicForm.$submitted == true'>
+      <i class='fa fa-5x fa-spin fa-spinner'></i>
+      <h6>Loading</h6>
+    </div> -->
 
     <!-- add topic form -->
     <form class='form-group' name="app.forms.topicForm" ng-submit="app.functions.submitForm(app.forms.topicForm.$valid)" novalidate>
@@ -75,8 +79,7 @@
 
       <h4>You're done, add the topic and wait for feedback!</h4>
       <!-- submit topic form -->
-      <button class='btn' type="submit">Add Topic</button>
-
+      <button class='btn' type="submit">Add Topic <i  ng-if='app.forms.topicForm.$submitted && app.forms.topicForm.$valid' class='fa fa-spinner fa-spin'></i></button>
     </form><!-- end form -->
   </div><!-- end wrapper -->
 </div><!-- end main topic container

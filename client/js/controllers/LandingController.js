@@ -18,10 +18,10 @@ app.controller('LandingController', ['$scope', 'UserFactory',  function($scope, 
     }
   };
 
-  //delete when in production
+  // delete when in production
   $scope.app.forms = {
     login : {
-        email: 'tony@gmail.com'
+        email: 'julian@gmail.com'
       , password: 'password'
     }
   };

@@ -2,26 +2,23 @@
 <div class='landing-container  valign-wrapper'>
   <div class='reg-container valign'>
     <a href="/#/" class='btn btn-back'>Back to login</a>
-
     <!-- server error message -->
     <p ng-if="app.messages !== null" ng-bind="app.messages"></p>
     <!-- link to login page -->
     <h3 class='center teal-text text-lighten-2'>Please fill the form to register</h3>
-
     <!-- registration form -->
     <form name="app.forms.regForm" ng-submit="app.functions.submitForm(app.forms.regForm.$valid)" class='container' novalidate>
-
       <!-- user name input -->
       <label for='name'>
         <h6>User Name</h6>
-          <!-- user name error messages -->
+        <!-- user name error messages -->
         <div class='error_msg' ng-messages="app.forms.regForm.name.$error" ng-if="app.forms.regForm.$submitted || !app.forms.regForm.name.$pristine">
           <h6 ng-message="required" class="help-block">Username is required</h6>
           <h6 ng-message="maxlength" class="help-block">Password is too long.</h6>
           <h6 ng-message="pattern"  class="help-block">Alpha Numeric characters only.</h6>
         </div>
       </label>
-      <input type="text" ng-model="app.forms.registration.name" ng-pattern="app.patterns.alphanumeric" id='name' name="name" ng-trim="true" ng-maxlength="255" required/>
+      <input type="text" ng-model="app.forms.registration.name" ng-pattern="app.patterns.alphanumeric" id='name' name="name" ng-trim="true" ng-maxlength="255" required />
 
       <!-- email input -->
       <label for='email'>
@@ -43,26 +40,26 @@
           <h6 ng-message="required"  class="help-block">Password is required.</h6>
           <h6 ng-message="minlength" class="help-block">Password is too short.</h6>
           <h6 ng-message="maxlength" class="help-block">Password is too long.</h6>
-          <h6 ng-message="pattern"   class="help-block">Alphanumeric Only.</p>
-        </div>
-      </label>
-      <input type="password" ng-model="app.forms.registration.password" ng-pattern="app.patterns.password" ng-change="app.functions.isMatch()" ng-minlength="6" ng-maxlength="72" name="password" id='password' ng-trim="true"  required/>
+          <h6 ng-message="pattern"   class="help-block">Alphanumeric Only.</h6>
+          </div>
+        </label>
+        <input type="password" ng-model="app.forms.registration.password" ng-pattern="app.patterns.password" ng-change="app.functions.isMatch()" ng-minlength="6" ng-maxlength="72" name="password" id='password' ng-trim="true"  required/>
 
-      <!-- password confirmation input -->
-      <label for='confirm'>
-        <h6>Confirm Password</h6>
-        <!-- password error messages -->
-        <div class='error_msg' ng-messages="app.forms.regForm.confirm.$error" ng-if="app.forms.regForm.password.$valid && !app.forms.regForm.confirm.$pristine">
-         <h6 ng-message="required" class="help-block">Password confirmation is required.</h6>
-         <h6 ng-message="match"    class="help-block">Password doesn't match</h6>
-        </div>
-      </label>
-      <input type="password" ng-model="app.forms.registration.confirm"  ng-pattern="app.patterns.password" ng-change="app.functions.isMatch()" name="confirm" id='confirm' ng-trim="true"  required/>
+        <!-- password confirmation input -->
+        <label for='confirm'>
+          <h6>Confirm Password</h6>
+          <!-- password error messages -->
+          <div class='error_msg' ng-messages="app.forms.regForm.confirm.$error" ng-if="app.forms.regForm.password.$valid && !app.forms.regForm.confirm.$pristine">
+           <h6 ng-message="required" class="help-block">Password confirmation is required.</h6>
+           <h6 ng-message="match"    class="help-block">Password doesn't match</h6>
+         </div>
+       </label>
+       <input type="password" ng-model="app.forms.registration.confirm"  ng-pattern="app.patterns.password" ng-change="app.functions.isMatch()" name="confirm" id='confirm' ng-trim="true"  required/>
 
-      <!-- location input -->
-      <select  name="location" ng-model="app.forms.registration.location"class='browser-default' ng-class="{'red darken-2': app.forms.regForm.$submitted && app.forms.regForm.location.$pristine}"required>
+       <!-- location input -->
+       <select  name="location" ng-model="app.forms.registration.location"class='browser-default' ng-class="{'red darken-2': app.forms.regForm.$submitted && app.forms.regForm.location.$pristine}"required>
         <option class='error_msg' ng-messages="app.forms.regForm.location.$error" ng-if="app.forms.regForm.$submitted " disabled selected>
-            <p ng-message="required" class="help-block">&#xf00d; Location is required.</p>
+          <p ng-message="required" class="help-block">&#xf00d; Location is required.</p>
         </option>
         <option  value="" disabled selected>Cohort Location</option>
         <option ng-repeat="l in app.lists.locations" value="{{l.name}}" ng-bind="l.name"></option>
@@ -70,32 +67,31 @@
       <!-- location error messages -->
       <!-- month input -->
       <select name="month" ng-model="app.forms.registration.month" class='browser-default' ng-class="{'red darken-2': app.forms.regForm.$submitted && app.forms.regForm.month.$pristine}" required>
-         <!-- month error messages -->
-        <option class='error_msg' ng-messages="app.forms.regForm.month.$error" ng-if="app.forms.regForm.$submitted" disabled selected>
-          <p ng-message="required" class="help-block">&#xf00d; Month is required.</p>
-        </option>
-        <option value="" disabled selected>Graduation Month</option>
-        <option ng-repeat="l in app.lists.months" value="{{l.id}}" ng-bind="l.month"></option>
-      </select>
+       <!-- month error messages -->
+       <option class='error_msg' ng-messages="app.forms.regForm.month.$error" ng-if="app.forms.regForm.$submitted" disabled selected>
+        <p ng-message="required" class="help-block">&#xf00d; Month is required.</p>
+      </option>
+      <option value="" disabled selected>Graduation Month</option>
+      <option ng-repeat="l in app.lists.months" value="{{l.id}}" ng-bind="l.month"></option>
+    </select>
 
-      <select name="year" ng-model="app.forms.registration.year" class='browser-default' ng-class="{'red darken-2': app.forms.regForm.$submitted && app.forms.regForm.year.$pristine}"required>
-        <!-- year error messges -->
-        <option class='error_msg' ng-messages="app.forms.regForm.year.$error" ng-if="app.forms.regForm.$submitted " selected disabled>
-           <p ng-message="required" class="help-block">&#xf00d; Year is required.</p>
-        </option>
-        <option value="" disabled selected>Graduation Year</option>
-        <option ng-repeat="l in app.lists.years" value="{{l.id}}" ng-bind="l.year"></option>
-      </select>
+    <select name="year" ng-model="app.forms.registration.year" class='browser-default' ng-class="{'red darken-2': app.forms.regForm.$submitted && app.forms.regForm.year.$pristine}"required>
+      <!-- year error messges -->
+      <option class='error_msg' ng-messages="app.forms.regForm.year.$error" ng-if="app.forms.regForm.$submitted " selected disabled>
+       <p ng-message="required" class="help-block">&#xf00d; Year is required.</p>
+     </option>
+     <option value="" disabled selected>Graduation Year</option>
+     <option ng-repeat="l in app.lists.years" value="{{l.id}}" ng-bind="l.year"></option>
+   </select>
 
-      <!-- profile pic input -->
-      <span id='file' class='btn btn-file '>
-        <span id='file' ng-bind='app.forms.registration.pic.name'></span>
-        <input type="file" file-model="app.forms.registration.pic" ng-model="app.forms.registration.pic" name="pic_path" id="inputFile" />
-      </span>
+   <!-- profile pic input -->
+   <span id='file' class='btn btn-file '>
+    <span id='file' ng-bind='app.forms.registration.pic.name'></span>
+    <input type="file" file-model="app.forms.registration.pic" ng-model="app.forms.registration.pic" name="pic_path" id="inputFile" />
+  </span>
 
-      <!-- submit button -->
-      <button type="submit" class='btn btn-log'>Register</button>
-    </form><!-- end form -->
-
-  </div>
+  <!-- submit button -->
+  <button type="submit" class='btn btn-log'>Register</button>
+</form><!-- end form -->
+</div>
 </div><!-- end container

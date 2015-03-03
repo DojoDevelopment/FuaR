@@ -48,13 +48,22 @@
           </div>
 
           <div ng-if='app.settings.user_id === app.topic.stats.user_id && app.settings.user_level < 5'>
-
             <form name="app.forms.fileForm" ng-submit="app.functions.submitForm(app.forms.fileForm.$valid, 'file')" novalidate>
-              <span id='file' class='btn btn-file' ng-class="{'red' : app.forms.file.name == 'no file chosen'}">
+
+              <!-- FILE UPLOAD -->
+              <span ng-if='app.settings.message == null'class='btn btn-file' ng-class="{'red' : app.forms.file.name == 'no file chosen'}">
                 <span id='file' ng-bind='app.forms.file.name'></span>
-                <input type="file" file-model="app.forms.file" ng-model="app.forms.file" name="revision" id="inputFile"/>
+                <input type="file" file-model="app.forms.file" ng-model="app.forms.file" name="revision" id="inputFile" ng-click='update_name()'/>
               </span>
-              <button class='btn blue' type='submit'>Upload File</button>
+               <span ng-if='app.settings.message != null'class='btn btn-file' ng-class="{'red' : app.forms.file.name == 'no file chosen'}">
+                <span id='file'>Select File</span>
+                <input type="file" file-model="app.forms.file" ng-model="app.forms.file" name="revision" id="inputFile" ng-click='update_name()'/>
+              </span>
+              <!-- END FILE UPLOAD -->
+
+              <button class='btn blue' type='submit'>Upload File
+                    <i   ng-if="app.uploads.up_file.name == 'Loading...' && app.settings.message == null"  class='loader fa fa-spinner fa-spin'></i>
+              </button>
             </form>
           </div>
         </div><!-- end user privacy switch -->
@@ -83,6 +92,9 @@
     </div>
   </div>
 </nav><!-- navbar end -->
+
+<!-- <h1>{{app.forms.fileForm.revision.$viewValue.name}}</h1> -->
+
 
 <!-- main container -->
 <section>
@@ -129,7 +141,7 @@
       <div class='form-group new_post'>
         <h6 class='teal-text'>A bit about this topic: <span class='grey-text'>{{app.topic.stats.description}}</span></h6>
         <button class="btn btn-floating red" ng-click="app.functions.add_post(null, 0, app.forms.post)"><i class='mdi-image-edit'></i></button>
-        <input ng-model="app.forms.post" type="text" placeholder='add a new post!' class='teal-text'>
+        <input ng-model="app.forms.post" type="text" placeholder='add a new post; no wedges or special characters please' class='teal-text'>
       </div>
 
       <!--  end of user new post input  -->
@@ -161,7 +173,7 @@
             <!-- user input for commenting on a post -->
             <div class='input-fields new_post' ng-class="{pst: p.parent_id == p.post_id, cmt: p.parent_id != p.post_id}" ng-if="app.topic.posts[$index+1].parent_id != p.parent_id">
               <button class="btn btn-floating blue" ng-click="app.functions.add_post($index, p.parent_id, app.forms.comment[$index])"><i class='mdi-action-question-answer'></i></button>
-              <input type="text" ng-model="app.forms.comment[$index]" placeholder='comment on this post'>
+              <input type="text" ng-model="app.forms.comment[$index]" placeholder='comment on this post; no wedges or special characters please' class='teal-text'>
             </div><!-- end post input-->
           </div><!-- end block element -->
         </div><!-- end comments & posts -->

@@ -99,7 +99,7 @@ app.factory('UserFactory', ['$http', '$location', '$rootScope', function($http, 
       fd.append('pic_info', obj.pic);
       $http.post('/api/users/pic', fd, {
           transformRequest: angular.identity
-          , headers: { 'Content-Type': undefined }  //lets the browser decide that it's multipart form, if defined as multipart process throws error
+          , headers: { 'Content-Type': undefined }  //This lets the browser decide that it's multipart form, if defined as multipart process throws error
         })
         .success(function(data){
           $rootScope.user.file_name = data;

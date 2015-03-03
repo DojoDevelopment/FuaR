@@ -1,6 +1,5 @@
 //[TopicController is used to view topics]
 app.controller('TopicController', [ '$scope', '$location', '$rootScope', 'PageFactory', 'TopicFactory', 'UserFactory', function($scope, $location, $rootScope, PageFactory, TopicFactory, UserFactory) {
-
   //reroute to root if not logged in
   UserFactory.check_session(function(logged){
     if (logged){
@@ -20,10 +19,22 @@ app.controller('TopicController', [ '$scope', '$location', '$rootScope', 'PageFa
       $scope.app.forms = {
          video : { name : 'Select File' }
         , file : { name : 'Select File' }
-      }
+      };
+
+
+      $scope.app.uploads = {
+        up_video:{
+          name : $scope.app.forms.video.name
+        },
+        up_file:{
+          name : $scope.app.forms.file.name
+        }
+      };
+
 
       $scope.app.functions = {
-        mark_complete: function(){
+
+          mark_complete: function(){
           //change topic status to complete
           TopicFactory.update_status(topic_id, {status: 'completed'}, function(has_err, data){
             $scope.app.settings.message = data;
@@ -84,6 +95,7 @@ app.controller('TopicController', [ '$scope', '$location', '$rootScope', 'PageFa
             }
           }
         }, submitForm: function(valid, form){
+           //testing to see if this works
           if (valid){
             if (form === 'video' && $scope.app.forms.video.size !== undefined ){
               //upload video response
@@ -97,15 +109,14 @@ app.controller('TopicController', [ '$scope', '$location', '$rootScope', 'PageFa
               });
             } else if (form === 'file' && $scope.app.forms.file.size !== undefined ){
               //upload file revision
-//              $scope.app.forms.file.name = '<i class="fa fa-circle-o-notch fa-spin"></i>'
+              $scope.app.uploads.up_file.name = 'Loading...';
               TopicFactory.add_file(topic_id, $scope.app.forms.file, function(has_err, data){
                 //add topic to page and display message
                 $scope.app.topic.files.push({key: data.key, type: data.type})
                 $scope.app.settings.message = data.msg;
-//                $scope.app.forms.file.name = 'Upload Complete'
               });
             } else {
-              $scope.app.forms.video.name = 'no file chosen';
+              $scope.app.forms.file.name = 'no file chosen';
               $scope.app.forms.file.name = 'no file chosen';
             }
           }

@@ -5,7 +5,6 @@ var bodyParser = require('body-parser');
 var express    = require('express');
 var multer     = require('multer');
 var morgan     = require('morgan');
-var csrf       = require('csurf');
 var path       = require('path');
 var app        = express();
 
@@ -44,7 +43,7 @@ pg_connect(function(db) {
   // checks for our db stuff
   console.log('db connected: ' + db.connected/*, db.client*/);
   //require routes
-  require('./server/routes.js')(app, db, csrf);
+  require('./server/routes.js')(app, db);
   // TELL THE SERVER TO LISTEN
   // listen
   app.listen(3000, function() { console.log("localhost:3000") })
