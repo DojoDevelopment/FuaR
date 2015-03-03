@@ -82,7 +82,7 @@
   <form name="app.forms.picForm" ng-submit="app.functions.submitForm(app.forms.picForm.$valid, 'pic')" novalidate>
           <h4>Update Profile Pic</h4>
       <button id='file' class='btn btn-file' ng-class="{red : app.forms.profile.pic.name == 'no file chosen'}">
-      <span id='file' ng-bind='app.forms.profile.pic.name'></span>
+      <span id='file' ng-bind='app.forms.profile.pic.name' ng-if='app.forms.profile.pic.name != ""'></span>
         <input type="file" ng-model="app.forms.profile.pic" file-model="app.forms.profile.pic" name="pic" required/>
     </button>
     <button type="submit" class="btn mdi-image-portrait orange darken-2">Update</button>
